@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\VarDumper\Caster\TraceStub;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 /**
  * The PropelDataCollector collector class collects information.
@@ -54,9 +55,9 @@ class PropelDataCollector extends DataCollector
     /**
      * Returns queries.
      *
-     * @return array<int, array{sql: string, connection: string, time: int|float, memory: int, trace: TraceStub}> Queries
+     * @return Data<int, array{sql: string, connection: string, time: int|float, memory: int, trace: TraceStub}> Queries
      */
-    public function getQueries(): array
+    public function getQueries(): Data
     {
         return $this->data['queries'];
     }
