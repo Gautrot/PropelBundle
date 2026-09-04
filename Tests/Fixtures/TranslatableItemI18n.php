@@ -33,22 +33,22 @@ class TranslatableItemI18n implements ActiveRecordInterface
         $this->value = $value;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getPrimaryKey()
     {
         return $this->getId();
     }
 
-    public function setPrimaryKey($primaryKey)
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setPrimaryKey($primaryKey): void
     {
         $this->setId($primaryKey);
     }
@@ -58,17 +58,17 @@ class TranslatableItemI18n implements ActiveRecordInterface
         return null === $this->getId();
     }
 
-    public function isModified()
+    public function isModified(): bool
     {
         return false;
     }
 
-    public function isColumnModified($col)
+    public function isColumnModified($col): bool
     {
         return false;
     }
 
-    public function isNew()
+    public function isNew(): bool
     {
         return false;
     }
@@ -81,7 +81,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
     {
     }
 
-    public function isDeleted()
+    public function isDeleted(): bool
     {
         return false;
     }
@@ -90,18 +90,12 @@ class TranslatableItemI18n implements ActiveRecordInterface
     {
     }
 
-    public function delete(ConnectionInterface $con = null)
+    public function delete(?ConnectionInterface $con = null)
     {
     }
 
-    public function save(ConnectionInterface $con = null)
+    public function save(?ConnectionInterface $con = null)
     {
-    }
-
-    public function setLocale($locale)
-    {
-
-        $this->locale = $locale;
     }
 
     public function getLocale()
@@ -109,20 +103,19 @@ class TranslatableItemI18n implements ActiveRecordInterface
         return $this->locale;
     }
 
+    public function setLocale($locale): void
+    {
+        $this->locale = $locale;
+    }
+
     public function getItem()
     {
         return $this->item;
     }
 
-    public function setItem($item)
+    public function setItem($item): void
     {
         $this->item = $item;
-    }
-
-    public function setValue($value)
-    {
-
-        $this->value = $value;
     }
 
     public function getValue()
@@ -130,14 +123,18 @@ class TranslatableItemI18n implements ActiveRecordInterface
         return $this->value;
     }
 
-    public function setValue2($value2)
+    public function setValue($value): void
     {
-
-        $this->value2 = $value2;
+        $this->value = $value;
     }
 
     public function getValue2()
     {
         return $this->value2;
+    }
+
+    public function setValue2($value2): void
+    {
+        $this->value2 = $value2;
     }
 }

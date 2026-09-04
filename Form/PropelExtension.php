@@ -11,19 +11,19 @@
 
 namespace Propel\Bundle\PropelBundle\Form;
 
-use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\Form\AbstractExtension;
 use Symfony\Component\Form\ChoiceList\Factory\ChoiceListFactoryInterface;
 use Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory;
 use Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator;
+use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
-* Represents the Propel form extension, which loads the Propel functionality.
-*
-* @author Joseph Rouff <rouffj@gmail.com>
-*/
+ * Represents the Propel form extension, which loads the Propel functionality.
+ *
+ * @author Joseph Rouff <rouffj@gmail.com>
+ */
 class PropelExtension extends AbstractExtension
 {
 
@@ -40,15 +40,15 @@ class PropelExtension extends AbstractExtension
     /**
      * PropelExtension constructor.
      *
-     * @param PropertyAccessorInterface|null  $propertyAccessor
+     * @param PropertyAccessorInterface|null $propertyAccessor
      * @param ChoiceListFactoryInterface|null $choiceListFactory
      */
-    public function __construct(PropertyAccessorInterface $propertyAccessor = null, ChoiceListFactoryInterface $choiceListFactory = null)
+    public function __construct(?PropertyAccessorInterface $propertyAccessor = null, ?ChoiceListFactoryInterface $choiceListFactory = null)
     {
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
         $this->choiceListFactory = $choiceListFactory ?: new PropertyAccessDecorator(new DefaultChoiceListFactory(), $this->propertyAccessor);
     }
-    
+
     protected function loadTypes(): array
     {
         return array(

@@ -30,16 +30,6 @@ class TranslatableItem implements ActiveRecordInterface
         $this->currentTranslations = $translations;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getGroupName()
     {
         return $this->groupName;
@@ -55,7 +45,17 @@ class TranslatableItem implements ActiveRecordInterface
         return $this->getId();
     }
 
-    public function setPrimaryKey($primaryKey)
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setPrimaryKey($primaryKey): void
     {
         $this->setId($primaryKey);
     }
@@ -65,17 +65,17 @@ class TranslatableItem implements ActiveRecordInterface
         return null === $this->getId();
     }
 
-    public function isModified()
+    public function isModified(): bool
     {
         return false;
     }
 
-    public function isColumnModified($col)
+    public function isColumnModified($col): bool
     {
         return false;
     }
 
-    public function isNew()
+    public function isNew(): bool
     {
         return false;
     }
@@ -88,7 +88,7 @@ class TranslatableItem implements ActiveRecordInterface
     {
     }
 
-    public function isDeleted()
+    public function isDeleted(): bool
     {
         return false;
     }
@@ -97,15 +97,15 @@ class TranslatableItem implements ActiveRecordInterface
     {
     }
 
-    public function delete(ConnectionInterface $con = null)
+    public function delete(?ConnectionInterface $con = null)
     {
     }
 
-    public function save(ConnectionInterface $con = null)
+    public function save(?ConnectionInterface $con = null)
     {
     }
 
-    public function getTranslation($locale = 'de', ConnectionInterface $con = null)
+    public function getTranslation($locale = 'de', ?ConnectionInterface $con = null)
     {
         if (!isset($this->currentTranslations[$locale])) {
             $translation = new TranslatableItemI18n();
@@ -116,7 +116,7 @@ class TranslatableItem implements ActiveRecordInterface
         return $this->currentTranslations[$locale];
     }
 
-    public function addTranslatableItemI18n(TranslatableItemI18n $i)
+    public function addTranslatableItemI18n(TranslatableItemI18n $i): void
     {
         if (!in_array($i, $this->currentTranslations)) {
             $this->currentTranslations[$i->getLocale()] = $i;
@@ -124,7 +124,7 @@ class TranslatableItem implements ActiveRecordInterface
         }
     }
 
-    public function removeTranslatableItemI18n(TranslatableItemI18n $i)
+    public function removeTranslatableItemI18n(TranslatableItemI18n $i): void
     {
         unset($this->currentTranslations[$i->getLocale()]);
     }

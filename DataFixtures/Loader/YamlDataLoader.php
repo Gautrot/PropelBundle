@@ -22,14 +22,14 @@ use Symfony\Component\Yaml\Yaml;
 class YamlDataLoader extends AbstractDataLoader
 {
     /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
     /**
      * {@inheritdoc}
      */
-    public function __construct($rootDir, array $datasources, Generator $faker = null)
+    public function __construct($rootDir, array $datasources, ?Generator $faker = null)
     {
         parent::__construct($rootDir, $datasources);
 
@@ -61,7 +61,7 @@ class YamlDataLoader extends AbstractDataLoader
             }
 
             ob_start();
-            $retval  = include $file;
+            $retval = include $file;
             $content = ob_get_clean();
 
             // if an array is returned by the config file assume it's in plain php form else in YAML

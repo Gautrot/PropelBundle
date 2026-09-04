@@ -32,16 +32,6 @@ class Item implements ActiveRecordInterface
         $this->price = $price;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getValue()
     {
         return $this->value;
@@ -62,7 +52,17 @@ class Item implements ActiveRecordInterface
         return $this->getId();
     }
 
-    public function setPrimaryKey($primaryKey)
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setPrimaryKey($primaryKey): void
     {
         $this->setId($primaryKey);
     }
@@ -72,17 +72,17 @@ class Item implements ActiveRecordInterface
         return null === $this->getId();
     }
 
-    public function isModified()
+    public function isModified(): bool
     {
         return false;
     }
 
-    public function isColumnModified($col)
+    public function isColumnModified($col): bool
     {
         return false;
     }
 
-    public function isNew()
+    public function isNew(): bool
     {
         return false;
     }
@@ -95,7 +95,7 @@ class Item implements ActiveRecordInterface
     {
     }
 
-    public function isDeleted()
+    public function isDeleted(): bool
     {
         return false;
     }
@@ -104,11 +104,11 @@ class Item implements ActiveRecordInterface
     {
     }
 
-    public function delete(ConnectionInterface $con = null)
+    public function delete(?ConnectionInterface $con = null)
     {
     }
 
-    public function save(ConnectionInterface $con = null)
+    public function save(?ConnectionInterface $con = null)
     {
     }
 }

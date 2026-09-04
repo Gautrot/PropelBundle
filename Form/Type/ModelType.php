@@ -11,6 +11,7 @@
 
 namespace Propel\Bundle\PropelBundle\Form\Type;
 
+use PDO;
 use Propel\Bundle\PropelBundle\Form\ChoiceList\PropelChoiceLoader;
 use Propel\Bundle\PropelBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -20,11 +21,11 @@ use Symfony\Component\Form\ChoiceList\Factory\ChoiceListFactoryInterface;
 use Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory;
 use Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 /**
  * ModelType class.
@@ -64,10 +65,10 @@ class ModelType extends AbstractType
     /**
      * ModelType constructor.
      *
-     * @param PropertyAccessorInterface|null  $propertyAccessor
+     * @param PropertyAccessorInterface|null $propertyAccessor
      * @param ChoiceListFactoryInterface|null $choiceListFactory
      */
-    public function __construct(PropertyAccessorInterface $propertyAccessor = null, ChoiceListFactoryInterface $choiceListFactory = null)
+    public function __construct(?PropertyAccessorInterface $propertyAccessor = null, ?ChoiceListFactoryInterface $choiceListFactory = null)
     {
         $this->choiceListFactory = $choiceListFactory ?: new PropertyAccessDecorator(
             new DefaultChoiceListFactory(),
@@ -87,9 +88,9 @@ class ModelType extends AbstractType
      * @internal This method is public to be usable as callback. It should not
      *           be used in user code.
      */
-    public static function createChoiceLabel($choice)
+    public static function createChoiceLabel(object $choice): string
     {
-        return (string) $choice;
+        return (string)$choice;
     }
 
     /**
@@ -99,9 +100,9 @@ class ModelType extends AbstractType
      * a single-column integer ID. In that case, the value of the field is
      * the ID of the object. That ID is also used as field name.
      *
-     * @param object     $choice The object.
-     * @param int|string $key    The choice key.
-     * @param string     $value  The choice value. Corresponds to the object's
+     * @param object $choice The object.
+     * @param int|string $key The choice key.
+     * @param string $value The choice value. Corresponds to the object's
      *                           ID here.
      *
      * @return string The field name.
@@ -109,9 +110,9 @@ class ModelType extends AbstractType
      * @internal This method is public to be usable as callback. It should not
      *           be used in user code.
      */
-    public static function createChoiceName($choice, $key, $value): string
+    public static function createChoiceName(object $choice, int|string $key, string $value): string
     {
-        return str_replace('-', '_', (string) $value);
+        return str_replace('-', '_', (string)$value);
     }
 
     /**
@@ -121,8 +122,7 @@ class ModelType extends AbstractType
     {
         if ($options['multiple']) {
             $builder
-                ->addViewTransformer(new CollectionToArrayTransformer(), true)
-            ;
+                ->addViewTransformer(new CollectionToArrayTransformer(), true);
         }
     }
 
@@ -159,7 +159,7 @@ class ModelType extends AbstractType
             }
             /** @var ColumnMap $firstIdentifier */
             $firstIdentifier = current($identifier);
-            if (count($identifier) === 1 && $firstIdentifier->getPdoType() === \PDO::PARAM_INT) {
+            if (count($identifier) === 1 && $firstIdentifier->getPdoType() === PDO::PARAM_INT) {
                 return array(__CLASS__, 'createChoiceName');
             }
             return null;
@@ -176,8 +176,8 @@ class ModelType extends AbstractType
             }
             /** @var ColumnMap $firstIdentifier */
             $firstIdentifier = current($identifier);
-            if (count($identifier) === 1 && in_array($firstIdentifier->getPdoType(), [\PDO::PARAM_BOOL, \PDO::PARAM_INT, \PDO::PARAM_STR])) {
-                return function($object) use ($firstIdentifier) {
+            if (count($identifier) === 1 && in_array($firstIdentifier->getPdoType(), [PDO::PARAM_BOOL, PDO::PARAM_INT, PDO::PARAM_STR])) {
+                return function ($object) use ($firstIdentifier) {
                     if ($object) {
                         return call_user_func([$object, 'get' . ucfirst($firstIdentifier->getPhpName())]);
                     }
@@ -215,8 +215,8 @@ class ModelType extends AbstractType
                     /** @var ModelCriteria $query */
                     $query = $options['query'];
 
-                    $choiceLabel = function($choice) use ($valueProperty, $query) {
-                        $getter = 'get'.ucfirst($valueProperty);
+                    $choiceLabel = function ($choice) use ($valueProperty, $query) {
+                        $getter = 'get' . ucfirst($valueProperty);
                         if (!method_exists($choice, $getter)) {
                             $getter = 'get' . ucfirst($query->getTableMap()->getColumn($valueProperty)->getPhpName());
                         }
