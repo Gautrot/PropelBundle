@@ -1,0 +1,11 @@
+services:
+  ubuntu:
+    container_name: propel-bundle
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SYMFONY_REQUIRE: "6.4"
+      PHP: "8.2"
+    volumes:
+      - .:/app
