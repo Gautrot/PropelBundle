@@ -2,9 +2,9 @@
 
 ---
 
-[![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/CI%207.1.yml/badge.svg?branch=7.1)](https://github.com/gautrot/PropelBundle/actions/workflows/CI%207.1.yml)
+[![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=7.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/7.1/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0.2-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
 
 This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony.
 
