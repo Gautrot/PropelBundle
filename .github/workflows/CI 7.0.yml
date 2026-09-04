@@ -87,10 +87,17 @@ jobs:
         run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./Tests/
           files: ./Tests/coverage.xml
           fail_ci_if_error: true
           verbose: true
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
