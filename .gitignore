@@ -10,3 +10,5 @@
 /.idea/
 /.phpunit.result.cache
 /phpstan-baseline.neon
+
+/.phpunit*
