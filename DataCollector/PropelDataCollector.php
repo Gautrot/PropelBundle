@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\VarDumper\Caster\TraceStub;
 use Symfony\Component\VarDumper\Cloner\Data;
+use Throwable;
 
 /**
  * The PropelDataCollector collector class collects information.
@@ -34,57 +35,12 @@ class PropelDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null): void
+    public function collect(Request $request, Response $response, ?Throwable $exception = null): void
     {
         $this->data = array(
             'queries'       => $this->cloneVar($this->buildQueries()),
             'querycount'    => $this->countQueries(),
         );
-    }
-
-    /**
-     * Returns the collector name.
-     *
-     * @return string The collector name.
-     */
-    public function getName(): string
-    {
-        return 'propel';
-    }
-
-    /**
-     * Returns queries.
-     *
-     * @return Data<int, array{sql: string, connection: string, time: int|float, memory: int, trace: TraceStub}> Queries
-     */
-    public function getQueries(): Data
-    {
-        return $this->data['queries'];
-    }
-
-    /**
-     * Returns the query count.
-     *
-     * @return int The query count
-     */
-    public function getQueryCount()
-    {
-        return $this->data['querycount'];
-    }
-
-    /**
-     * Returns the total time of queries.
-     *
-     * @return float The total time of queries
-     */
-    public function getTime()
-    {
-        $time = 0;
-        foreach ($this->data['queries'] as $query) {
-            $time += (float) $query['time'];
-        }
-
-        return $time;
     }
 
     /**
@@ -98,6 +54,16 @@ class PropelDataCollector extends DataCollector
     }
 
     /**
+     * Returns queries.
+     *
+     * @return Data<int, array{sql: string, connection: string, time: int|float, memory: int, trace: TraceStub}> Queries
+     */
+    public function getQueries(): Data
+    {
+        return $this->data['queries'];
+    }
+
+    /**
      * Count queries.
      *
      * @return int The number of queries.
@@ -105,6 +71,41 @@ class PropelDataCollector extends DataCollector
     private function countQueries(): int
     {
         return count($this->logger->getQueries());
+    }
+
+    /**
+     * Returns the collector name.
+     *
+     * @return string The collector name.
+     */
+    public function getName(): string
+    {
+        return 'propel';
+    }
+
+    /**
+     * Returns the query count.
+     *
+     * @return int The query count
+     */
+    public function getQueryCount(): int
+    {
+        return $this->data['querycount'];
+    }
+
+    /**
+     * Returns the total time of queries.
+     *
+     * @return float|int The total time of queries
+     */
+    public function getTime(): float|int
+    {
+        $time = 0;
+        foreach ($this->data['queries'] as $query) {
+            $time += (float)$query['time'];
+        }
+
+        return $time;
     }
 
     /**
