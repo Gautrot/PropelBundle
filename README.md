@@ -1,57 +1,38 @@
-PropelBundle
-============
+# PropelBundle
+
+---
 
 [![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/CI%207.1.yml/badge.svg?branch=7.1)](https://github.com/gautrot/PropelBundle/actions/workflows/CI%207.1.yml)
 [![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/7.1/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
-[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%208.0.2-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0.2-8892BF.svg)](https://php.net/)
 
-This is the official implementation of [Propel](http://www.propelorm.org/) in Symfony.
+This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony.
 
-## Branching model
+## Installation
 
-Since Propel 2 was released on June 23, 2026, we are migrating the branching model of this bundle in advance!
+### Minimum requirements
 
-* The `1.0` branch contains Propel **1.6** integration for Symfony *2.0* (*currently 2.0 branch*).
-    * The `1.1` branch contains Propel **1.6** integration for Symfony *2.1* (*currently 2.1 branch*).
-    * The `1.2` branch contains Propel **1.6** integration for Symfony *2.2* (*currently master branch*).
-* The `2.0` branch contains Propel **2**  integration for Symfony *2.5-2.8*.
-* The `3.0` branch contains Propel **2**  integration for Symfony *2.8-3.x*.
-* The `5.0` branch contains Propel **2** (branch **2.0.0-beta1**) integration for Symfony **4.x|5.x** and PHP **7.2** -
-  **8.0**.
-    * The `5.1` branch contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **4.x|5.x|6.x** and PHP
-      **7.4** - **8.1**.
-* The `6.0` branch contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **6.x**. and PHP **8.0.2+**
-* The `7.0` branch contains Propel **2** (branch **2.0.0-beta2**, **2.0.0-beta3**, **2.0.0-beta4**) integration for
-  Symfony **6.x|7.x**. and PHP **8.0.2+**
-    * The `7.1` branch contains Propel **2** (branch **2.0.0**, **2.0.1**) integration for Symfony **6.x|7.x**. and PHP
-      **8.0.2+**
+- [Symfony](https://symfony.com/releases/6.0): **6.0**
+- [PHP](https://www.php.net/releases/8.0/en.php): **8.0.2**
+- [`propel/propel`](https://github.com/propelorm/Propel2): **2.0.0**
 
-## Version 7.1 Changes
-
-## Symfony 7.1 Installation
-
-### Requirements
-
-- php: 8.0.2+
-- propel/propel
-
-### Composer command
+### Composer
 
 ```shell
-composer require propel/propel "^2"
+composer require propel/propel "^2.0"
 composer require gautrot/propel-bundle "7.1.0" # (or newer tag/release)
 # or
 composer require gautrot/propel-bundle "7.1.x-dev"
 ```
 
-### composer.json -> add in "require"
+### composer.json
 
 ```json
 {
   ...
   "require": {
     ...
-    "propel/propel": "^2",
+    "propel/propel": "^2.0",
     "gautrot/propel-bundle": "7.1.0",
     // (or newer tag/release)
     // or
@@ -68,9 +49,9 @@ composer require gautrot/propel-bundle "7.1.x-dev"
 * Insertion of SQL statements;
 * Runtime autoloading of Propel and generated classes;
 * Propel runtime initialization through the XML configuration;
-* [Propel Migrations](http://propelorm.org/documentation/09-migrations.html);
+* [Propel Migrations](https://propelorm.org/documentation/09-migrations.html);
 * Reverse engineering
-  from [existing database](http://propelorm.org/documentation/cookbook/working-with-existing-databases.html);
+  from [existing database](https://propelorm.org/documentation/cookbook/working-with-existing-databases.html);
 * Integration to the Symfony Profiler;
 * Load SQL, YAML and XML fixtures;
 * Create/Drop databases;
@@ -78,6 +59,34 @@ composer require gautrot/propel-bundle "7.1.x-dev"
 * Integration with the Security component;
 * Propel ParamConverter can be used with Sensio Framework Extra Bundle.
 
-[Read the documentation](http://propelorm.org/documentation/)
+## New to version 7.1
 
-For license, see: [LICENSE](Resources/meta/LICENSE)
+* Added support for Symfony 7.4
+* Added support for PHP 8.4 and 8.5
+    * Removed deprecated content introduced in PHP 8.4 and later
+* Updated `propel/propel` minimum version to its official stable release (2.0.0)
+
+You can also read the changelogs [CHANGELOG.md](here).
+
+## Branching model
+
+Since Propel 2 was officially released on June 23, 2026, we are migrating the branching model of this bundle in advance!
+
+* The `1.0` branch contains Propel **1.6** integration for Symfony **2.0**.
+    * The `1.1` branch contains Propel **1.6** integration for Symfony **2.1**.
+    * The `1.2` branch contains Propel **1.6** integration for Symfony **2.2**.
+* The `2.0` branch contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **2.5 - 2.8**.
+* The `3.0` branch contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **2.8 - 3.x**.
+* The `5.0` branch contains Propel **2** (branch **2.0.0-beta1**) integration for Symfony **4.x|5.x** and PHP **7.2** -
+  **8.0**.
+    * The `5.1` branch contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **4.x|5.x|6.x** and PHP
+      **7.4** - **8.1**.
+* The `6.0` branch contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **6.x**. and PHP **8.0.2+**
+* The `7.0` branch contains Propel **2** (branches **2.0.0-beta2** to **2.0.0-beta4**) integration for Symfony
+  **6.x|7.x**. and PHP **8.0.2+**
+    * The `7.1` branch contains Propel **2** integration for Symfony **6.x|7.x**. and PHP **8.0.2+**
+
+## And more...
+
+You can read and learn Propel 2 from their official documentation [here](https://propelorm.org/documentation/). For
+licenses, see: [LICENSE](Resources/meta/LICENSE)
