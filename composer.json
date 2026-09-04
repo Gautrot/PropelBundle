@@ -36,9 +36,9 @@
     "propel/propel": "^2",
     "symfony/console": "^6.0||^7.0",
     "symfony/dependency-injection": "^6.0||^7.0",
-    "symfony/framework-bundle": "^6.0||^7.0",
+    "symfony/framework-bundle": "^6.4.40||^7.4.12",
     "symfony/security-bundle": "^6.0||^7.0",
-    "symfony/yaml": "^6.0||^7.0"
+    "symfony/yaml": "^6.4.40||^7.4.12"
   },
   "require-dev": {
     "ext-json": "*",
@@ -52,7 +52,7 @@
     "phpstan/extension-installer": "^1.1",
     "phpstan/phpstan-deprecation-rules": "^1.0",
     "phpstan/phpstan-symfony": "^1.2",
-    "twig/twig": "*",
+    "twig/twig": "3.26||^3.27",
     "symfony/stopwatch": "^6.0"
   },
   "config": {
