@@ -22,7 +22,7 @@ jobs:
         symfony-version: [ '6.0', '6.1', '6.2', '6.3', '6.4', '7.0', '7.1', '7.2', '7.3', '7.4' ]
         exclude:
           # excluded because of "symfony minimum required" PHP version
-          # well it's a stupid solution but it works
+          # well it's a stupid solution, but it works
           - php-version: '8.0.2'
             symfony-version: '6.1'
           - php-version: '8.0.2'
@@ -82,11 +82,11 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests >= 8.1
+      - name: Run tests with PHPs >= 8.1
         if: matrix.php-version >= '8.1'
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
 
-      - name: Run tests < 8.1
+      - name: Run tests with PHP < 8.1
         if: matrix.php-version < '8.1'
         run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 

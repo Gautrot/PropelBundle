@@ -14,7 +14,7 @@ This is the official implementation of [Propel](https://www.propelorm.org/) in S
 
 - [Symfony](https://symfony.com/releases/6.0): **6.0**
 - [PHP](https://www.php.net/releases/8.0/en.php): **8.0.2**
-- [`propel/propel`](https://github.com/propelorm/Propel2): **2.0.0**
+- [Propel](https://github.com/propelorm/Propel2): **2.0.0**
 
 ### Composer
 
@@ -25,7 +25,7 @@ composer require gautrot/propel-bundle "7.1.0" # (or newer tag/release)
 composer require gautrot/propel-bundle "7.1.x-dev"
 ```
 
-### composer.json
+#### composer.json
 
 ```json
 {
@@ -66,7 +66,7 @@ composer require gautrot/propel-bundle "7.1.x-dev"
     * Removed deprecated content introduced in PHP 8.4 and later
 * Updated `propel/propel` minimum version to its official stable release (2.0.0)
 
-You can also read the changelogs [CHANGELOG.md](here).
+You can also read the changelogs [here](CHANGELOG.md).
 
 ## Branching model
 
