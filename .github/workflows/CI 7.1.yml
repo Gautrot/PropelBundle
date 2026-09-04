@@ -90,11 +90,11 @@ jobs:
         if: matrix.php-version < '8.1'
         run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
-#      - name: Code Coverage Report
-#        uses: codecov/codecov-action@v3
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          directory: ./Tests/
-#          files: ./Tests/coverage.xml
-#          fail_ci_if_error: true
-#          verbose: true
+      - name: Code Coverage Report
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./Tests/
+          files: ./Tests/coverage.xml
+          fail_ci_if_error: true
+          verbose: true
