@@ -86,7 +86,7 @@ jobs:
         if: matrix.php-version < '8.1'
         run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
-      - name: Upload coverage reports to Codecov
+      - name: Code Coverage Report
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
