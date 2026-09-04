@@ -12,3 +12,4 @@
 /phpstan-baseline.neon
 
 /.phpunit*
+junit.xml
