@@ -1,7 +1,7 @@
 <?php
+
 namespace App;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -10,8 +10,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * Class AppBundle
  * @package App
  */
-class AppBundle extends Bundle {
-    const NAME = 'AppBundle';
+class AppBundle extends Bundle
+{
+    const string NAME = 'AppBundle';
 
     public function __construct(ContainerInterface $container)
     {

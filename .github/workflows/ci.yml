@@ -20,8 +20,8 @@ jobs:
       matrix:
         php-version: [ '8.2', '8.3', '8.4', '8.5' ]
         symfony-version: [ '6.4', '7.4' ]
-#        exclude:
-          # excluded because of "symfony minimum required" PHP version
+        # excluded because of "symfony minimum required" PHP version
+        # exclude:
 
     steps:
       - name: Setup PHP, with composer and extensions

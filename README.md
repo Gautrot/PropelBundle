@@ -17,6 +17,7 @@ This is the official implementation of [Propel](https://www.propelorm.org/) in S
 - [Propel](https://github.com/propelorm/Propel2): **2.0.0**
 
 Additional notes:
+
 - If you're using Symfony 6.4, it must be running with PHP 8.2
 
 ### Composer
@@ -30,19 +31,23 @@ composer require gautrot/propel-bundle "7.1.x-dev"
 
 #### composer.json
 
+Stable release:
 ```json
 {
-  ...
   "require": {
-    ...
     "propel/propel": "^2.0",
-    "gautrot/propel-bundle": "7.1.0",
-    // (or newer tag/release)
-    // or
-    "gautrot/propel-bundle": "7.1.x-dev",
-    ...
-  },
-  ...
+    "gautrot/propel-bundle": "7.1.0"
+  }
+}
+```
+
+Nightly release:
+```json
+{
+  "require": {
+    "propel/propel": "^2.0",
+    "gautrot/propel-bundle": "7.1.x-dev"
+  }
 }
 ```
 

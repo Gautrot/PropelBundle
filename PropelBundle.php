@@ -10,15 +10,16 @@
 
 namespace Propel\Bundle\PropelBundle;
 
+use Exception;
 use Propel\Bundle\PropelBundle\DependencyInjection\Security\UserProvider\PropelFactory;
 use Propel\Runtime\Connection\ConnectionManagerPrimaryReplica;
+use Propel\Runtime\Connection\ConnectionManagerSingle;
 use Propel\Runtime\Connection\ConnectionWrapper;
 use Propel\Runtime\Propel;
-use Propel\Runtime\Connection\ConnectionManagerSingle;
 use Propel\Runtime\ServiceContainer\StandardServiceContainer;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * PropelBundle
@@ -38,21 +39,7 @@ class PropelBundle extends Bundle
             if ($this->container->getParameter('propel.logging')) {
                 $this->configureLogging();
             }
-        } catch( \Exception $e ) {
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container): void
-    {
-        parent::build($container);
-
-        if ($container->hasExtension('security')) {
-            /** @var SecurityExtension $securityExtension */
-            $securityExtension = $container->getExtension('security');
-            $securityExtension->addUserProviderFactory(new PropelFactory('propel', 'propel.security.user.provider'));
+        } catch (Exception $e) {
         }
     }
 
@@ -91,7 +78,7 @@ class PropelBundle extends Bundle
             $serviceContainer->setConnectionManager($manager);
 
             // load database maps
-            if(file_exists($config['paths']['loaderScriptDir'].'/loadDatabase.php') && is_readable($config['paths']['loaderScriptDir'].'/loadDatabase.php')) {
+            if (file_exists($config['paths']['loaderScriptDir'] . '/loadDatabase.php') && is_readable($config['paths']['loaderScriptDir'] . '/loadDatabase.php')) {
                 require_once($config['paths']['loaderScriptDir'] . '/loadDatabase.php');
             }
         }
@@ -106,11 +93,25 @@ class PropelBundle extends Bundle
         foreach ($serviceContainer->getConnectionManagers() as $manager) {
             /** @var ConnectionWrapper $connection */
             $connection = $manager->getReadConnection($serviceContainer->getAdapter($manager->getName()));
-            $connection->setLogMethods(array_merge($connection->getLogMethods(), array('prepare')));
+            $connection->setLogMethods(array_merge($connection->getLogMethods(), ['prepare']));
 
             /** @var ConnectionWrapper $connection */
             $connection = $manager->getWriteConnection($serviceContainer->getAdapter($manager->getName()));
-            $connection->setLogMethods(array_merge($connection->getLogMethods(), array('prepare')));
+            $connection->setLogMethods(array_merge($connection->getLogMethods(), ['prepare']));
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+
+        if ($container->hasExtension('security')) {
+            /** @var SecurityExtension $securityExtension */
+            $securityExtension = $container->getExtension('security');
+            $securityExtension->addUserProviderFactory(new PropelFactory('propel', 'propel.security.user.provider'));
         }
     }
 }
