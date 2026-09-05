@@ -11,25 +11,15 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Form\Form\DataTransformer;
 
-use Propel\Runtime\Collection\ObjectCollection;
-use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use Propel\Bundle\PropelBundle\Tests\CaseTest;
+use Propel\Runtime\Collection\ObjectCollection;
+use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class CollectionToArrayTransformerTest extends TestCase
+class CollectionToArrayTransformerTest extends CaseTest
 {
-    private $transformer;
-
-    protected function setUp(): void
-    {
-        if (!class_exists('Symfony\Component\Form\Form')) {
-            $this->markTestSkipped('The "Form" component is not available');
-        }
-
-        parent::setUp();
-
-        $this->transformer = new CollectionToArrayTransformer();
-    }
+    private CollectionToArrayTransformer $transformer;
 
     public function testTransform()
     {
@@ -60,7 +50,7 @@ class CollectionToArrayTransformerTest extends TestCase
     public function testTransformWithData()
     {
         $coll = new ObjectCollection();
-        $coll->setData(array($a = new \stdClass, $b = new \stdClass));
+        $coll->setData([$a = new stdClass, $b = new stdClass]);
 
         $result = $this->transformer->transform($coll);
 
@@ -98,10 +88,10 @@ class CollectionToArrayTransformerTest extends TestCase
 
     public function testReverseTransformWithData()
     {
-        $inputData  = array($a = new \stdClass, $b = new \stdClass);
+        $inputData = [$a = new stdClass, $b = new stdClass];
 
-        $result     = $this->transformer->reverseTransform($inputData);
-        $data       = $result->getData();
+        $result = $this->transformer->reverseTransform($inputData);
+        $data = $result->getData();
 
         $this->assertInstanceOf('\Propel\Runtime\Collection\ObjectCollection', $result);
 
@@ -111,6 +101,19 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->assertSame($b, $data[1]);
         $this->assertsame($inputData, $data);
     }
+
+    protected function setUp(): void
+    {
+        if (!class_exists('Symfony\Component\Form\Form')) {
+            $this->markTestSkipped('The "Form" component is not available');
+        }
+
+        parent::setUp();
+
+        $this->transformer = new CollectionToArrayTransformer();
+    }
 }
 
-class DummyObject {}
+class DummyObject
+{
+}

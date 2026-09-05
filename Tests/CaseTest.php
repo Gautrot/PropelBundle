@@ -11,23 +11,24 @@
 namespace Propel\Bundle\PropelBundle\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Propel\Runtime\Propel;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 /**
- * TestCase
+ * CaseTest
  */
-class TestCase extends BaseTestCase
+class CaseTest extends BaseTestCase
 {
-    public function getContainer()
+    public function getContainer(): ContainerBuilder
     {
-        $container = new ContainerBuilder(new ParameterBag(array(
-            'kernel.debug'      => false,
-            'kernel.project_dir'   => __DIR__ . '/../',
-        )));
+        $container = new ContainerBuilder(new ParameterBag([
+            'kernel.debug' => false,
+            'kernel.project_dir' => __DIR__ . '/../',
+        ]));
 
-        $container->setParameter('propel.configuration', array());
+        $container->setParameter('propel.configuration', []);
         $container->setDefinition('propel', new Definition('Propel\Runtime\Propel'));
 
         return $container;
@@ -37,10 +38,11 @@ class TestCase extends BaseTestCase
      * load propel database maps
      * @param array $databaseMapsArray
      */
-    protected function loadDatabaseMap(array $databaseMapsArray) {
-        $serviceContainer = \Propel\Runtime\Propel::getServiceContainer();
-        $serviceContainer->initDatabaseMaps(array (
+    protected function loadDatabaseMap(array $databaseMapsArray): void
+    {
+        $serviceContainer = Propel::getServiceContainer();
+        $serviceContainer->initDatabaseMaps([
             'default' => $databaseMapsArray
-        ));
+        ]);
     }
 }

@@ -10,11 +10,11 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Security\User;
 
-use Propel\Generator\Util\QuickBuilder;
-
 use Propel\Bundle\PropelBundle\Security\User\PropelUserProvider;
+use Propel\Bundle\PropelBundle\Tests\CaseTest;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\User;
-use Propel\Bundle\PropelBundle\Tests\TestCase;
+use Propel\Generator\Util\QuickBuilder;
+use Propel\Runtime\Connection\ConnectionWrapper;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 /**
@@ -22,9 +22,9 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
  *
  * NOTE: currently no driver is selected "sqlite" will be used by default
  */
-class PropelUserProviderTest extends TestCase
+class PropelUserProviderTest extends CaseTest
 {
-    public static $con = null;
+    public static ?ConnectionWrapper $con = null;
 
     public function setUp(): void
     {
@@ -46,10 +46,9 @@ class PropelUserProviderTest extends TestCase
 
             $builder = new QuickBuilder();
             $builder->setSchema($schema);
-            $classTargets = array('tablemap', 'object', 'query', /*'objectstub',*/ 'querystub');
+            $classTargets = ['tablemap', 'object', 'query', /*'objectstub',*/'querystub'];
 
-            $this::$con = $builder->build($dsn = null, $user = null, $pass = null, $adapter = null, $classTargets);
-
+            $this::$con = $builder->build(classTargets: $classTargets);
         }
     }
 
@@ -77,7 +76,8 @@ class PropelUserProviderTest extends TestCase
         $this->assertSame($user1, $resultUser);
     }
 
-    public function testLoadUserByUsername() {
+    public function testLoadUserByUsername()
+    {
         $user1 = new User();
         $user1->setUsername('user1');
         $user1->save();
@@ -93,7 +93,8 @@ class PropelUserProviderTest extends TestCase
         $provider->loadUserByUsername('not_exists');
     }
 
-    public function testSupportsClass() {
+    public function testSupportsClass()
+    {
         $class = 'Propel\Bundle\PropelBundle\Tests\Fixtures\Model\User';
 
         $provider = new PropelUserProvider($class, 'username');
@@ -102,7 +103,8 @@ class PropelUserProviderTest extends TestCase
         $this->assertFalse($provider->supportsClass('\AnotherClass'));
     }
 
-    public function testLoadUserByIdentifier() {
+    public function testLoadUserByIdentifier()
+    {
         $user1 = new User();
         $user1->setUsername('user1');
         $user1->save();

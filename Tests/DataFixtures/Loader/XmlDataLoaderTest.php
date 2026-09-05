@@ -10,16 +10,21 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\DataFixtures\Loader;
 
-use Propel\Runtime\Propel;
-use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
+use Exception;
 use Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader;
+use Propel\Bundle\PropelBundle\Tests\DataFixtures\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class XmlDataLoaderTest extends TestCase
+class XmlDataLoaderTest extends CaseTest
 {
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testXmlLoad()
     {
         $fixtures = <<<XML
@@ -35,10 +40,10 @@ XML;
 
         $filename = $this->getTempFile($fixtures);
 
-        $loader = new XmlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new XmlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', array());
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery::create()->find($this->con);
+        $books = CoolBookQuery::create()->find($this->con);
         $this->assertCount(1, $books);
 
         $book = $books[0];

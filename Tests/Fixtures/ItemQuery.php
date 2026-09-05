@@ -11,53 +11,47 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Fixtures;
 
+use Propel\Generator\Model\PropelTypes;
 use Propel\Runtime\Map\ColumnMap;
 use Propel\Runtime\Map\RelationMap;
 use Propel\Runtime\Map\TableMap;
-use Propel\Generator\Model\PropelTypes;
 
 class ItemQuery
 {
-    private $map = array(
-        'id'            => PropelTypes::INTEGER,
-        'value'         => PropelTypes::VARCHAR,
-        'price'         => PropelTypes::FLOAT,
-        'is_active'     => PropelTypes::BOOLEAN,
-        'enabled'       => PropelTypes::BOOLEAN_EMU,
-        'updated_at'    => PropelTypes::TIMESTAMP,
+    private array $map = [
+        'id' => PropelTypes::INTEGER,
+        'value' => PropelTypes::VARCHAR,
+        'price' => PropelTypes::FLOAT,
+        'is_active' => PropelTypes::BOOLEAN,
+        'enabled' => PropelTypes::BOOLEAN_EMU,
+        'updated_at' => PropelTypes::TIMESTAMP,
 
-        'updated_at'    => PropelTypes::TIMESTAMP,
-        'updated_at'    => PropelTypes::TIMESTAMP,
-        'updated_at'    => PropelTypes::TIMESTAMP,
-    );
+        'updated_at' => PropelTypes::TIMESTAMP,
+        'updated_at' => PropelTypes::TIMESTAMP,
+        'updated_at' => PropelTypes::TIMESTAMP,
+    ];
 
-    public function getTableMap()
+    public function getTableMap(): static
     {
         // Allows to define methods in this class
         // to avoid a lot of mock classes
         return $this;
     }
 
-    public function getPrimaryKeys()
+    public function getPrimaryKeys(): array
     {
         $cm = new ColumnMap('id', new TableMap());
         $cm->setType('INTEGER');
 
-        return array('id' => $cm);
+        return ['id' => $cm];
     }
 
     /**
      * Method from the TableMap API
+     * @param $column
+     * @return Column|null
      */
-    public function hasColumn($column)
-    {
-        return in_array($column, array_keys($this->map));
-    }
-
-    /**
-     * Method from the TableMap API
-     */
-    public function getColumn($column)
+    public function getColumn($column): ?Column
     {
         if ($this->hasColumn($column)) {
             return new Column($column, $this->map[$column]);
@@ -68,8 +62,19 @@ class ItemQuery
 
     /**
      * Method from the TableMap API
+     * @param $column
+     * @return bool
      */
-    public function getRelations()
+    public function hasColumn($column): bool
+    {
+        return in_array($column, array_keys($this->map));
+    }
+
+    /**
+     * Method from the TableMap API
+     * @return array
+     */
+    public function getRelations(): array
     {
         // table maps
         $authorTable = new TableMap();
@@ -91,10 +96,10 @@ class ItemQuery
         $resellerRelation = new RelationMap('Reseller', $resellerTable, $defaultForeignTable);
         $resellerRelation->setType(RelationMap::MANY_TO_MANY);
 
-        return array(
+        return [
             $mainAuthorRelation,
             $authorRelation,
             $resellerRelation
-        );
+        ];
     }
 }

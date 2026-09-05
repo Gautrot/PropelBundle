@@ -16,18 +16,18 @@ use Propel\Runtime\Map\TableMap;
 
 class ReadOnlyItemQuery
 {
-    public function getTableMap()
+    public function getTableMap(): static
     {
         // Allows to define methods in this class
         // to avoid a lot of mock classes
         return $this;
     }
 
-    public function getPrimaryKeys()
+    public function getPrimaryKeys(): array
     {
         $cm = new ColumnMap('id', new TableMap());
         $cm->setType('INTEGER');
 
-        return array('id' => $cm);
+        return ['id' => $cm];
     }
 }

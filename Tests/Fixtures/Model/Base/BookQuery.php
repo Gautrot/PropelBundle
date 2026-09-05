@@ -2,19 +2,18 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Base;
 
-use \Exception;
-use \PDO;
+use Exception;
+use PDO;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Book as ChildBook;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\BookQuery as ChildBookQuery;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Map\BookTableMap;
-use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\ActiveQuery\ModelJoin;
-use Propel\Runtime\Collection\Collection;
 use Propel\Runtime\Collection\ObjectCollection;
 use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Exception\PropelException;
+use Propel\Runtime\Propel;
 
 /**
  * Base class that represents a query for the 'book' table.
@@ -55,8 +54,8 @@ abstract class BookQuery extends ModelCriteria
     /**
      * Initializes internal state of \Acme\DemoBundle\Model\Base\BookQuery object.
      *
-     * @param string $dbName     The database name
-     * @param string $modelName  The phpName of a model, e.g. 'Book'
+     * @param string $dbName The database name
+     * @param string $modelName The phpName of a model, e.g. 'Book'
      * @param string $modelAlias The alias for the model in this query, e.g. 'b'
      */
     public function __construct($dbName = 'default', $modelName = '\\Propel\\Bundle\\PropelBundle\\Tests\\Fixtures\\Model\\Book', $modelAlias = null)
@@ -67,17 +66,17 @@ abstract class BookQuery extends ModelCriteria
     /**
      * Returns a new ChildBookQuery object.
      *
-     * @param string   $modelAlias The alias of a model in the query
-     * @param Criteria $criteria   Optional Criteria to build the query from
+     * @param string|null $modelAlias The alias of a model in the query
+     * @param Criteria|null $criteria Optional Criteria to build the query from
      *
      * @return ChildBookQuery
      */
-    public static function create($modelAlias = null, $criteria = null)
+    public static function create(?string $modelAlias = null, ?Criteria $criteria = null): ChildBookQuery
     {
-        if ($criteria instanceof \Propel\Bundle\PropelBundle\Tests\Fixtures\Model\BookQuery) {
+        if ($criteria instanceof ChildBookQuery) {
             return $criteria;
         }
-        $query = new \Propel\Bundle\PropelBundle\Tests\Fixtures\Model\BookQuery();
+        $query = new ChildBookQuery();
         if (null !== $modelAlias) {
             $query->setModelAlias($modelAlias);
         }
@@ -97,17 +96,18 @@ abstract class BookQuery extends ModelCriteria
      * $obj  = $c->findPk(12, $con);
      * </code>
      *
-     * @param mixed               $key Primary key to use for the query
-     * @param ConnectionInterface $con an optional connection object
+     * @param mixed $key Primary key to use for the query
+     * @param ConnectionInterface|null $con an optional connection object
      *
      * @return ChildBook|array|mixed the result, formatted by the current formatter
+     * @throws PropelException
      */
-    public function findPk($key, ConnectionInterface $con = null)
+    public function findPk($key, ?ConnectionInterface $con = null): mixed
     {
         if ($key === null) {
             return null;
         }
-        if ((null !== ($obj = BookTableMap::getInstanceFromPool((string) $key))) && !$this->formatter) {
+        if ((null !== ($obj = BookTableMap::getInstanceFromPool((string)$key))) && !$this->formatter) {
             // the object is already in the instance pool
             return $obj;
         }
@@ -116,8 +116,8 @@ abstract class BookQuery extends ModelCriteria
         }
         $this->basePreSelect($con);
         if ($this->formatter || $this->modelAlias || $this->with || $this->select
-         || $this->selectColumns || $this->asColumns || $this->selectModifiers
-         || $this->map || $this->having || $this->joins) {
+            || $this->selectColumns || $this->asColumns || $this->selectModifiers
+            || $this->map || $this->having || $this->joins) {
             return $this->findPkComplex($key, $con);
         } else {
             return $this->findPkSimple($key, $con);
@@ -125,45 +125,14 @@ abstract class BookQuery extends ModelCriteria
     }
 
     /**
-     * Find object by primary key using raw SQL to go fast.
-     * Bypass doSelect() and the object formatter by using generated code.
-     *
-     * @param mixed               $key Primary key to use for the query
-     * @param ConnectionInterface $con A connection object
-     *
-     * @return ChildBook A model object, or null if the key is not found
-     */
-    protected function findPkSimple($key, $con)
-    {
-        $sql = 'SELECT ID, TITLE, ISBN, AUTHOR_ID FROM book WHERE ID = :p0';
-        try {
-            $stmt = $con->prepare($sql);
-            $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
-            $stmt->execute();
-        } catch (Exception $e) {
-            Propel::log($e->getMessage(), Propel::LOG_ERR);
-            throw new PropelException(sprintf('Unable to execute SELECT statement [%s]', $sql), 0, $e);
-        }
-        $obj = null;
-        if ($row = $stmt->fetch(\PDO::FETCH_NUM)) {
-            $obj = new ChildBook();
-            $obj->hydrate($row);
-            BookTableMap::addInstanceToPool($obj, (string) $key);
-        }
-        $stmt->closeCursor();
-
-        return $obj;
-    }
-
-    /**
      * Find object by primary key.
      *
-     * @param mixed               $key Primary key to use for the query
+     * @param mixed $key Primary key to use for the query
      * @param ConnectionInterface $con A connection object
      *
      * @return ChildBook|array|mixed the result, formatted by the current formatter
      */
-    protected function findPkComplex($key, $con)
+    protected function findPkComplex(mixed $key, ConnectionInterface $con): mixed
     {
         // As the query uses a PK condition, no limit(1) is necessary.
         $criteria = $this->isKeepQuery() ? clone $this : $this;
@@ -175,16 +144,60 @@ abstract class BookQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query by primary key
+     *
+     * @param mixed $key Primary key to use for the query
+     *
+     * @return ChildBookQuery The current query, for fluid interface
+     */
+    public function filterByPrimaryKey(mixed $key): ChildBookQuery
+    {
+        return $this->addUsingAlias(BookTableMap::ID, $key, Criteria::EQUAL);
+    }
+
+    /**
+     * Find object by primary key using raw SQL to go fast.
+     * Bypass doSelect() and the object formatter by using generated code.
+     *
+     * @param mixed $key Primary key to use for the query
+     * @param ConnectionInterface $con A connection object
+     *
+     * @return ChildBook|null A model object, or null if the key is not found
+     * @throws PropelException
+     */
+    protected function findPkSimple(mixed $key, ConnectionInterface $con): ?ChildBook
+    {
+        $sql = 'SELECT ID, TITLE, ISBN, AUTHOR_ID FROM book WHERE ID = :p0';
+        try {
+            $stmt = $con->prepare($sql);
+            $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (Exception $e) {
+            Propel::log($e->getMessage(), Propel::LOG_ERR);
+            throw new PropelException(sprintf('Unable to execute SELECT statement [%s]', $sql), 0, $e);
+        }
+        $obj = null;
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $obj = new ChildBook();
+            $obj->hydrate($row);
+            BookTableMap::addInstanceToPool($obj, (string)$key);
+        }
+        $stmt->closeCursor();
+
+        return $obj;
+    }
+
+    /**
      * Find objects by primary key
      * <code>
      * $objs = $c->findPks(array(12, 56, 832), $con);
      * </code>
-     * @param array               $keys Primary keys to use for the query
-     * @param ConnectionInterface $con  an optional connection object
+     * @param array $keys Primary keys to use for the query
+     * @param ConnectionInterface|null $con an optional connection object
      *
      * @return ObjectCollection|array|mixed the list of results, formatted by the current formatter
      */
-    public function findPks($keys, ConnectionInterface $con = null)
+    public function findPks(array $keys, ?ConnectionInterface $con = null): mixed
     {
         if (null === $con) {
             $con = Propel::getServiceContainer()->getReadConnection($this->getDbName());
@@ -199,25 +212,13 @@ abstract class BookQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by primary key
-     *
-     * @param mixed $key Primary key to use for the query
-     *
-     * @return ChildBookQuery The current query, for fluid interface
-     */
-    public function filterByPrimaryKey($key)
-    {
-        return $this->addUsingAlias(BookTableMap::ID, $key, Criteria::EQUAL);
-    }
-
-    /**
      * Filter the query by a list of primary keys
      *
      * @param array $keys The list of primary key to use for the query
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function filterByPrimaryKeys($keys)
+    public function filterByPrimaryKeys(array $keys): ChildBookQuery
     {
         return $this->addUsingAlias(BookTableMap::ID, $keys, Criteria::IN);
     }
@@ -232,15 +233,15 @@ abstract class BookQuery extends ModelCriteria
      * $query->filterById(array('min' => 12)); // WHERE id > 12
      * </code>
      *
-     * @param mixed  $id         The value to use as filter.
+     * @param mixed $id The value to use as filter.
      *                           Use scalar values for equality.
      *                           Use array values for in_array() equivalent.
      *                           Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     * @param string|null $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function filterById($id = null, $comparison = null)
+    public function filterById(mixed $id = null, ?string $comparison = null): ChildBookQuery
     {
         if (is_array($id)) {
             $useMinMax = false;
@@ -272,13 +273,13 @@ abstract class BookQuery extends ModelCriteria
      * $query->filterByTitle('%fooValue%'); // WHERE title LIKE '%fooValue%'
      * </code>
      *
-     * @param string $title      The value to use as filter.
+     * @param string|null $title The value to use as filter.
      *                           Accepts wildcards (* and % trigger a LIKE)
-     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     * @param string|null $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function filterByTitle($title = null, $comparison = null)
+    public function filterByTitle(?string $title = null, ?string $comparison = null): ChildBookQuery
     {
         if (null === $comparison) {
             if (is_array($title)) {
@@ -301,13 +302,13 @@ abstract class BookQuery extends ModelCriteria
      * $query->filterByIsbn('%fooValue%'); // WHERE ISBN LIKE '%fooValue%'
      * </code>
      *
-     * @param string $isbn       The value to use as filter.
+     * @param string|null $isbn The value to use as filter.
      *                           Accepts wildcards (* and % trigger a LIKE)
-     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     * @param string|null $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function filterByIsbn($isbn = null, $comparison = null)
+    public function filterByIsbn(?string $isbn = null, ?string $comparison = null): ChildBookQuery
     {
         if (null === $comparison) {
             if (is_array($isbn)) {
@@ -331,17 +332,17 @@ abstract class BookQuery extends ModelCriteria
      * $query->filterByAuthorId(array('min' => 12)); // WHERE author_id > 12
      * </code>
      *
-     * @see       filterByAuthor()
-     *
-     * @param mixed  $authorId   The value to use as filter.
+     * @param mixed $authorId The value to use as filter.
      *                           Use scalar values for equality.
      *                           Use array values for in_array() equivalent.
      *                           Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     * @param string|null $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ChildBookQuery The current query, for fluid interface
+     * @see       filterByAuthor()
+     *
      */
-    public function filterByAuthorId($authorId = null, $comparison = null)
+    public function filterByAuthorId(mixed $authorId = null, ?string $comparison = null): ChildBookQuery
     {
         if (is_array($authorId)) {
             $useMinMax = false;
@@ -367,12 +368,12 @@ abstract class BookQuery extends ModelCriteria
     /**
      * Adds a JOIN clause to the query using the Author relation
      *
-     * @param string $relationAlias optional alias for the relation
-     * @param string $joinType      Accepted values are null, 'left join', 'right join', 'inner join'
+     * @param string|null $relationAlias optional alias for the relation
+     * @param string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function joinAuthor($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinAuthor(?string $relationAlias = null, string $joinType = Criteria::LEFT_JOIN): ChildBookQuery
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Author');
@@ -399,11 +400,11 @@ abstract class BookQuery extends ModelCriteria
     /**
      * Exclude object from result
      *
-     * @param ChildBook $book Object to remove from the list of results
+     * @param ChildBook|null $book Object to remove from the list of results
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function prune($book = null)
+    public function prune(?ChildBook $book = null): ChildBookQuery
     {
         if ($book) {
             $this->addUsingAlias(BookTableMap::ID, $book->getId(), Criteria::NOT_EQUAL);
@@ -418,7 +419,6 @@ abstract class BookQuery extends ModelCriteria
      * @param ConnectionInterface|null $con the connection to use
      * @return int                          The number of affected rows (if supported by underlying database driver).
      *
-     * @throws PropelException
      */
     public function doDeleteAll(?ConnectionInterface $con = null): int
     {
@@ -426,22 +426,15 @@ abstract class BookQuery extends ModelCriteria
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
-        try {
-            // use transaction because $criteria could contain info
-            // for more than one table or we could emulating ON DELETE CASCADE, etc.
-            $con->beginTransaction();
-            $affectedRows += parent::doDeleteAll($con);
-            // Because this db requires some delete cascade/set null emulation, we have to
-            // clear the cached instance *after* the emulation has happened (since
-            // instances get re-added by the select statement contained therein).
-            BookTableMap::clearInstancePool();
-            BookTableMap::clearRelatedInstancePool();
+        $con->beginTransaction();
+        $affectedRows += parent::doDeleteAll($con);
+        // Because this db requires some delete cascade/set null emulation, we have to
+        // clear the cached instance *after* the emulation has happened (since
+        // instances get re-added by the select statement contained therein).
+        BookTableMap::clearInstancePool();
+        BookTableMap::clearRelatedInstancePool();
 
-            $con->commit();
-        } catch (PropelException $e) {
-            $con->rollBack();
-            throw $e;
-        }
+        $con->commit();
 
         return $affectedRows;
     }
@@ -473,7 +466,7 @@ abstract class BookQuery extends ModelCriteria
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
 
-        BookTableMap::removeInstanceFromPool($criteria);
+            BookTableMap::removeInstanceFromPool($criteria);
 
             $affectedRows += ModelCriteria::delete($con);
             BookTableMap::clearRelatedInstancePool();

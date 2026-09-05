@@ -16,15 +16,15 @@ use Propel\Runtime\Connection\ConnectionInterface;
 
 class TranslatableItemI18n implements ActiveRecordInterface
 {
-    private $id;
+    private mixed $id;
 
-    private $locale;
+    private mixed $locale;
 
-    private $value;
+    private mixed $value;
 
-    private $value2;
+    private mixed $value2;
 
-    private $item;
+    private mixed $item;
 
     public function __construct($id = null, $locale = null, $value = null)
     {

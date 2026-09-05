@@ -7,25 +7,20 @@ namespace Propel\Bundle\PropelBundle\Tests;
 
 use Propel\Bundle\PropelBundle\Logger\PropelLogger;
 use Propel\Bundle\PropelBundle\PropelBundle;
-use Propel\Bundle\PropelBundle\Tests\TestCase;
-use Propel\Common\Config\ConfigurationManager;
-use Propel\Common\Config\FileLocator;
-use Propel\Common\Config\Loader\IniFileLoader;
 use Propel\Generator\Util\VfsTrait;
 use Propel\Runtime\Adapter\Pdo\SqliteAdapter;
 use Propel\Runtime\Connection\ConnectionManagerPrimaryReplica;
 use Propel\Runtime\Connection\ConnectionManagerSingle;
-use Propel\Runtime\Connection\ConnectionWrapper;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ServiceContainer\StandardServiceContainer;
 use Psr\Log\NullLogger;
-use Symfony\Component\HttpKernel\DependencyInjection\LoggerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author SkyFoxvn
  * NOTE: this class test only changes made by this bundle which make change on propel bundle
  */
-class PropelBundleTest extends TestCase
+class PropelBundleTest extends CaseTest
 {
     use VfsTrait;
 
@@ -57,14 +52,11 @@ class PropelBundleTest extends TestCase
 //
 //        // compile
 //        $container->compile();
-//
-////        var_dump($container->getParameter('propel.configuration'));
-////        var_dump($container->getExtensions());
-//
 //        $this->assertTrue($container->hasExtension('security'));
 //    }
 
-    public function testConfigureConnections() {
+    public function testConfigureConnections()
+    {
         /**
          * set single connection without slaves
          */
@@ -73,7 +65,7 @@ class PropelBundleTest extends TestCase
         $serviceContainer = Propel::getServiceContainer();
 
         // init PropelBundle class
-        $this->initPropelBundle(array(
+        $this->initPropelBundle([
             'paths' => ['loaderScriptDir' => 'not_exists'],
             'database' => [
                 'connections' => [
@@ -83,7 +75,7 @@ class PropelBundleTest extends TestCase
             'runtime' => [
                 'defaultConnection' => 'test_default_connection'
             ]
-        ));
+        ]);
 
         // tests
         $manager = $serviceContainer->getConnectionManager('mysource');
@@ -101,7 +93,7 @@ class PropelBundleTest extends TestCase
         $serviceContainer = Propel::getServiceContainer();
 
         // init PropelBundle class
-        $this->initPropelBundle(array(
+        $this->initPropelBundle([
             'paths' => ['loaderScriptDir' => 'not_exists'],
             'database' => [
                 'connections' => [
@@ -117,7 +109,7 @@ class PropelBundleTest extends TestCase
             'runtime' => [
                 'defaultConnection' => 'test_default_connection2'
             ]
-        ));
+        ]);
 
         // tests
         $manager = $serviceContainer->getConnectionManager('mysource2');
@@ -136,7 +128,7 @@ class PropelBundleTest extends TestCase
         $serviceContainer = Propel::getServiceContainer();
 
         // init PropelBundle class
-        $this->initPropelBundle(array(
+        $this->initPropelBundle([
             'paths' => ['loaderScriptDir' => 'not_exists'],
             'database' => [
                 'connections' => [
@@ -156,7 +148,7 @@ class PropelBundleTest extends TestCase
             'runtime' => [
                 'defaultConnection' => 'test_default_connection3'
             ]
-        ));
+        ]);
 
         // tests
         $this->assertCount(2, $serviceContainer->getConnectionManagers());
@@ -167,57 +159,13 @@ class PropelBundleTest extends TestCase
     }
 
     /**
-     * test logger is set and methods exist
-     * @return void
-     */
-    public function testConfigureLogging() {
-        Propel::setServiceContainer(new StandardServiceContainer());
-        $serviceContainer = Propel::getServiceContainer();
-
-        // ensure no logger is set at the start
-        $this->assertInstanceOf(NullLogger::class, $serviceContainer->getLogger());
-
-        // init PropelBundle class
-        $container = $this->initPropelBundle(array(
-            'paths' => ['loaderScriptDir' => 'not_exists'],
-            'database' => [
-                'connections' => [
-                    'mysource1' => [
-                        'dsn' => 'sqlite::memory:',
-                        'adapter' => 'sqlite',
-                        'slaves' => [
-                            ['dsn' => 'sqlite::memory:']
-                        ]
-                    ],
-                    'mysource2' => [
-                        'dsn' => 'sqlite::memory:',
-                        'adapter' => 'sqlite'
-                    ],
-                ]
-            ],
-            'runtime' => [
-                'defaultConnection' => 'test_default_connection'
-            ]
-        ), new PropelLogger());
-
-        // logger
-        $this->assertInstanceOf(PropelLogger::class, $serviceContainer->getLogger());
-        // conn 1
-        $con1 = $serviceContainer->getConnectionManager('mysource1');
-        $this->assertTrue(in_array('prepare', $con1->getReadConnection()->getLogMethods()));
-        $this->assertTrue(in_array('prepare', $con1->getReadConnection()->getLogMethods()));
-        // conn 2
-        $con2 = $serviceContainer->getConnectionManager('mysource2');
-        $this->assertTrue(in_array('prepare', $con2->getReadConnection()->getLogMethods()));
-        $this->assertTrue(in_array('prepare', $con2->getReadConnection()->getLogMethods()));
-    }
-
-    /**
      * initialize PropelBundle with given configuration
      * @param array $configuration propel configuration parameters
-     * @return \Symfony\Component\DependencyInjection\ContainerBuilder
+     * @param mixed $logger
+     * @return ContainerBuilder
      */
-    private function initPropelBundle(array $configuration, $logger = false) {
+    private function initPropelBundle(array $configuration, mixed $logger = false): ContainerBuilder
+    {
         // init new container
         $container = $this->getContainer();
 
@@ -237,5 +185,52 @@ class PropelBundleTest extends TestCase
         $propelBundleClass->boot();
 
         return $container;
+    }
+
+    /**
+     * test logger is set and methods exist
+     * @return void
+     */
+    public function testConfigureLogging()
+    {
+        Propel::setServiceContainer(new StandardServiceContainer());
+        $serviceContainer = Propel::getServiceContainer();
+
+        // ensure no logger is set at the start
+        $this->assertInstanceOf(NullLogger::class, $serviceContainer->getLogger());
+
+        // init PropelBundle class
+        $container = $this->initPropelBundle([
+            'paths' => ['loaderScriptDir' => 'not_exists'],
+            'database' => [
+                'connections' => [
+                    'mysource1' => [
+                        'dsn' => 'sqlite::memory:',
+                        'adapter' => 'sqlite',
+                        'slaves' => [
+                            ['dsn' => 'sqlite::memory:']
+                        ]
+                    ],
+                    'mysource2' => [
+                        'dsn' => 'sqlite::memory:',
+                        'adapter' => 'sqlite'
+                    ],
+                ]
+            ],
+            'runtime' => [
+                'defaultConnection' => 'test_default_connection'
+            ]
+        ], new PropelLogger());
+
+        // logger
+        $this->assertInstanceOf(PropelLogger::class, $serviceContainer->getLogger());
+        // conn 1
+        $con1 = $serviceContainer->getConnectionManager('mysource1');
+        $this->assertTrue(in_array('prepare', $con1->getReadConnection()->getLogMethods()));
+        $this->assertTrue(in_array('prepare', $con1->getReadConnection()->getLogMethods()));
+        // conn 2
+        $con2 = $serviceContainer->getConnectionManager('mysource2');
+        $this->assertTrue(in_array('prepare', $con2->getReadConnection()->getLogMethods()));
+        $this->assertTrue(in_array('prepare', $con2->getReadConnection()->getLogMethods()));
     }
 }

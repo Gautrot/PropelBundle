@@ -11,11 +11,11 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Form\Form\Type;
 
+use Propel\Bundle\PropelBundle\Form\PropelExtension;
 use Propel\Bundle\PropelBundle\Form\Type\TranslationCollectionType;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Item;
-use Propel\Bundle\PropelBundle\Form\PropelExtension;
-use Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItemI18n;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItem;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItemI18n;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -24,21 +24,9 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class TranslationCollectionTypeTest extends TypeTestCase
 {
-    const TRANSLATION_CLASS         = 'Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItem';
-    const TRANSLATABLE_I18N_CLASS   = 'Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItemI18n';
-    const NON_TRANSLATION_CLASS     = 'Propel\Bundle\PropelBundle\Tests\Fixtures\Item';
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    protected function getExtensions()
-    {
-        return array_merge(parent::getExtensions(), array(
-            new PropelExtension(),
-        ));
-    }
+    const TRANSLATION_CLASS = 'Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItem';
+    const TRANSLATABLE_I18N_CLASS = 'Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItemI18n';
+    const NON_TRANSLATION_CLASS = 'Propel\Bundle\PropelBundle\Tests\Fixtures\Item';
 
     public function testTranslationsAdded()
     {
@@ -46,17 +34,17 @@ class TranslationCollectionTypeTest extends TypeTestCase
         $item->addTranslatableItemI18n(new TranslatableItemI18n(1, 'fr', 'val1'));
         $item->addTranslatableItemI18n(new TranslatableItemI18n(2, 'en', 'val2'));
 
-        $builder = $this->factory->createBuilder(FormType::class, null, array(
+        $builder = $this->factory->createBuilder(FormType::class, null, [
             'data_class' => self::TRANSLATION_CLASS
-        ));
+        ]);
 
-        $builder->add('translatableItemI18ns', TranslationCollectionType::class, array(
-            'languages' => array('en', 'fr'),
-            'entry_options' => array(
+        $builder->add('translatableItemI18ns', TranslationCollectionType::class, [
+            'languages' => ['en', 'fr'],
+            'entry_options' => [
                 'data_class' => self::TRANSLATABLE_I18N_CLASS,
-                'columns' => array('value', 'value2' => array('label' => 'Label', 'type' => TextareaType::class))
-            )
-        ));
+                'columns' => ['value', 'value2' => ['label' => 'Label', 'type' => TextareaType::class]]
+            ]
+        ]);
         $form = $builder->getForm();
         $form->setData($item);
         $translations = $form->get('translatableItemI18ns');
@@ -83,16 +71,16 @@ class TranslationCollectionTypeTest extends TypeTestCase
 
         $this->assertCount(0, $item->getTranslatableItemI18ns());
 
-        $builder = $this->factory->createBuilder(FormType::class, null, array(
+        $builder = $this->factory->createBuilder(FormType::class, null, [
             'data_class' => self::TRANSLATION_CLASS
-        ));
-        $builder->add('translatableItemI18ns', TranslationCollectionType::class, array(
-            'languages' => array('en', 'fr'),
-            'entry_options' => array(
+        ]);
+        $builder->add('translatableItemI18ns', TranslationCollectionType::class, [
+            'languages' => ['en', 'fr'],
+            'entry_options' => [
                 'data_class' => self::TRANSLATABLE_I18N_CLASS,
-                'columns' => array('value', 'value2' => array('label' => 'Label', 'type' => TextareaType::class))
-            )
-        ));
+                'columns' => ['value', 'value2' => ['label' => 'Label', 'type' => TextareaType::class]]
+            ]
+        ]);
 
         $form = $builder->getForm();
         $form->setData($item);
@@ -107,16 +95,16 @@ class TranslationCollectionTypeTest extends TypeTestCase
     {
         $item = new Item(null, 'val');
 
-        $builder = $this->factory->createBuilder(FormType::class, null, array(
+        $builder = $this->factory->createBuilder(FormType::class, null, [
             'data_class' => self::NON_TRANSLATION_CLASS
-        ));
-        $builder->add('value', TranslationCollectionType::class, array(
-            'languages' => array('en', 'fr'),
-            'entry_options' => array(
+        ]);
+        $builder->add('value', TranslationCollectionType::class, [
+            'languages' => ['en', 'fr'],
+            'entry_options' => [
                 'data_class' => self::TRANSLATABLE_I18N_CLASS,
-                'columns' => array('value', 'value2' => array('label' => 'Label', 'type' => TextareaType::class))
-            )
-        ));
+                'columns' => ['value', 'value2' => ['label' => 'Label', 'type' => TextareaType::class]]
+            ]
+        ]);
 
         $this->expectException(UnexpectedTypeException::class);
 
@@ -131,12 +119,12 @@ class TranslationCollectionTypeTest extends TypeTestCase
     {
         $this->expectException(MissingOptionsException::class);
 
-        $this->factory->createNamed('itemI18ns', TranslationCollectionType::class, null, array(
-            'languages' => array('en', 'fr'),
-            'entry_options' => array(
-                'columns' => array('value', 'value2')
-            )
-        ));
+        $this->factory->createNamed('itemI18ns', TranslationCollectionType::class, null, [
+            'languages' => ['en', 'fr'],
+            'entry_options' => [
+                'columns' => ['value', 'value2']
+            ]
+        ]);
     }
 
     /**
@@ -146,12 +134,12 @@ class TranslationCollectionTypeTest extends TypeTestCase
     {
         $this->expectException(MissingOptionsException::class);
 
-        $this->factory->createNamed('itemI18ns', TranslationCollectionType::class, null, array(
-           'entry_options' => array(
-               'data_class' => self::TRANSLATABLE_I18N_CLASS,
-               'columns' => array('value', 'value2')
-           )
-        ));
+        $this->factory->createNamed('itemI18ns', TranslationCollectionType::class, null, [
+            'entry_options' => [
+                'data_class' => self::TRANSLATABLE_I18N_CLASS,
+                'columns' => ['value', 'value2']
+            ]
+        ]);
     }
 
     /**
@@ -161,11 +149,18 @@ class TranslationCollectionTypeTest extends TypeTestCase
     {
         $this->expectException(MissingOptionsException::class);
 
-        $this->factory->createNamed('itemI18ns', TranslationCollectionType::class, null, array(
-            'languages' => array('en', 'fr'),
-            'entry_options' => array(
+        $this->factory->createNamed('itemI18ns', TranslationCollectionType::class, null, [
+            'languages' => ['en', 'fr'],
+            'entry_options' => [
                 'data_class' => self::TRANSLATABLE_I18N_CLASS
-            )
-        ));
+            ]
+        ]);
+    }
+
+    protected function getExtensions(): array
+    {
+        return array_merge(parent::getExtensions(), [
+            new PropelExtension(),
+        ]);
     }
 }

@@ -10,17 +10,33 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\DataFixtures\Loader;
 
-use Propel\Generator\Util\QuickBuilder;
-use Propel\Runtime\Propel;
-use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
+use Exception;
+use Faker\Factory;
 use Propel\Bundle\PropelBundle\DataFixtures\Loader\YamlDataLoader;
+use Propel\Bundle\PropelBundle\Tests\DataFixtures\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthorQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlBookWithObjectQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlDelegateOnPrimaryKeyAuthorQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlInheritedRelationshipBookQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyAuthorQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBookAuthorQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBookQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesAuthorQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBookAuthorQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBookQuery;
+use Propel\Generator\Util\QuickBuilder;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class YamlDataLoaderTest extends TestCase
+class YamlDataLoaderTest extends CaseTest
 {
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testYamlLoadOneToMany()
     {
         $fixtures = <<<YAML
@@ -37,19 +53,22 @@ class YamlDataLoaderTest extends TestCase
 YAML;
         $filename = $this->getTempFile($fixtures);
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery::create()->find($this->con);
+        $books = CoolBookQuery::create()->find($this->con);
         $this->assertCount(1, $books);
 
         $book = $books[0];
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor', $book->getCoolBookAuthor());
     }
 
+    /**
+     * @throws Exception
+     */
     public function testYamlLoadOneToManyExternalReference()
     {
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
 
         $fixtures = <<<YAML
 \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor:
@@ -59,7 +78,7 @@ YAML;
 
 YAML;
         $filename = $this->getTempFile($fixtures);
-        $loader->load(array($filename), 'default');
+        $loader->load([$filename], 'default');
 
         $fixtures = <<<YAML
 \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBook:
@@ -70,15 +89,19 @@ YAML;
 
 YAML;
         $filename = $this->getTempFile($fixtures);
-        $loader->load(array($filename), 'default');
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery::create()->find($this->con);
+        $books = CoolBookQuery::create()->find($this->con);
         $this->assertCount(1, $books);
 
         $book = $books[0];
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor', $book->getCoolBookAuthor());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testLoadSelfReferencing()
     {
         $fixtures = <<<YAML
@@ -93,19 +116,23 @@ Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor:
 YAML;
         $filename = $this->getTempFile($fixtures);
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery::create()->find($this->con);
+        $books = CoolBookQuery::create()->find($this->con);
         $this->assertCount(0, $books);
 
-        $authors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthorQuery::create()->find($this->con);
+        $authors = CoolBookAuthorQuery::create()->find($this->con);
         $this->assertCount(1, $authors);
 
         $author = $authors[0];
         $this->assertEquals('A famous one', $author->getName());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testLoaderWithPhp()
     {
         $fixtures = <<<YAML
@@ -117,19 +144,23 @@ Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor:
 YAML;
         $filename = $this->getTempFile($fixtures);
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery::create()->find($this->con);
+        $books = CoolBookQuery::create()->find($this->con);
         $this->assertCount(0, $books);
 
-        $authors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthorQuery::create()->find($this->con);
+        $authors = CoolBookAuthorQuery::create()->find($this->con);
         $this->assertCount(1, $authors);
 
         $author = $authors[0];
         $this->assertEquals('to be announced', $author->getName());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testLoadWithoutFaker()
     {
         $fixtures = <<<YAML
@@ -141,19 +172,23 @@ Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor:
 YAML;
         $filename = $this->getTempFile($fixtures);
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery::create()->find($this->con);
+        $books = CoolBookQuery::create()->find($this->con);
         $this->assertCount(0, $books);
 
-        $authors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthorQuery::create()->find($this->con);
+        $authors = CoolBookAuthorQuery::create()->find($this->con);
         $this->assertCount(1, $authors);
 
         $author = $authors[0];
         $this->assertEquals('word', $author->getName());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testLoadWithFaker()
     {
         if (!class_exists('Faker\Factory')) {
@@ -168,12 +203,12 @@ Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBook:
         description: <?php \$faker('sentence'); ?>
 
 YAML;
-        $filename  = $this->getTempFile($fixtures);
+        $filename = $this->getTempFile($fixtures);
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array(), \Faker\Factory::create());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', [], Factory::create());
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery::create()->find($this->con);
+        $books = CoolBookQuery::create()->find($this->con);
         $this->assertCount(1, $books);
 
         $book = $books[0];
@@ -185,6 +220,10 @@ YAML;
         $this->assertMatchesRegularExpression('#[\w ]+#', $book->getDescription());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testYamlLoadManyToMany()
     {
         $schema = <<<XML
@@ -244,20 +283,20 @@ YAML;
 
         $con = $builder->build();
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBookQuery::create()->find($con);
+        $books = YamlManyToManyBookQuery::create()->find($con);
         $this->assertCount(2, $books);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBook', $books[0]);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBook', $books[1]);
 
-        $authors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyAuthorQuery::create()->find($con);;
+        $authors = YamlManyToManyAuthorQuery::create()->find($con);
         $this->assertCount(2, $authors);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyAuthor', $authors[0]);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyAuthor', $authors[1]);
 
-        $bookAuthors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBookAuthorQuery::create()->find($con);;
+        $bookAuthors = YamlManyToManyBookAuthorQuery::create()->find($con);
         $this->assertCount(2, $bookAuthors);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBookAuthor', $bookAuthors[0]);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyBookAuthor', $bookAuthors[1]);
@@ -267,6 +306,10 @@ YAML;
         $this->assertEquals('Les misérables', $authors[1]->getBooks()->get(0)->getName());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testYamlLoadManyToManyMultipleFiles()
     {
         $schema = <<<XML
@@ -332,20 +375,20 @@ YAML;
         $builder->setSchema($schema);
         $con = $builder->build();
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename1, $filename2), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename1, $filename2], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBookQuery::create()->find($con);
+        $books = YamlManyToManyMultipleFilesBookQuery::create()->find($con);
         $this->assertCount(2, $books);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBook', $books[0]);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBook', $books[1]);
 
-        $authors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesAuthorQuery::create()->find($con);
+        $authors = YamlManyToManyMultipleFilesAuthorQuery::create()->find($con);
         $this->assertCount(2, $authors);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesAuthor', $authors[0]);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesAuthor', $authors[1]);
 
-        $bookAuthors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBookAuthorQuery::create()->find($con);
+        $bookAuthors = YamlManyToManyMultipleFilesBookAuthorQuery::create()->find($con);
         $this->assertCount(2, $bookAuthors);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBookAuthor', $bookAuthors[0]);
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToManyMultipleFilesBookAuthor', $bookAuthors[1]);
@@ -355,6 +398,10 @@ YAML;
         $this->assertEquals('Les misérables', $authors[1]->getBooks()->get(0)->getName());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testLoadWithInheritedRelationship()
     {
         $schema = <<<XML
@@ -401,10 +448,10 @@ YAML;
         $builder->setSchema($schema);
         $con = $builder->build();
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $books = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlInheritedRelationshipBookQuery::create()->find($con);
+        $books = YamlInheritedRelationshipBookQuery::create()->find($con);
         $this->assertCount(1, $books);
 
         $book = $books[0];
@@ -412,6 +459,10 @@ YAML;
         $this->assertInstanceOf('Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlInheritedRelationshipAuthor', $author);
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testLoadArrayToObjectType()
     {
         $schema = <<<XML
@@ -436,15 +487,19 @@ YAML;
         $builder->setSchema($schema);
         $con = $builder->build();
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $book = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlBookWithObjectQuery::create(null)->findOne($con);
+        $book = YamlBookWithObjectQuery::create(null)->findOne($con);
 
         $this->assertInstanceOf('\Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlBookWithObject', $book);
-        $this->assertEquals(array('opt1' => 2012, 'opt2' => 140, 'inner' => array('subOpt' => 123)), $book->getOptions());
+        $this->assertEquals(['opt1' => 2012, 'opt2' => 140, 'inner' => ['subOpt' => 123]], $book->getOptions());
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     public function testLoadDelegatedOnPrimaryKey()
     {
         $schema = <<<XML
@@ -486,10 +541,10 @@ YAML;
         $builder->setSchema($schema);
         $con = $builder->build();
 
-        $loader = new YamlDataLoader(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
-        $loader->load(array($filename), 'default');
+        $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
+        $loader->load([$filename], 'default');
 
-        $authors = \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlDelegateOnPrimaryKeyAuthorQuery::create()->find($con);
+        $authors = YamlDelegateOnPrimaryKeyAuthorQuery::create()->find($con);
         $this->assertCount(1, $authors);
 
         $author = $authors[0];

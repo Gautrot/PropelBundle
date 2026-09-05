@@ -15,9 +15,9 @@ use Propel\Generator\Model\PropelTypes;
 
 class Column
 {
-    private $name;
+    private mixed $name;
 
-    private $type;
+    private mixed $type;
 
     public function __construct($name, $type)
     {
@@ -30,31 +30,25 @@ class Column
         return $this->type;
     }
 
-    public function isText()
+    public function getSize(): int
+    {
+        return $this->isText() ? 255 : 0;
+    }
+
+    public function isText(): bool
     {
         if (!$this->type) {
             return false;
         }
 
-        switch ($this->type) {
-            case PropelTypes::CHAR:
-            case PropelTypes::VARCHAR:
-            case PropelTypes::LONGVARCHAR:
-            case PropelTypes::BLOB:
-            case PropelTypes::CLOB:
-            case PropelTypes::CLOB_EMU:
-                return true;
-        }
+        return match ($this->type) {
+            PropelTypes::CHAR, PropelTypes::VARCHAR, PropelTypes::LONGVARCHAR, PropelTypes::BLOB, PropelTypes::CLOB, PropelTypes::CLOB_EMU => true,
+            default => false,
+        };
 
-        return false;
     }
 
-    public function getSize()
-    {
-        return $this->isText() ? 255 : 0;
-    }
-
-    public function isNotNull()
+    public function isNotNull(): bool
     {
         return ('id' === $this->name);
     }

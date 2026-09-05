@@ -16,13 +16,13 @@ use Propel\Runtime\Connection\ConnectionInterface;
 
 class Item implements ActiveRecordInterface
 {
-    private $id;
+    private mixed $id;
 
-    private $value;
+    private mixed $value;
 
-    private $groupName;
+    private mixed $groupName;
 
-    private $price;
+    private mixed $price;
 
     public function __construct($id = null, $value = null, $groupName = null, $price = null)
     {

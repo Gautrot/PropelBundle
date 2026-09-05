@@ -10,35 +10,36 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\DataFixtures\Dumper;
 
-use Propel\Runtime\Propel;
-use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
 use Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper;
+use Propel\Bundle\PropelBundle\Tests\DataFixtures\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBook;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor;
+use stdClass;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class YamlDataDumperTest extends TestCase
+class YamlDataDumperTest extends CaseTest
 {
     public function testYamlDump()
     {
-        $author = new \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor();
+        $author = new CoolBookAuthor();
         $author->setName('A famous one')->save($this->con);
 
-        $complementary = new \stdClass();
+        $complementary = new stdClass();
         $complementary->first_word_date = '2012-01-01';
 
-        $book = new \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBook();
+        $book = new CoolBook();
         $book
             ->setName('An important one')
             ->setAuthorId(1)
             ->setComplementaryInfos($complementary)
-            ->save($this->con)
-        ;
+            ->save($this->con);
 
         $filename = $this->getTempFile();
 
-        $loader = new YamlDataDumper(__DIR__.'/../../Fixtures/DataFixtures/Loader', array());
+        $loader = new YamlDataDumper(__DIR__ . '/../../Fixtures/DataFixtures/Loader', array());
         $loader->dump($filename);
 
         $expected = <<<YAML
@@ -56,6 +57,6 @@ class YamlDataDumperTest extends TestCase
 YAML;
         $result = file_get_contents($filename);
 
-        $this->assertEquals(str_replace (["\r\n", "\n", "\r"], '', $expected), str_replace (["\r\n", "\n", "\r"], '', $result));
+        $this->assertEquals(str_replace(["\r\n", "\n", "\r"], '', $expected), str_replace(["\r\n", "\n", "\r"], '', $result));
     }
 }

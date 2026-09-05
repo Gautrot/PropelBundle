@@ -15,18 +15,18 @@ use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 
 class ReadOnlyItem implements ActiveRecordInterface
 {
-    public function getName()
+    public function getName(): string
     {
         return 'Marvin';
-    }
-
-    public function getPrimaryKey()
-    {
-        return 42;
     }
 
     public function isPrimaryKeyNull(): bool
     {
         return null === $this->getPrimaryKey();
+    }
+
+    public function getPrimaryKey(): int
+    {
+        return 42;
     }
 }

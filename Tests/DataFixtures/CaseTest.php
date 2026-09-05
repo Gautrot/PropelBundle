@@ -10,26 +10,29 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\DataFixtures;
 
+use PDO;
+use Propel\Bundle\PropelBundle\Tests\CaseTest as BaseTestCase;
 use Propel\Generator\Util\QuickBuilder;
+use Propel\Runtime\Connection\ConnectionWrapper;
+use Propel\Runtime\Connection\PropelPDO;
 use Propel\Runtime\Propel;
-use Propel\Bundle\PropelBundle\Tests\TestCase as BaseTestCase;
 
 /**
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class TestCase extends BaseTestCase
+class CaseTest extends BaseTestCase
 {
     /**
-     * @var \PropelPDO
+     * @var PropelPDO|ConnectionWrapper|null
      */
-    protected $con;
+    protected PropelPDO|ConnectionWrapper|null $con = null;
 
     /**
      * The list of created temp files to be removed.
      *
      * @var array
      */
-    protected $tmpFiles = array();
+    protected array $tmpFiles = [];
 
     protected function setUp(): void
     {
@@ -63,7 +66,7 @@ XML;
         $this->con = Propel::getServiceContainer()->getConnection('default');
         // added for tests only!
         // convert numeric values to string otherwise they will be converted to integer in PHP 8.1
-        $this->con->setAttribute(\PDO::ATTR_STRINGIFY_FETCHES, true);
+        $this->con->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
         $this->con->beginTransaction();
     }
 
@@ -73,7 +76,7 @@ XML;
             @unlink($eachFile);
         }
 
-        $this->tmpFiles = array();
+        $this->tmpFiles = [];
 
         // Only commit if the transaction hasn't failed.
         // This is because tearDown() is also executed on a failed tests,
@@ -95,7 +98,7 @@ XML;
      *
      * @return string
      */
-    protected function getTempFile($content = '')
+    protected function getTempFile(string $content = ''): string
     {
         $filename = tempnam(sys_get_temp_dir(), 'propelbundle-datafixtures-test');
         @unlink($filename);

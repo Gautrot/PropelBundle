@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class AppBundle extends Bundle
 {
-    const string NAME = 'AppBundle';
+    const NAME = 'AppBundle';
 
     public function __construct(ContainerInterface $container)
     {
