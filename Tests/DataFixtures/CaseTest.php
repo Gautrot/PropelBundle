@@ -20,7 +20,7 @@ use Propel\Runtime\Propel;
 /**
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class CaseTest extends BaseTestCase
+abstract class CaseTest extends BaseTestCase
 {
     /**
      * @var PropelPDO|ConnectionWrapper|null
