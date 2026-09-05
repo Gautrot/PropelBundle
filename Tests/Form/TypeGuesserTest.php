@@ -14,7 +14,7 @@ namespace Propel\Bundle\PropelBundle\Tests\Form;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Propel\Bundle\PropelBundle\Form\Type\ModelType;
 use Propel\Bundle\PropelBundle\Form\TypeGuesser;
-use Propel\Bundle\PropelBundle\Tests\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -22,7 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Guess\Guess;
 
-class TypeGuesserTest extends CaseTest
+class TypeGuesserTest extends TestCase
 {
     const CLASS_NAME = 'Propel\Bundle\PropelBundle\Tests\Fixtures\Item';
 

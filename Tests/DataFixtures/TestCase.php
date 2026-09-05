@@ -11,7 +11,7 @@
 namespace Propel\Bundle\PropelBundle\Tests\DataFixtures;
 
 use PDO;
-use Propel\Bundle\PropelBundle\Tests\CaseTest as BaseTestCase;
+use Propel\Bundle\PropelBundle\Tests\TestCase as BaseTestCase;
 use Propel\Generator\Util\QuickBuilder;
 use Propel\Runtime\Connection\ConnectionWrapper;
 use Propel\Runtime\Connection\PropelPDO;
@@ -20,7 +20,7 @@ use Propel\Runtime\Propel;
 /**
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-abstract class CaseTest extends BaseTestCase
+class TestCase extends BaseTestCase
 {
     /**
      * @var PropelPDO|ConnectionWrapper|null

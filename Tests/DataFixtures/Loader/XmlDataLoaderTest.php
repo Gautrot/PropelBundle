@@ -12,14 +12,14 @@ namespace Propel\Bundle\PropelBundle\Tests\DataFixtures\Loader;
 
 use Exception;
 use Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader;
-use Propel\Bundle\PropelBundle\Tests\DataFixtures\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class XmlDataLoaderTest extends CaseTest
+class XmlDataLoaderTest extends TestCase
 {
     /**
      * @return void

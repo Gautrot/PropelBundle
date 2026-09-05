@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author SkyFoxvn
  * NOTE: this class test only changes made by this bundle which make change on propel bundle
  */
-class PropelBundleTest extends CaseTest
+class PropelBundleTest extends TestCase
 {
     use VfsTrait;
 

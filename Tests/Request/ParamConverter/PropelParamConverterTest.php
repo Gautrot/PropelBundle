@@ -5,14 +5,14 @@ namespace Propel\Bundle\PropelBundle\Tests\Request\ParamConverter;
 use Exception;
 use LogicException;
 use Propel\Bundle\PropelBundle\Request\ParamConverter\PropelParamConverter;
-use Propel\Bundle\PropelBundle\Tests\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Generator\Util\QuickBuilder;
 use Propel\Runtime\Connection\ConnectionWrapper;
 use Propel\Runtime\Propel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PropelParamConverterTest extends CaseTest
+class PropelParamConverterTest extends TestCase
 {
     /**
      * @var ConnectionWrapper $con
@@ -56,7 +56,7 @@ class PropelParamConverterTest extends CaseTest
         $configuration = new ParamConverter(['class' => 'fakeClass']);
         $this->assertFalse($paramConverter->supports($configuration), 'param converter should not support wrong class');
 
-        $configuration = new ParamConverter(['class' => 'Propel\Bundle\PropelBundle\Tests\CaseTest']);
+        $configuration = new ParamConverter(['class' => 'Propel\Bundle\PropelBundle\Tests\TestCase']);
         $this->assertFalse($paramConverter->supports($configuration), 'param converter should not support wrong class');
     }
 

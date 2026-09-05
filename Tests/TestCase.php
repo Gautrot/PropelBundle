@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 /**
  * CaseTest
  */
-abstract class CaseTest extends BaseTestCase
+class TestCase extends BaseTestCase
 {
     public function getContainer(): ContainerBuilder
     {

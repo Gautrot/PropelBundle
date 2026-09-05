@@ -11,7 +11,7 @@
 namespace Propel\Bundle\PropelBundle\Tests\DataFixtures\Dumper;
 
 use Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper;
-use Propel\Bundle\PropelBundle\Tests\DataFixtures\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBook;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor;
 use stdClass;
@@ -20,7 +20,7 @@ use stdClass;
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class YamlDataDumperTest extends CaseTest
+class YamlDataDumperTest extends TestCase
 {
     public function testYamlDump()
     {

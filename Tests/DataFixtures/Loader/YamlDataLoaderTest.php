@@ -13,7 +13,7 @@ namespace Propel\Bundle\PropelBundle\Tests\DataFixtures\Loader;
 use Exception;
 use Faker\Factory;
 use Propel\Bundle\PropelBundle\DataFixtures\Loader\YamlDataLoader;
-use Propel\Bundle\PropelBundle\Tests\DataFixtures\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthorQuery;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlBookWithObjectQuery;
@@ -31,7 +31,7 @@ use Propel\Generator\Util\QuickBuilder;
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
-class YamlDataLoaderTest extends CaseTest
+class YamlDataLoaderTest extends TestCase
 {
     /**
      * @return void

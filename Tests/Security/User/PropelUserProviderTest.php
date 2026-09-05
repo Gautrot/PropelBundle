@@ -11,7 +11,7 @@
 namespace Propel\Bundle\PropelBundle\Tests\Security\User;
 
 use Propel\Bundle\PropelBundle\Security\User\PropelUserProvider;
-use Propel\Bundle\PropelBundle\Tests\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\User;
 use Propel\Generator\Util\QuickBuilder;
 use Propel\Runtime\Connection\ConnectionWrapper;
@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
  *
  * NOTE: currently no driver is selected "sqlite" will be used by default
  */
-class PropelUserProviderTest extends CaseTest
+class PropelUserProviderTest extends TestCase
 {
     public static ?ConnectionWrapper $con = null;
 

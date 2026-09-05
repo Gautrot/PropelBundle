@@ -12,12 +12,12 @@
 namespace Propel\Bundle\PropelBundle\Tests\Form\Form\DataTransformer;
 
 use Propel\Bundle\PropelBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use Propel\Bundle\PropelBundle\Tests\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Runtime\Collection\ObjectCollection;
 use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class CollectionToArrayTransformerTest extends CaseTest
+class CollectionToArrayTransformerTest extends TestCase
 {
     private CollectionToArrayTransformer $transformer;
 

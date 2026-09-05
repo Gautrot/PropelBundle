@@ -11,13 +11,13 @@
 namespace Propel\Bundle\PropelBundle\Tests\Util;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use Propel\Bundle\PropelBundle\Tests\CaseTest;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Util\PropelInflector;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
  */
-class PropelInflectorTest extends CaseTest
+class PropelInflectorTest extends TestCase
 {
     public static function dataProviderForTestCamelize(): array
     {
