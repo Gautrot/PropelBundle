@@ -11,6 +11,9 @@ namespace Propel\Bundle\PropelBundle\Tests\Fixtures\FakeBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * # FakeBundle
+ */
 class FakeBundle extends Bundle
 {
 

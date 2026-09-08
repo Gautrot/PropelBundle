@@ -17,6 +17,7 @@ use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
+ * # PropelBundleTest
  * @author SkyFoxvn
  * NOTE: this class test only changes made by this bundle which make change on propel bundle
  */
@@ -55,6 +56,9 @@ class PropelBundleTest extends TestCase
 //        $this->assertTrue($container->hasExtension('security'));
 //    }
 
+    /**
+     * @return void
+     */
     public function testConfigureConnections()
     {
         /**

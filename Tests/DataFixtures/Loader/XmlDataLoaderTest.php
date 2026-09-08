@@ -16,6 +16,7 @@ use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookQuery;
 
 /**
+ * # XmlDataLoaderTest
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */

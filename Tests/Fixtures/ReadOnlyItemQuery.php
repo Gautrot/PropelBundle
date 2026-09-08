@@ -14,8 +14,14 @@ namespace Propel\Bundle\PropelBundle\Tests\Fixtures;
 use Propel\Runtime\Map\ColumnMap;
 use Propel\Runtime\Map\TableMap;
 
+/**
+ * # ReadOnlyItemQuery
+ */
 class ReadOnlyItemQuery
 {
+    /**
+     * @return $this
+     */
     public function getTableMap(): static
     {
         // Allows to define methods in this class
@@ -23,6 +29,9 @@ class ReadOnlyItemQuery
         return $this;
     }
 
+    /**
+     * @return ColumnMap[]
+     */
     public function getPrimaryKeys(): array
     {
         $cm = new ColumnMap('id', new TableMap());

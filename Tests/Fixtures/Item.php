@@ -14,16 +14,37 @@ namespace Propel\Bundle\PropelBundle\Tests\Fixtures;
 use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 use Propel\Runtime\Connection\ConnectionInterface;
 
+/**
+ * # Item
+ */
 class Item implements ActiveRecordInterface
 {
+    /**
+     * @var mixed|null
+     */
     private mixed $id;
 
+    /**
+     * @var mixed|null
+     */
     private mixed $value;
 
+    /**
+     * @var mixed|null
+     */
     private mixed $groupName;
 
+    /**
+     * @var mixed|null
+     */
     private mixed $price;
 
+    /**
+     * @param $id
+     * @param $value
+     * @param $groupName
+     * @param $price
+     */
     public function __construct($id = null, $value = null, $groupName = null, $price = null)
     {
         $this->id = $id;
@@ -32,82 +53,140 @@ class Item implements ActiveRecordInterface
         $this->price = $price;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getGroupName()
     {
         return $this->groupName;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getPrice()
     {
         return $this->price;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getPrimaryKey()
     {
         return $this->getId();
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function setId($id): void
     {
         $this->id = $id;
     }
 
+    /**
+     * @param $primaryKey
+     * @return void
+     */
     public function setPrimaryKey($primaryKey): void
     {
         $this->setId($primaryKey);
     }
 
+    /**
+     * @return bool
+     */
     public function isPrimaryKeyNull(): bool
     {
         return null === $this->getId();
     }
 
+    /**
+     * @return bool
+     */
     public function isModified(): bool
     {
         return false;
     }
 
+    /**
+     * @param $col
+     * @return bool
+     */
     public function isColumnModified($col): bool
     {
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function isNew(): bool
     {
         return false;
     }
 
+    /**
+     * @param $b
+     * @return void
+     */
     public function setNew($b)
     {
     }
 
+    /**
+     * @return void
+     */
     public function resetModified()
     {
     }
 
+    /**
+     * @return bool
+     */
     public function isDeleted(): bool
     {
         return false;
     }
 
+    /**
+     * @param $b
+     * @return void
+     */
     public function setDeleted($b)
     {
     }
 
+    /**
+     * @param ConnectionInterface|null $con
+     * @return void
+     */
     public function delete(?ConnectionInterface $con = null)
     {
     }
 
+    /**
+     * @param ConnectionInterface|null $con
+     * @return void
+     */
     public function save(?ConnectionInterface $con = null)
     {
     }

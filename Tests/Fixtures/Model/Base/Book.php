@@ -16,6 +16,9 @@ use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Parser\AbstractParser;
 use Propel\Runtime\Propel;
 
+/**
+ * # Book
+ */
 abstract class Book implements ActiveRecordInterface
 {
     /**

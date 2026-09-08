@@ -17,10 +17,13 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 /**
- * CaseTest
+ * # TestCase
  */
 class TestCase extends BaseTestCase
 {
+    /**
+     * @return ContainerBuilder
+     */
     public function getContainer(): ContainerBuilder
     {
         $container = new ContainerBuilder(new ParameterBag([

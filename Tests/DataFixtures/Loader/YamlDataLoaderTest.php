@@ -28,6 +28,7 @@ use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\YamlManyToMany
 use Propel\Generator\Util\QuickBuilder;
 
 /**
+ * # YamlDataLoaderTest
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */

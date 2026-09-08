@@ -18,6 +18,7 @@ use Propel\Runtime\Connection\PropelPDO;
 use Propel\Runtime\Propel;
 
 /**
+ * # TestCase
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
 class TestCase extends BaseTestCase
@@ -34,6 +35,9 @@ class TestCase extends BaseTestCase
      */
     protected array $tmpFiles = [];
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -70,6 +74,9 @@ XML;
         $this->con->beginTransaction();
     }
 
+    /**
+     * @return void
+     */
     protected function tearDown(): void
     {
         foreach ($this->tmpFiles as $eachFile) {

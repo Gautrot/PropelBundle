@@ -17,10 +17,19 @@ use Propel\Runtime\Collection\ObjectCollection;
 use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+/**
+ * # CollectionToArrayTransformerTest
+ */
 class CollectionToArrayTransformerTest extends TestCase
 {
+    /**
+     * @var CollectionToArrayTransformer
+     */
     private CollectionToArrayTransformer $transformer;
 
+    /**
+     * @return void
+     */
     public function testTransform()
     {
         $result = $this->transformer->transform(new ObjectCollection());
@@ -29,6 +38,9 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->assertEquals(0, count($result));
     }
 
+    /**
+     * @return void
+     */
     public function testTransformWithNull()
     {
         $result = $this->transformer->transform(null);
@@ -47,6 +59,9 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->transformer->transform(new DummyObject());
     }
 
+    /**
+     * @return void
+     */
     public function testTransformWithData()
     {
         $coll = new ObjectCollection();
@@ -60,6 +75,9 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->assertSame($b, $result[1]);
     }
 
+    /**
+     * @return void
+     */
     public function testReverseTransformWithNull()
     {
         $result = $this->transformer->reverseTransform(null);
@@ -68,6 +86,9 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->assertEquals(0, count($result->getData()));
     }
 
+    /**
+     * @return void
+     */
     public function testReverseTransformWithEmptyString()
     {
         $result = $this->transformer->reverseTransform('');
@@ -86,6 +107,9 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->transformer->reverseTransform(new DummyObject());
     }
 
+    /**
+     * @return void
+     */
     public function testReverseTransformWithData()
     {
         $inputData = [$a = new stdClass, $b = new stdClass];
@@ -102,6 +126,9 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->assertsame($inputData, $data);
     }
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         if (!class_exists('Symfony\Component\Form\Form')) {
@@ -114,6 +141,9 @@ class CollectionToArrayTransformerTest extends TestCase
     }
 }
 
+/**
+ *
+ */
 class DummyObject
 {
 }

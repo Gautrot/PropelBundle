@@ -17,11 +17,15 @@ use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor
 use stdClass;
 
 /**
+ * # YamlDataDumperTest
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  */
 class YamlDataDumperTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testYamlDump()
     {
         $author = new CoolBookAuthor();

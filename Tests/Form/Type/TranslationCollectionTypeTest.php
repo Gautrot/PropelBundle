@@ -22,12 +22,27 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
+/**
+ * # TranslationCollectionTypeTest
+ */
 class TranslationCollectionTypeTest extends TypeTestCase
 {
+    /**
+     *
+     */
     const TRANSLATION_CLASS = 'Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItem';
+    /**
+     *
+     */
     const TRANSLATABLE_I18N_CLASS = 'Propel\Bundle\PropelBundle\Tests\Fixtures\TranslatableItemI18n';
+    /**
+     *
+     */
     const NON_TRANSLATION_CLASS = 'Propel\Bundle\PropelBundle\Tests\Fixtures\Item';
 
+    /**
+     * @return void
+     */
     public function testTranslationsAdded()
     {
         $item = new TranslatableItem();
@@ -65,6 +80,9 @@ class TranslationCollectionTypeTest extends TypeTestCase
         $this->assertEquals('Label', $columnOptions['value2']['label']);
     }
 
+    /**
+     * @return void
+     */
     public function testNotPresentTranslationsAdded()
     {
         $item = new TranslatableItem();
@@ -157,6 +175,9 @@ class TranslationCollectionTypeTest extends TypeTestCase
         ]);
     }
 
+    /**
+     * @return array|\Symfony\Component\Form\FormExtensionInterface[]
+     */
     protected function getExtensions(): array
     {
         return array_merge(parent::getExtensions(), [

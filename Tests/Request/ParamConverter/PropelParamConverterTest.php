@@ -12,6 +12,9 @@ use Propel\Runtime\Propel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * # PropelParamConverterTest
+ */
 class PropelParamConverterTest extends TestCase
 {
     /**
@@ -37,6 +40,9 @@ class PropelParamConverterTest extends TestCase
         $this->loadDatabaseMap(['Propel\\Bundle\\PropelBundle\\Tests\\Fixtures\\Model\\Map\\BookTableMap']);
     }
 
+    /**
+     * @return void
+     */
     public function tearDown(): void
     {
         //Propel::enableInstancePooling();
@@ -46,6 +52,9 @@ class PropelParamConverterTest extends TestCase
         }
     }
 
+    /**
+     * @return void
+     */
     public function testParamConverterSupport()
     {
         $paramConverter = new PropelParamConverter();
@@ -292,6 +301,9 @@ class PropelParamConverterTest extends TestCase
         Propel::enableInstancePooling();
     }
 
+    /**
+     * @return void
+     */
     protected function loadFixtures(): void
     {
         $schema = <<<XML

@@ -16,8 +16,14 @@ use Propel\Runtime\Map\ColumnMap;
 use Propel\Runtime\Map\RelationMap;
 use Propel\Runtime\Map\TableMap;
 
+/**
+ * # ItemQuery
+ */
 class ItemQuery
 {
+    /**
+     * @var array
+     */
     private array $map = [
         'id' => PropelTypes::INTEGER,
         'value' => PropelTypes::VARCHAR,
@@ -31,6 +37,9 @@ class ItemQuery
         'updated_at' => PropelTypes::TIMESTAMP,
     ];
 
+    /**
+     * @return $this
+     */
     public function getTableMap(): static
     {
         // Allows to define methods in this class
@@ -38,6 +47,9 @@ class ItemQuery
         return $this;
     }
 
+    /**
+     * @return ColumnMap[]
+     */
     public function getPrimaryKeys(): array
     {
         $cm = new ColumnMap('id', new TableMap());

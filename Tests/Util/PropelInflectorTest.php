@@ -15,10 +15,14 @@ use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Util\PropelInflector;
 
 /**
+ * # PropelInflectorTest
  * @author William Durand <william.durand1@gmail.com>
  */
 class PropelInflectorTest extends TestCase
 {
+    /**
+     * @return array
+     */
     public static function dataProviderForTestCamelize(): array
     {
         return [
@@ -37,6 +41,11 @@ class PropelInflectorTest extends TestCase
         ];
     }
 
+    /**
+     * @param $word
+     * @param $expected
+     * @return void
+     */
     #[DataProvider('dataProviderForTestCamelize')]
     public function testCamelize($word, $expected)
     {

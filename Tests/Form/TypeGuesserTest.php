@@ -22,14 +22,29 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Guess\Guess;
 
+/**
+ * # TypeGuesserTest
+ */
 class TypeGuesserTest extends TestCase
 {
+    /**
+     *
+     */
     const CLASS_NAME = 'Propel\Bundle\PropelBundle\Tests\Fixtures\Item';
 
+    /**
+     *
+     */
     const UNKNOWN_CLASS_NAME = 'Propel\Bundle\PropelBundle\Tests\Fixtures\UnknownItem';
 
+    /**
+     * @var TypeGuesser
+     */
     private TypeGuesser $guesser;
 
+    /**
+     * @return array[]
+     */
     public static function dataProviderForGuessType(): array
     {
         return [
@@ -46,11 +61,17 @@ class TypeGuesserTest extends TestCase
         ];
     }
 
+    /**
+     * @return void
+     */
     public function setUp(): void
     {
         $this->guesser = new TypeGuesser();
     }
 
+    /**
+     * @return void
+     */
     public function testGuessMaxLengthWithText()
     {
         $value = $this->guesser->guessMaxLength(self::CLASS_NAME, 'value');
@@ -59,6 +80,9 @@ class TypeGuesserTest extends TestCase
         $this->assertEquals(255, $value->getValue());
     }
 
+    /**
+     * @return void
+     */
     public function testGuessMaxLengthWithFloat()
     {
         $value = $this->guesser->guessMaxLength(self::CLASS_NAME, 'price');
@@ -67,6 +91,9 @@ class TypeGuesserTest extends TestCase
         $this->assertNull($value->getValue());
     }
 
+    /**
+     * @return void
+     */
     public function testGuessMinLengthWithText()
     {
         $value = $this->guesser->guessPattern(self::CLASS_NAME, 'value');
@@ -74,6 +101,9 @@ class TypeGuesserTest extends TestCase
         $this->assertNull($value);
     }
 
+    /**
+     * @return void
+     */
     public function testGuessMinLengthWithFloat()
     {
         $value = $this->guesser->guessPattern(self::CLASS_NAME, 'price');
@@ -82,6 +112,9 @@ class TypeGuesserTest extends TestCase
         $this->assertNull($value->getValue());
     }
 
+    /**
+     * @return void
+     */
     public function testGuessRequired()
     {
         $value = $this->guesser->guessRequired(self::CLASS_NAME, 'id');
@@ -90,6 +123,9 @@ class TypeGuesserTest extends TestCase
         $this->assertTrue($value->getValue());
     }
 
+    /**
+     * @return void
+     */
     public function testGuessRequiredWithNullableColumn()
     {
         $value = $this->guesser->guessRequired(self::CLASS_NAME, 'value');
@@ -98,6 +134,9 @@ class TypeGuesserTest extends TestCase
         $this->assertFalse($value->getValue());
     }
 
+    /**
+     * @return void
+     */
     public function testGuessTypeWithoutTable()
     {
         $value = $this->guesser->guessType(self::UNKNOWN_CLASS_NAME, 'property');
@@ -107,6 +146,9 @@ class TypeGuesserTest extends TestCase
         $this->assertEquals(Guess::LOW_CONFIDENCE, $value->getConfidence());
     }
 
+    /**
+     * @return void
+     */
     public function testGuessTypeWithoutColumn()
     {
         $value = $this->guesser->guessType(self::CLASS_NAME, 'property');
@@ -116,6 +158,13 @@ class TypeGuesserTest extends TestCase
         $this->assertEquals(Guess::LOW_CONFIDENCE, $value->getConfidence());
     }
 
+    /**
+     * @param $property
+     * @param $type
+     * @param $confidence
+     * @param $multiple
+     * @return void
+     */
     #[DataProvider('dataProviderForGuessType')]
     public function testGuessType($property, $type, $confidence, $multiple = null)
     {

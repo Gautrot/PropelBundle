@@ -18,7 +18,13 @@ use Propel\Runtime\Connection\ConnectionInterface;
  */
 class BookQuery extends BaseBookQuery
 {
+    /**
+     * @var bool
+     */
     private bool $bySlug = false;
+    /**
+     * @var bool
+     */
     private bool $byAuthorSlug = false;
 
     /**

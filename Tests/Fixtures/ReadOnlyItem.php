@@ -13,18 +13,30 @@ namespace Propel\Bundle\PropelBundle\Tests\Fixtures;
 
 use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 
+/**
+ * # ReadOnlyItem
+ */
 class ReadOnlyItem implements ActiveRecordInterface
 {
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return 'Marvin';
     }
 
+    /**
+     * @return bool
+     */
     public function isPrimaryKeyNull(): bool
     {
         return null === $this->getPrimaryKey();
     }
 
+    /**
+     * @return int
+     */
     public function getPrimaryKey(): int
     {
         return 42;

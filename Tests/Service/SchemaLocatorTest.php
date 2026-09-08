@@ -20,6 +20,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\HttpKernel\Kernel;
 
+/**
+ * # SchemaLocatorTest
+ */
 class SchemaLocatorTest extends TestCase
 {
     /**
@@ -29,6 +32,9 @@ class SchemaLocatorTest extends TestCase
 
     /*
      * container generated for the tasts
+     */
+    /**
+     * @var ContainerBuilder
      */
     private ContainerBuilder $container;
 
@@ -42,6 +48,9 @@ class SchemaLocatorTest extends TestCase
      */
     private array $configuration;
 
+    /**
+     * @var FileLocator
+     */
     private FileLocator $fileLocator;
 
     /**
@@ -49,6 +58,9 @@ class SchemaLocatorTest extends TestCase
      */
     private MockObject|FakeBundle $bundleMock;
 
+    /**
+     * @return void
+     */
     public function setUp(): void
     {
         $pathStructure = [
@@ -77,6 +89,9 @@ class SchemaLocatorTest extends TestCase
         $this->fileLocator = new FileLocator($this->kernelMock);
     }
 
+    /**
+     * @return void
+     */
     public function testLocateFromBundle()
     {
         $locator = new SchemaLocator($this->container, $this->fileLocator, $this->configuration);
@@ -89,6 +104,9 @@ class SchemaLocatorTest extends TestCase
 
     }
 
+    /**
+     * @return void
+     */
     public function testLocateFromBundlesAndConfiguration()
     {
         $locator = new SchemaLocator($this->container, $this->fileLocator, $this->configuration);
