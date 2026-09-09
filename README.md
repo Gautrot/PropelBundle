@@ -13,12 +13,8 @@ This is the official implementation of [Propel](https://www.propelorm.org/) in S
 ### Minimum requirements
 
 - [Symfony](https://symfony.com/releases/6.0): **6.4**
-- [PHP](https://www.php.net/releases/8.0/en.php): **8.2**
+- [PHP](https://www.php.net/releases/8.0/en.php): **8.1**
 - [Propel](https://github.com/propelorm/Propel2): **2.0.0**
-
-Additional notes:
-
-- If you are using Symfony 6.4, it must be running with PHP 8.2.
 
 ### Composer
 
@@ -73,7 +69,7 @@ Nightly release:
 * Added support for Symfony 7.4
     * Removed support for Symfony 6.0 to 6.3 and 7.0 to 7.3
 * Added support for PHP 8.4 and 8.5
-    * Removed support for PHP 8.0 and PHP 8.1
+    * Removed support for PHP 8.0
     * Removed deprecated content introduced in PHP 8.4 and 8.5
 * Updated `propel/propel` minimum version to its official stable release (2.0.0)
 
@@ -82,4 +78,4 @@ You can also read the changelogs [here](CHANGELOG.md).
 ## And more...
 
 You can read and learn Propel 2 from their official documentation [here](https://propelorm.org/documentation/). For
-licenses, see: [LICENSE](Resources/meta/LICENSE). If you want more details about PropelBundle: [go here](Misc).
+licenses, see: [LICENSE](Resources/meta/LICENSE). If you want more details about PropelBundle, [go here](misc).

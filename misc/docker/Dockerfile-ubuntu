@@ -1,0 +1,36 @@
+FROM ubuntu:24.04
+
+ENV SYMFONY_REQUIRE=6.4
+ENV PHP=8.1
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+WORKDIR /app
+
+RUN apt update
+RUN apt install -y software-properties-common
+RUN add-apt-repository -y ppa:ondrej/php
+RUN apt update && apt upgrade -y
+RUN apt install -y composer git zip php$PHP \
+    php$PHP-curl \
+    php$PHP-dom \
+    php$PHP-mbstring \
+    php$PHP-mysql \
+    php$PHP-pdo \
+    php$PHP-pgsql \
+    php$PHP-simplexml \
+    php$PHP-sqlite3 \
+    php$PHP-tokenizer \
+    php$PHP-xml \
+    php$PHP-xmlwriter
+
+RUN apt autoremove -y && apt autoclean -y
+RUN update-alternatives --set php /usr/bin/php$PHP
+
+COPY . /app
+RUN composer global config --no-plugins allow-plugins.symfony/flex true
+RUN composer global require --no-progress --no-scripts --no-plugins symfony/flex
+RUN SYMFONY_REQUIRE=$SYMFONY_REQUIRE composer u --prefer-dist -n
+
+CMD ["sleep", "infinity"]
+# If you just want to run unit tests
+#CMD ["php", "vendor/bin/phpunit"]

@@ -1,37 +1,34 @@
-FROM ubuntu:22.04
+FROM alpine:3
 
 ENV SYMFONY_REQUIRE=6.4
-ENV PHP=8.2
+ENV PHP=81
 ENV COMPOSER_ALLOW_SUPERUSER=1
+
 WORKDIR /app
 
 RUN ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime \
     && echo $CONTAINER_TIMEZONE > /etc/timezone
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
-RUN apt update
-RUN apt install -y software-properties-common
-RUN add-apt-repository -y ppa:ondrej/php
-RUN apt update && apt upgrade -y
-RUN apt install -y git mysql-common nano postgresql sqlite sudo zip php$PHP \
-    php$PHP-cli \
-    php$PHP-ctype \
+RUN apk update && apk upgrade
+# Alpine 3.19 has PHP 8.1
+RUN apk add ca-certificates \
+    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.19/community" >> /etc/apk/repositories
+RUN apk del php
+RUN apk add git zip php$PHP \
     php$PHP-curl \
     php$PHP-dom \
-    php$PHP-iconv \
-    php$PHP-intl \
-    php$PHP-pdo \
     php$PHP-mbstring \
-    php$PHP-mysql \
-    php$PHP-pgsql \
+    php$PHP-pdo \
+    php$PHP-pdo_mysql \
+    php$PHP-pdo_pgsql \
+    php$PHP-pdo_sqlite \
     php$PHP-simplexml \
-    php$PHP-sqlite3 \
     php$PHP-tokenizer \
     php$PHP-xml \
     php$PHP-xmlwriter
 
-RUN apt autoremove -y && apt autoclean -y
-RUN update-alternatives --set php /usr/bin/php$PHP
+RUN rm /usr/bin/php && ln -s /usr/bin/php81 /usr/bin/php
 
 COPY . /app
 RUN composer global config --no-plugins allow-plugins.symfony/flex true
@@ -39,3 +36,5 @@ RUN composer global require --no-progress --no-scripts --no-plugins symfony/flex
 RUN SYMFONY_REQUIRE=$SYMFONY_REQUIRE composer u --prefer-dist -n
 
 CMD ["sleep", "infinity"]
+# If you just want to run unit tests
+#CMD ["php", "vendor/bin/phpunit"]

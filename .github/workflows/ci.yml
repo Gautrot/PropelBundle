@@ -18,10 +18,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ '8.2', '8.3', '8.4', '8.5' ]
+        php-version: [ '8.1', '8.2', '8.3', '8.4', '8.5' ]
         symfony-version: [ '6.4', '7.4' ]
         # excluded because of "symfony minimum required" PHP version
-        # exclude:
+        exclude:
+          - php-version: '8.1'
+            symfony-version: '7.0'
+          - php-version: '8.1'
+            symfony-version: '7.1'
+          - php-version: '8.1'
+            symfony-version: '7.2'
+          - php-version: '8.1'
+            symfony-version: '7.3'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -53,9 +61,13 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs >= 8.2
-        if: matrix.php-version >= '8.2'
+      - name: Run tests with PHPs >= 8.1
+        if: matrix.php-version >= '8.1'
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+
+      - name: Run tests < 8.1
+        if: matrix.php-version < '8.1'
+        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -81,10 +93,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ '8.2', '8.3', '8.4', '8.5' ]
+        php-version: [ '8.1', '8.2', '8.3', '8.4', '8.5' ]
         symfony-version: [ '6.4', '7.4' ]
         # excluded because of "symfony minimum required" PHP version
-        # exclude:
+        exclude:
+          - php-version: '8.1'
+            symfony-version: '7.0'
+          - php-version: '8.1'
+            symfony-version: '7.1'
+          - php-version: '8.1'
+            symfony-version: '7.2'
+          - php-version: '8.1'
+            symfony-version: '7.3'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -116,9 +136,13 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs >= 8.2
-        if: matrix.php-version >= '8.2'
+      - name: Run tests with PHPs >= 8.1
+        if: matrix.php-version >= '8.1'
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+
+      - name: Run tests < 8.1
+        if: matrix.php-version < '8.1'
+        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -141,10 +165,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ '8.2', '8.3', '8.4', '8.5' ]
+        php-version: [ '8.1', '8.2', '8.3', '8.4', '8.5' ]
         symfony-version: [ '6.4', '7.4' ]
         # excluded because of "symfony minimum required" PHP version
-        # exclude:
+        exclude:
+          - php-version: '8.1'
+            symfony-version: '7.0'
+          - php-version: '8.1'
+            symfony-version: '7.1'
+          - php-version: '8.1'
+            symfony-version: '7.2'
+          - php-version: '8.1'
+            symfony-version: '7.3'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -176,9 +208,13 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs >= 8.2
-        if: matrix.php-version >= '8.2'
+      - name: Run tests with PHPs >= 8.1
+        if: matrix.php-version >= '8.1'
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+
+      - name: Run tests < 8.1
+        if: matrix.php-version < '8.1'
+        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
