@@ -6,7 +6,8 @@
 [![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/6.1/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
 
-This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony.
+This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is a LTS support of
+Symfony 6.4 only.
 
 ## Installation
 
