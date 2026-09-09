@@ -1,12 +1,12 @@
-name: GitHub Actions - CI branch 7.1
+name: GitHub Actions - CI branch 6.1
 
 on:
   push:
     branches:
-      - '7.1'
+      - '6.1'
   pull_request:
     branches:
-      - '7.1'
+      - '6.1'
   workflow_dispatch:
 permissions:
   contents: read
