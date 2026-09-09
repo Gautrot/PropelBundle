@@ -1,7 +1,7 @@
 FROM alpine:3
 
-ENV SYMFONY_REQUIRE=6.4
-ENV PHP=81
+ENV SYMFONY_REQUIRE=7.4
+ENV PHP=82
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /app
@@ -11,9 +11,9 @@ RUN ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime \
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 RUN apk update && apk upgrade
-# Alpine 3.19 has PHP 8.1
+# Alpine 3.22 has PHP 8.2
 RUN apk add ca-certificates \
-    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.19/community" >> /etc/apk/repositories
+    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.22/community" >> /etc/apk/repositories
 RUN apk del php
 RUN apk add git zip php$PHP \
     php$PHP-curl \
