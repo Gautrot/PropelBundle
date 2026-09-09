@@ -13,3 +13,5 @@
 
 /.phpunit*
 junit.xml
+/act
+.secrets
