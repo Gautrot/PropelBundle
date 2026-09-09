@@ -75,6 +75,9 @@ jobs:
   testsuite_win:
     name: "Test Suite (Windows)"
     runs-on: windows-2022
+    defaults:
+      run:
+        shell: bash # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#defaultsrunshell
     strategy:
       fail-fast: false
       matrix:
