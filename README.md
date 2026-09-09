@@ -2,9 +2,9 @@
 
 ---
 
-[![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=7.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/7.1/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
+[![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=6.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/6.1/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
 
 This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony.
 
@@ -20,9 +20,9 @@ This is the official implementation of [Propel](https://www.propelorm.org/) in S
 
 ```shell
 composer require propel/propel "~2.0"
-composer require gautrot/propel-bundle "~7.1" # (or newer tag/release)
+composer require gautrot/propel-bundle "~6.1" # (or newer tag/release)
 # or
-composer require gautrot/propel-bundle "7.1.x-dev"
+composer require gautrot/propel-bundle "6.1.x-dev"
 ```
 
 #### composer.json
@@ -33,7 +33,7 @@ Stable release:
 {
   "require": {
     "propel/propel": "~2.0",
-    "gautrot/propel-bundle": "~7.1"
+    "gautrot/propel-bundle": "~6.1"
   }
 }
 ```
@@ -44,7 +44,7 @@ Nightly release:
 {
   "require": {
     "propel/propel": "~2.0",
-    "gautrot/propel-bundle": "7.1.x-dev"
+    "gautrot/propel-bundle": "6.1.x-dev"
   }
 }
 ```
@@ -64,10 +64,9 @@ Nightly release:
 * Integration with the Form component;
 * Integration with the Security component.
 
-## New to version 7.1
+## New to version 6.1
 
-* Added support for Symfony 7.4
-    * Removed support for Symfony 6.0 to 6.3 and 7.0 to 7.3
+* Removed support for Symfony 6.0 to 6.3
 * Added support for PHP 8.4 and 8.5
     * Removed support for PHP 8.0
     * Removed deprecated content introduced in PHP 8.4 and 8.5
