@@ -23,13 +23,7 @@ jobs:
         # excluded because of "symfony minimum required" PHP version
         exclude:
           - php-version: '8.1'
-            symfony-version: '7.0'
-          - php-version: '8.1'
-            symfony-version: '7.1'
-          - php-version: '8.1'
-            symfony-version: '7.2'
-          - php-version: '8.1'
-            symfony-version: '7.3'
+            symfony-version: '7.4'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -98,13 +92,7 @@ jobs:
         # excluded because of "symfony minimum required" PHP version
         exclude:
           - php-version: '8.1'
-            symfony-version: '7.0'
-          - php-version: '8.1'
-            symfony-version: '7.1'
-          - php-version: '8.1'
-            symfony-version: '7.2'
-          - php-version: '8.1'
-            symfony-version: '7.3'
+            symfony-version: '7.4'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -170,13 +158,7 @@ jobs:
         # excluded because of "symfony minimum required" PHP version
         exclude:
           - php-version: '8.1'
-            symfony-version: '7.0'
-          - php-version: '8.1'
-            symfony-version: '7.1'
-          - php-version: '8.1'
-            symfony-version: '7.2'
-          - php-version: '8.1'
-            symfony-version: '7.3'
+            symfony-version: '7.4'
 
     steps:
       - name: Setup PHP, with composer and extensions
