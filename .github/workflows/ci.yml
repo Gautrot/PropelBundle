@@ -1,4 +1,4 @@
-name: GitHub Adtions - CI branch 7.1
+name: GitHub Actions - CI branch 7.1
 
 on:
   push:
@@ -91,7 +91,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          #extensions: json, libxml, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, sqlite3
+          extensions: pdo_sqlite
           coverage: pcov
 
       - name: Checkout
