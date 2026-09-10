@@ -64,7 +64,7 @@ jobs:
 
       - name: Run tests with PHPs < 8.1
         if: matrix.php-version < '8.1'
-        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml ./Tests
+        run: vendor/bin/phpunit --configuration phpunit-legacy.dist.xml --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -136,7 +136,7 @@ jobs:
 
       - name: Run tests with PHPs < 8.1
         if: matrix.php-version < '8.1'
-        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml ./Tests
+        run: vendor/bin/phpunit --configuration phpunit-legacy.dist.xml --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -205,7 +205,7 @@ jobs:
 
       - name: Run tests with PHPs < 8.1
         if: matrix.php-version < '8.1'
-        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml ./Tests
+        run: vendor/bin/phpunit --configuration phpunit-legacy.dist.xml --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7

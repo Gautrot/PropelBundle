@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- https://phpunit.readthedocs.io/en/10.5/configuration.html -->
+<!-- https://phpunit.readthedocs.io/en/9.6/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
          bootstrap="vendor/autoload.php"
-         cacheDirectory=".phpunit.cache"
 >
     <php>
         <!-- <server name="SYMFONY" value="/path/to/symfony" /> -->
     </php>
     <testsuites>
-        <testsuite name="PropelBundle Test Suite (Current - PHPUnit 10 and later)">
+        <testsuite name="PropelBundle Test Suite (Legacy - PHPUnit 9)">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>
-    <source>
+    <coverage cacheDirectory=".phpunit.cache">
         <include>
             <directory>./</directory>
         </include>
@@ -23,5 +22,5 @@
             <directory>./vendor</directory>
             <directory>./Resources</directory>
         </exclude>
-    </source>
+    </coverage>
 </phpunit>
