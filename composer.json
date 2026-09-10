@@ -75,5 +75,10 @@
   "extra": {
   },
   "scripts": {
+  },
+  "policy": {
+    "advisories": {
+      "block": false
+    }
   }
 }
