@@ -21,7 +21,7 @@ support of Symfony 5.4 only.
 ### Composer
 
 ```shell
-composer require propel/propel "~2.0"
+composer require propel/propel "2.0.0-beta4"
 composer require gautrot/propel-bundle "~5.2" # (or newer tag/release)
 # or
 composer require gautrot/propel-bundle "5.2.x-dev"
@@ -34,7 +34,7 @@ Stable release:
 ```json
 {
   "require": {
-    "propel/propel": "~2.0",
+    "propel/propel": "2.0.0-beta4",
     "gautrot/propel-bundle": "~5.2"
   }
 }
@@ -45,7 +45,7 @@ Nightly release:
 ```json
 {
   "require": {
-    "propel/propel": "~2.0",
+    "propel/propel": "2.0.0-beta4",
     "gautrot/propel-bundle": "5.2.x-dev"
   }
 }
@@ -64,7 +64,11 @@ Nightly release:
 * Load SQL, YAML and XML fixtures;
 * Create/drop databases;
 * Integration with the Form component;
-* Integration with the Security component.
+* Integration with the Security component;
+* Propel ParamConverter can be used
+  with [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle).
+    * **Warning!**: This bundle has become deprecated as of Symfony **6.2**. If you are still using it, you must convert
+      them to Symfony's [Attributes Overview](https://symfony.com/doc/current/reference/attributes.html).
 
 ## New to version 5.2
 
@@ -72,7 +76,7 @@ Nightly release:
 * Added support for PHP 8.4 and 8.5
     * Removed support for PHP 7.2 to 7.4
     * Removed deprecated content introduced in PHP 8.4 and 8.5
-* Updated `propel/propel` minimum version to its official stable release (2.0.0)
+* Updated `propel/propel` minimum version to latest beta release (2.0.0-beta4)
 
 You can also read the changelogs [here](CHANGELOG.md).
 
