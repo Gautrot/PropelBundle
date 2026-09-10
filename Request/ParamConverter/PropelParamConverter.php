@@ -5,10 +5,10 @@ namespace Propel\Bundle\PropelBundle\Request\ParamConverter;
 use Propel\Bundle\PropelBundle\Util\PropelInflector;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 /**
  * PropelParamConverter
@@ -21,9 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
  *
  *
  * @author     Jérémie Augustin <jeremie.augustin@pixel-cookers.com>
- * @deprecated SensioFrameworkExtraBundle is no longer maintained as of Symfony 6.2
  */
-class PropelParamConverter implements ParamConverterInterface
+class PropelParamConverter implements ValueResolverInterface
 {
     /**
      * the pk column (e.g. id)
@@ -61,18 +60,22 @@ class PropelParamConverter implements ParamConverterInterface
     protected $hasWith = false;
 
     /**
-     * @param Request        $request
-     * @param ParamConverter $configuration
+     * @param Request          $request
+     * @param ArgumentMetadata $argument
      *
-     * @return bool
+     * @return iterable
      *
      * @throws \LogicException
      * @throws NotFoundHttpException
      * @throws \Exception
      */
-    public function apply(Request $request, ParamConverter $configuration): bool
+    public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        $class = $configuration->getClass();
+        if (!$this->supports($argument)) {
+            return array();
+        }
+
+        $class = $argument->getType();
         $classQuery = $class . 'Query';
         $classTableMap = $class::TABLE_MAP;
         $this->filters = array();
@@ -90,13 +93,13 @@ class PropelParamConverter implements ParamConverterInterface
             $this->pk = strtolower($pk->getName());
         }
 
-        $options = $configuration->getOptions();
+        $options = array();
 
         // Check request attributes for converter options, if there are non provided.
-        if (empty($options) && $request->attributes->has('propel_converter') && $configuration instanceof ParamConverter) {
+        if (empty($options) && $request->attributes->has('propel_converter')) {
             $converterOption = $request->attributes->get('propel_converter');
-            if (!empty($converterOption[$configuration->getName()])) {
-                $options = $converterOption[$configuration->getName()];
+            if (!empty($converterOption[$argument->getName()])) {
+                $options = $converterOption[$argument->getName()];
             }
         }
         if (isset($options['mapping'])) {
@@ -115,8 +118,8 @@ class PropelParamConverter implements ParamConverterInterface
             $this->filters = $request->attributes->all();
         }
 
-        if (array_key_exists($configuration->getName(), $this->filters)) {
-            unset($this->filters[$configuration->getName()]);
+        if (array_key_exists($argument->getName(), $this->filters)) {
+            unset($this->filters[$argument->getName()]);
         }
 
         $this->withs = isset($options['with']) ? is_array($options['with']) ? $options['with'] : array($options['with']) : array();
@@ -133,7 +136,7 @@ class PropelParamConverter implements ParamConverterInterface
             if (false === $object = $this->findPk($classQuery, $request)) {
                 // find by criteria
                 if (false === $object = $this->findOneBy($classQuery, $request)) {
-                    if ($configuration->isOptional()) {
+                    if ($argument->isNullable()) {
                         //we find nothing but the object is optional
                         $object = null;
                     } else {
@@ -143,23 +146,23 @@ class PropelParamConverter implements ParamConverterInterface
             }
         }
 
-        if (null === $object && false === $configuration->isOptional()) {
-            throw new NotFoundHttpException(sprintf('%s object not found.', $configuration->getClass()));
+        if (null === $object && false === $argument->isNullable()) {
+            throw new NotFoundHttpException(sprintf('%s object not found.', $class));
         }
 
-        $request->attributes->set($configuration->getName(), $object);
+        $request->attributes->set($argument->getName(), $object);
 
-        return true;
+        return array($object);
     }
 
     /**
-     * @param ParamConverter $configuration
+     * @param ArgumentMetadata $argument
      *
      * @return bool
      */
-    public function supports(ParamConverter $configuration): bool
+    public function supports(ArgumentMetadata $argument): bool
     {
-        $classname = $configuration->getClass();
+        $classname = $argument->getType();
         if (!$classname) {
             return false;
         }

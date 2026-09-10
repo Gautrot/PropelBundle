@@ -63,7 +63,9 @@ Nightly release:
 * Load SQL, YAML and XML fixtures;
 * Create/drop databases;
 * Integration with the Form component;
-* Integration with the Security component.
+* Integration with the Security component;
+* Propel ParamConverter can be used
+  with [Symfony Attributes Overview](https://symfony.com/doc/6.4/reference/attributes.html).
 
 ## New to version 6.1
 
