@@ -70,15 +70,17 @@
   "config": {
     "allow-plugins": {
       "phpstan/extension-installer": true
+    },
+    "policy": {
+      "advisories": {
+        "ignore": [
+          "twig/twig"
+        ]
+      }
     }
   },
   "extra": {
   },
   "scripts": {
-  },
-  "policy": {
-    "advisories": {
-      "block": false
-    }
   }
 }
