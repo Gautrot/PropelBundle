@@ -11,6 +11,7 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Form;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Propel\Bundle\PropelBundle\Form\Type\ModelType;
 use Propel\Bundle\PropelBundle\Form\TypeGuesser;
 use Propel\Bundle\PropelBundle\Tests\TestCase;
