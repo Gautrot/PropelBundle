@@ -52,19 +52,18 @@
   },
   "require-dev": {
     "ext-json": "*",
-    "ext-simplexml": "*",
     "ext-pdo": "*",
-    "ext-xml": "*",
-    "phpunit/phpunit": "^10.5.62",
-    "symfony/form": "^6.4.41",
-    "fakerphp/faker": "^1",
+    "ext-simplexml": "*",
+    "fakerphp/faker": "^1.0",
     "mikey179/vfsstream": "^1.6",
-    "phpstan/phpstan": "^2.0",
     "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan": "^2.0",
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-symfony": "^2.0",
-    "twig/twig": ">=3.27",
-    "symfony/stopwatch": "^6.4"
+    "phpunit/phpunit": "^10.5.62",
+    "symfony/form": "^6.4.41",
+    "symfony/stopwatch": "^6.4",
+    "twig/twig": "^3.27"
   },
   "config": {
     "allow-plugins": {
