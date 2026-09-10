@@ -10,6 +10,7 @@ Since Propel 2 was officially released on June 23, 2026, we are migrating the br
 
 The following branches are maintained:
 
+* `5.2`: contains Propel **2** integration for Symfony **5.4** and PHP **8.0+**.
 * `6.1`: contains Propel **2** integration for Symfony **6.4** and PHP **8.1+**.
 * `7.1`: contains Propel **2** integration for Symfony **7.4** and PHP **8.2+**.
 
