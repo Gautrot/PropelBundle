@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * # PropelParamConverterTest
+ *
+ * @deprecated SensioFrameworkExtraBundle is no longer maintained as of Symfony 6.2
  */
 class PropelParamConverterTest extends TestCase
 {
@@ -24,7 +26,6 @@ class PropelParamConverterTest extends TestCase
 
     /**
      * @return void
-     * @todo SensioFrameworkExtraBundle is no longer maintained as of Symfony 6.2
      */
     public function setUp(): void
     {

@@ -5,6 +5,7 @@ namespace Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Base;
 use Exception;
 use PDO;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\BookQuery as ChildBookQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Book as ChildBook;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Map\BookTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -62,19 +63,19 @@ abstract class Book implements ActiveRecordInterface
      * The value for the name field.
      * @var        string
      */
-    protected string $name;
+    protected string $name = '';
 
     /**
      * The value for the slug field.
      * @var string
      */
-    protected string $slug;
+    protected string $slug = '';
 
     /**
      * The value for the isbn field.
      * @var        string
      */
-    protected string $isbn;
+    protected string $isbn = '';
 
     /**
      * The value for the author_id field.
@@ -161,9 +162,9 @@ abstract class Book implements ActiveRecordInterface
      * Set the value of [id] column.
      *
      * @param int $v new value
-     * @return \Acme\DemoBundle\Model\Book
+     * @return ChildBook
      */
-    public function setId(int $v): \Acme\DemoBundle\Model\Book
+    public function setId(int $v): ChildBook
     {
         if ($this->id !== $v) {
             $this->id = $v;
@@ -256,9 +257,9 @@ abstract class Book implements ActiveRecordInterface
      * Set the value of [slug] column.
      *
      * @param string $v new value
-     * @return \Acme\DemoBundle\Model\Book
+     * @return ChildBook
      */
-    public function setSlug(string $v): \Acme\DemoBundle\Model\Book
+    public function setSlug(string $v): ChildBook
     {
         if ($this->slug !== $v) {
             $this->slug = $v;
@@ -424,7 +425,7 @@ abstract class Book implements ActiveRecordInterface
             return $startcol + 4; // 4 = BookTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating \Acme\DemoBundle\Model\Book object", 0, $e);
+            throw new PropelException("Error populating ChildBook object", 0, $e);
         }
     }
 
@@ -665,9 +666,9 @@ abstract class Book implements ActiveRecordInterface
      * Declares an association between this object and a ChildAuthor object.
      *
      * @param ChildAuthor|null $v
-     * @return \Acme\DemoBundle\Model\Book
+     * @return ChildBook
      */
-    public function setAuthor(?ChildAuthor $v = null): \Acme\DemoBundle\Model\Book
+    public function setAuthor(?ChildAuthor $v = null): ChildBook
     {
         if ($v === null) {
             $this->setAuthorId((int)null);
@@ -887,9 +888,9 @@ abstract class Book implements ActiveRecordInterface
      * Set the value of [name] column.
      *
      * @param string $v new value
-     * @return \Acme\DemoBundle\Model\Book
+     * @return ChildBook
      */
-    public function setName(string $v): \Acme\DemoBundle\Model\Book
+    public function setName(string $v): ChildBook
     {
         if ($this->name !== $v) {
             $this->name = $v;
@@ -913,9 +914,9 @@ abstract class Book implements ActiveRecordInterface
      * Set the value of [isbn] column.
      *
      * @param string $v new value
-     * @return \Acme\DemoBundle\Model\Book
+     * @return ChildBook
      */
-    public function setIsbn(string $v): \Acme\DemoBundle\Model\Book
+    public function setIsbn(string $v): ChildBook
     {
         if ($this->isbn !== $v) {
             $this->isbn = $v;
@@ -939,9 +940,9 @@ abstract class Book implements ActiveRecordInterface
      * Set the value of [author_id] column.
      *
      * @param int $v new value
-     * @return \Acme\DemoBundle\Model\Book
+     * @return ChildBook
      */
-    public function setAuthorId(int $v): \Acme\DemoBundle\Model\Book
+    public function setAuthorId(int $v): ChildBook
     {
         if ($this->author_id !== $v) {
             $this->author_id = $v;
@@ -1029,10 +1030,10 @@ abstract class Book implements ActiveRecordInterface
      * objects.
      *
      * @param bool $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return \Acme\DemoBundle\Model\Book|Book Clone of current object.
+     * @return ChildBook|Book Clone of current object.
      * @throws PropelException
      */
-    public function copy(bool $deepCopy = false): \Acme\DemoBundle\Model\Book|Book
+    public function copy(bool $deepCopy = false): ChildBook|Book
     {
         // we use get_class(), because this might be a subclass
         $clazz = get_class($this);
@@ -1048,7 +1049,7 @@ abstract class Book implements ActiveRecordInterface
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param object $copyObj An object of \Acme\DemoBundle\Model\Book (or compatible) type.
+     * @param object $copyObj An object of ChildBook (or compatible) type.
      * @param bool $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param bool $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
