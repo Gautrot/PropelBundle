@@ -10,8 +10,8 @@ Since Propel 2 was officially released on June 23, 2026, we are migrating the br
 
 The following branches are maintained:
 
-* `5.2`: contains Propel **2** integration for Symfony **5.4** and PHP **8.0+**.
-* `6.1`: contains Propel **2** integration for Symfony **6.4** and PHP **8.1+**.
+* `5.2`: contains Propel **2** integration for Symfony **5.4** and PHP **8.0+**;
+* `6.1`: contains Propel **2** integration for Symfony **6.4** and PHP **8.1+**;
 * `7.1`: contains Propel **2** integration for Symfony **7.4** and PHP **8.2+**.
 
 ### Unmaintained branches
@@ -26,11 +26,11 @@ The following branches are no longer maintained, but are still available here fo
 
 #### Propel 2
 
-* `2.0`: contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **2.5 - 2.8**:
-* `3.0`: contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **2.8 - 3.x**:
-* `4.0`: contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **3.4 - 4.x**:
-* `5.0`: contains Propel **2** (branch **2.0.0-beta1**) integration for Symfony **4.x - 5.x** and PHP **7.2 - 8.0**:
-    * `5.1`: contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **4.x - 6.x** and PHP **7.4 - 8.1**:
-* `6.0`: contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **6.x** and PHP **8.0.2+**:
+* `2.0`: contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **2.5 - 2.8**;
+* `3.0`: contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **2.8 - 3.x**;
+* `4.0`: contains Propel **2** (branches **below 2.0.0-beta1**) integration for Symfony **3.4 - 4.x**;
+* `5.0`: contains Propel **2** (branch **2.0.0-beta1**) integration for Symfony **4.x - 5.x** and PHP **7.2 - 8.0**;
+    * `5.1`: contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **4.x - 6.x** and PHP **7.4 - 8.1**;
+* `6.0`: contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **6.x** and PHP **8.0.2+**;
 * `7.0`: contains Propel **2** (branches **2.0.0-beta2 - 2.0.0-beta4**) integration for Symfony **6.x - 7.x** and PHP
   **8.0.2+**.
