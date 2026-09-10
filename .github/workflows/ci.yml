@@ -57,13 +57,8 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs >= 8.1
-        if: matrix.php-version >= '8.1'
+      - name: Run tests with PHP
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
-
-      - name: Run tests < 8.1
-        if: matrix.php-version < '8.1'
-        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -128,13 +123,8 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs >= 8.1
-        if: matrix.php-version >= '8.1'
+      - name: Run tests with PHP
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
-
-      - name: Run tests < 8.1
-        if: matrix.php-version < '8.1'
-        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -196,13 +186,8 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs >= 8.1
-        if: matrix.php-version >= '8.1'
+      - name: Run tests with PHP
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
-
-      - name: Run tests < 8.1
-        if: matrix.php-version < '8.1'
-        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
