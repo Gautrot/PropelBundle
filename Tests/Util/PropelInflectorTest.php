@@ -10,6 +10,7 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Util;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Util\PropelInflector;
 
