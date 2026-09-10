@@ -10,7 +10,6 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Util;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Util\PropelInflector;
 
@@ -45,8 +44,8 @@ class PropelInflectorTest extends TestCase
      * @param $word
      * @param $expected
      * @return void
+     * @dataProvider dataProviderForTestCamelize
      */
-    #[DataProvider('dataProviderForTestCamelize')]
     public function testCamelize($word, $expected)
     {
         $this->assertEquals($expected, PropelInflector::camelize($word));

@@ -9,6 +9,7 @@ use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Generator\Util\QuickBuilder;
 use Propel\Runtime\Connection\ConnectionWrapper;
 use Propel\Runtime\Propel;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -24,7 +25,6 @@ class PropelParamConverterTest extends TestCase
 
     /**
      * @return void
-     * @todo SensioFrameworkExtraBundle is no longer maintained as of Symfony 6.2
      */
     public function setUp(): void
     {

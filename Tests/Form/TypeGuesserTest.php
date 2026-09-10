@@ -11,7 +11,6 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Form;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use Propel\Bundle\PropelBundle\Form\Type\ModelType;
 use Propel\Bundle\PropelBundle\Form\TypeGuesser;
 use Propel\Bundle\PropelBundle\Tests\TestCase;
@@ -164,8 +163,8 @@ class TypeGuesserTest extends TestCase
      * @param $confidence
      * @param $multiple
      * @return void
+     * @dataProvider dataProviderForGuessType
      */
-    #[DataProvider('dataProviderForGuessType')]
     public function testGuessType($property, $type, $confidence, $multiple = null)
     {
         $value = $this->guesser->guessType(self::CLASS_NAME, $property);

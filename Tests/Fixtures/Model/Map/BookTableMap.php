@@ -2,11 +2,12 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Map;
 
-use Acme\DemoBundle\Model\Book;
-use Acme\DemoBundle\Model\BookQuery;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Book;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\BookQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\InstancePoolTrait;
 use Propel\Runtime\Connection\ConnectionInterface;
+use Propel\Runtime\DataFetcher\DataFetcherInterface;
 use Propel\Runtime\Exception\PropelException;
 use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Map\TableMapTrait;
