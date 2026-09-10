@@ -14,8 +14,8 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y composer git zip php$PHP \
     php$PHP-curl \
     php$PHP-intl \
-    php$PHP-mysql \
     php$PHP-mbstring \
+    php$PHP-mysql \
     php$PHP-pdo \
     php$PHP-pgsql \
     php$PHP-simplexml \
