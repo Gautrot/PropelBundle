@@ -62,7 +62,7 @@
     "phpstan/phpstan": "^2.0",
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-symfony": "^2.0",
-    "phpunit/phpunit": "^9.6.33",
+    "phpunit/phpunit": ">=9.6.33",
     "symfony/form": "^5.4.19",
     "symfony/stopwatch": "^5.4.19",
     "twig/twig": "<=3.19"

@@ -62,9 +62,13 @@ jobs:
         if: matrix.php-version >= '8.1'
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
 
-      - name: Run tests < 8.1
-        if: matrix.php-version < '8.1'
+      - name: Run tests with PHP 8.1
+        if: matrix.php-version == '8.1'
         run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
+
+      - name: Run tests with PHP 8.0
+        if: matrix.php-version == '8.0'
+        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml ./Tests
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -134,9 +138,13 @@ jobs:
         if: matrix.php-version >= '8.1'
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
 
-      - name: Run tests < 8.1
-        if: matrix.php-version < '8.1'
+      - name: Run tests with PHP 8.1
+        if: matrix.php-version == '8.1'
         run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
+
+      - name: Run tests with PHP 8.0
+        if: matrix.php-version == '8.0'
+        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml ./Tests
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
@@ -203,9 +211,13 @@ jobs:
         if: matrix.php-version >= '8.1'
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
 
-      - name: Run tests < 8.1
-        if: matrix.php-version < '8.1'
+      - name: Run tests with PHP 8.1
+        if: matrix.php-version == '8.1'
         run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
+
+      - name: Run tests with PHP 8.0
+        if: matrix.php-version == '8.0'
+        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml ./Tests
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v7
