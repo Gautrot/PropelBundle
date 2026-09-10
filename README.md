@@ -62,13 +62,16 @@ Nightly release:
 * Load SQL, YAML and XML fixtures;
 * Create/drop databases;
 * Integration with the Form component;
-* Integration with the Security component.
+* Integration with the Security component;
+* Propel ParamConverter can be used
+  with [Symfony Attributes Overview](https://symfony.com/doc/7.4/reference/attributes.html).
 
 ## New to version 7.1
 
 * Added support for Symfony 7.4
     * Removed support for Symfony 6 and 7.0 to 7.3
-        * LTS support for Symfony 6.4 was migrated to a new branch: `6.1`
+        * LTS for Symfony 6.4 was migrated to a new branch: `6.1`
+        * Extended LTS for Symfony 5.4 was migrated to a new branch: `5.2`
 * Added support for PHP 8.4 and 8.5
     * Removed support for PHP 8.0 and PHP 8.1
     * Removed deprecated content introduced in PHP 8.4 and 8.5

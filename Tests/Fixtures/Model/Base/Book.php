@@ -25,7 +25,7 @@ abstract class Book implements ActiveRecordInterface
     /**
      * TableMap class name
      */
-    const string TABLE_MAP = '\\Propel\\Bundle\\PropelBundle\\Tests\\Fixtures\\Model\\Map\\BookTableMap';
+    const TABLE_MAP = '\\Propel\\Bundle\\PropelBundle\\Tests\\Fixtures\\Model\\Map\\BookTableMap';
 
     /**
      * attribute to determine if this object has previously been saved.
