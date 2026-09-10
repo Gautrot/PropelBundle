@@ -5,8 +5,8 @@ services:
       context: ../..
       dockerfile: misc/docker/Dockerfile-debian
     environment:
-      SYMFONY_REQUIRE: "6.4"
-      PHP: "8.1"
+      SYMFONY_REQUIRE: "5.4"
+      PHP: "8.0"
     volumes:
       - ../..:/app
   ubuntu:
@@ -15,8 +15,8 @@ services:
       context: ../..
       dockerfile: misc/docker/Dockerfile-ubuntu
     environment:
-      SYMFONY_REQUIRE: "6.4"
-      PHP: "8.1"
+      SYMFONY_REQUIRE: "5.4"
+      PHP: "8.0"
     volumes:
       - ../..:/app
   alpine:
@@ -25,7 +25,7 @@ services:
       context: ../..
       dockerfile: misc/docker/Dockerfile-alpine
     environment:
-      SYMFONY_REQUIRE: "6.4"
-      PHP: "81"
+      SYMFONY_REQUIRE: "5.4"
+      PHP: "80"
     volumes:
       - ../..:/app

@@ -2,28 +2,29 @@
 
 ---
 
-[![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=6.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/6.1/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
+[![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=5.2)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/5.2/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0-8892BF.svg)](https://php.net/)
 
-This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is a LTS support of
-Symfony 6.4 only.
+This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is an extended LTS
+support of Symfony 5.4 only.
 
 ## Installation
 
 ### Minimum requirements
 
-- [Symfony](https://symfony.com/releases/6.0): **6.4**
-- [PHP](https://www.php.net/releases/8.0/en.php): **8.1**
+- [Symfony](https://symfony.com/releases/6.0): **5.4**
+- [PHP](https://www.php.net/releases/8.0/en.php): **8.0**.
+    - If you are using PHP 7, you **must** upgrade to PHP 8.0 at least.
 - [Propel](https://github.com/propelorm/Propel2): **2.0.0**
 
 ### Composer
 
 ```shell
 composer require propel/propel "~2.0"
-composer require gautrot/propel-bundle "~6.1" # (or newer tag/release)
+composer require gautrot/propel-bundle "~5.2" # (or newer tag/release)
 # or
-composer require gautrot/propel-bundle "6.1.x-dev"
+composer require gautrot/propel-bundle "5.2.x-dev"
 ```
 
 #### composer.json
@@ -34,7 +35,7 @@ Stable release:
 {
   "require": {
     "propel/propel": "~2.0",
-    "gautrot/propel-bundle": "~6.1"
+    "gautrot/propel-bundle": "~5.2"
   }
 }
 ```
@@ -45,7 +46,7 @@ Nightly release:
 {
   "require": {
     "propel/propel": "~2.0",
-    "gautrot/propel-bundle": "6.1.x-dev"
+    "gautrot/propel-bundle": "5.2.x-dev"
   }
 }
 ```
@@ -65,11 +66,11 @@ Nightly release:
 * Integration with the Form component;
 * Integration with the Security component.
 
-## New to version 6.1
+## New to version 5.2
 
-* Removed support for Symfony 6.0 to 6.3
+* Removed support for Symfony 5.0 to 5.3
 * Added support for PHP 8.4 and 8.5
-    * Removed support for PHP 8.0
+    * Removed support for PHP 7.2 to 7.4
     * Removed deprecated content introduced in PHP 8.4 and 8.5
 * Updated `propel/propel` minimum version to its official stable release (2.0.0)
 
