@@ -6,12 +6,15 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /app
 
+# Forces to use an old version of Composer for PHP 8.0
+COPY --from=composer:2.2 /usr/bin/composer /usr/local/bin/composer
+
 RUN apt-get update
 RUN apt-get install -y apt-transport-https lsb-release ca-certificates wget
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y composer git zip php$PHP \
+RUN apt-get install -y git zip php$PHP \
     php$PHP-curl \
     php$PHP-mysql \
     php$PHP-mbstring \
