@@ -65,7 +65,7 @@
     "phpunit/phpunit": "^9.6.33",
     "symfony/form": "^5.4.19",
     "symfony/stopwatch": "^5.4.19",
-    "twig/twig": "~3.19"
+    "twig/twig": "<=3.19"
   },
   "config": {
     "allow-plugins": {
