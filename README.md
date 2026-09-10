@@ -7,7 +7,7 @@
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0-8892BF.svg)](https://php.net/)
 
 This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is an extended LTS
-support of Symfony 5.4 only.
+version for Symfony 5.4 only.
 
 ## Installation
 

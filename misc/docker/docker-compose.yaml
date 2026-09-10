@@ -26,6 +26,6 @@ services:
       dockerfile: misc/docker/Dockerfile-alpine
     environment:
       SYMFONY_REQUIRE: "5.4"
-      PHP: "80"
+      PHP: "8"
     volumes:
       - ../..:/app
