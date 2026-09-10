@@ -55,7 +55,7 @@
     "ext-simplexml": "*",
     "ext-pdo": "*",
     "ext-xml": "*",
-    "phpunit/phpunit": "^11.5.50",
+    "phpunit/phpunit": ">=11.5.50",
     "symfony/form": "^7.4.13",
     "fakerphp/faker": "^1",
     "mikey179/vfsstream": "^1.6",
@@ -63,7 +63,7 @@
     "phpstan/extension-installer": "^1.4",
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-symfony": "^2.0",
-    "twig/twig": ">=3.27",
+    "twig/twig": "^3.26",
     "symfony/stopwatch": "^7.4"
   },
   "config": {

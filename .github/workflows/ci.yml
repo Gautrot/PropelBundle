@@ -56,7 +56,7 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs
+      - name: Run tests with PHP
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
@@ -121,7 +121,7 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs
+      - name: Run tests with PHP
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
@@ -183,7 +183,7 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: Run tests with PHPs
+      - name: Run tests with PHP
         run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
