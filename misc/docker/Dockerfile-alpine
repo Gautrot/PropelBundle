@@ -35,4 +35,4 @@ RUN composer global config --no-plugins allow-plugins.symfony/flex true
 RUN composer global require --no-progress --no-scripts --no-plugins symfony/flex
 RUN SYMFONY_REQUIRE=$SYMFONY_REQUIRE composer u --prefer-dist -n
 
-CMD ["php", "vendor/bin/phpunit"]
+CMD ["php", "vendor/bin/phpunit", "Tests"]
