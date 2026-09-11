@@ -1,7 +1,6 @@
 {
   "name": "gautrot/propel-bundle",
   "description": "Integration of Propel in Symfony",
-  "version": "5.2.x-dev",
   "keywords": [
     "propel",
     "orm",
@@ -34,7 +33,7 @@
   },
   "require": {
     "php": ">=7.4",
-    "propel/propel": "2.0.0-beta4",
+    "propel/propel": "~2.0.0-beta4",
     "sensio/framework-extra-bundle": "^6.2",
     "symfony/cache": "^5.4.46",
     "symfony/config": "^5.4.19",
