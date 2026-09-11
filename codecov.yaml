@@ -1,74 +1,60 @@
 component_management:
   individual_components:
     - component_id: "commands"
-      name: "Commands"
       paths:
-        - "Command/**"
+        - "Command/"
 
     - component_id: "controllers"
-      name: "Controllers"
       paths:
-        - "Controller/**"
+        - "Controller/"
 
     - component_id: "data_collectors"
-      name: "Data collectors"
       paths:
-        - "DataCollector/**"
+        - "DataCollector/"
 
     - component_id: "data_fixtures"
-      name: "Data fixtures"
       paths:
-        - "DataFixtures/**"
+        - "DataFixtures/"
 
     - component_id: "dependency_injections"
-      name: "Dependency injections"
       paths:
-        - "DependencyInjection/**"
+        - "DependencyInjection/"
 
     - component_id: "forms"
-      name: "Forms"
       paths:
-        - "Form/**"
+        - "Form/"
 
     - component_id: "loggers"
-      name: "Loggers"
       paths:
-        - "Logger/**"
+        - "Logger/"
 
     - component_id: "requests"
-      name: "Requests"
       paths:
-        - "Request/**"
+        - "Request/"
 
     - component_id: "resources"
-      name: "Resources"
       paths:
-        - "Resource/**"
+        - "Resource/"
 
     - component_id: "security"
-      name: "Security"
       paths:
-        - "Security/**"
+        - "Security/"
 
     - component_id: "services"
-      name: "Services"
       paths:
-        - "Service/**"
+        - "Service/"
 
     - component_id: "twig"
-      name: "Twig"
       paths:
-        - "Twig/**"
+        - "Twig/"
 
     - component_id: "utils"
-      name: "Utils"
       paths:
-        - "Util/**"
+        - "Util/"
 
     - component_id: "validators"
-      name: "Validators"
       paths:
-        - "Validator/**"
+        - "Validator/"
 
 comment:
   layout: "header, diff, flags, components"  # show component info in the PR comment
