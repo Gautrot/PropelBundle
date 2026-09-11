@@ -168,7 +168,7 @@ class PropelBundleTest extends TestCase
      * @param mixed $logger
      * @return ContainerBuilder
      */
-    private function initPropelBundle(array $configuration, mixed $logger = false): ContainerBuilder
+    private function initPropelBundle(array $configuration, $logger = false): ContainerBuilder
     {
         // init new container
         $container = $this->getContainer();

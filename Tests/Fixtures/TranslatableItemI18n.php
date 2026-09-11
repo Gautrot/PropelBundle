@@ -22,27 +22,27 @@ class TranslatableItemI18n implements ActiveRecordInterface
     /**
      * @var mixed|null
      */
-    private mixed $id;
+    private $id;
 
     /**
      * @var mixed|null
      */
-    private mixed $locale;
+    private $locale;
 
     /**
      * @var mixed|null
      */
-    private mixed $value;
+    private $value;
 
     /**
      * @var mixed
      */
-    private mixed $value2;
+    private $value2;
 
     /**
      * @var mixed
      */
-    private mixed $item;
+    private $item;
 
     /**
      * @param $id

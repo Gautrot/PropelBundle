@@ -64,7 +64,7 @@ class UniqueObject extends Constraint
         return array('fields');
     }
 
-    public function getTargets(): array|string
+    public function getTargets()
     {
         return self::CLASS_CONSTRAINT;
     }

@@ -56,7 +56,7 @@ class SchemaLocatorTest extends TestCase
     /**
      * @var MockObject|FakeBundle
      */
-    private MockObject|FakeBundle $bundleMock;
+    private $bundleMock;
 
     /**
      * @return void

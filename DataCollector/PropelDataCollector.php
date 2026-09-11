@@ -98,7 +98,7 @@ class PropelDataCollector extends DataCollector
      *
      * @return float|int The total time of queries
      */
-    public function getTime(): float|int
+    public function getTime()
     {
         $time = 0;
         foreach ($this->data['queries'] as $query) {

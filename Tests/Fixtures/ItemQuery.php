@@ -40,7 +40,7 @@ class ItemQuery
     /**
      * @return $this
      */
-    public function getTableMap(): static
+    public function getTableMap()
     {
         // Allows to define methods in this class
         // to avoid a lot of mock classes

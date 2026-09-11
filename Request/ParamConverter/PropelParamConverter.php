@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  *
  * @author     Jérémie Augustin <jeremie.augustin@pixel-cookers.com>
- * @deprecated SensioFrameworkExtraBundle is no longer maintained as of Symfony 6.2
+ * @deprecated SensioFrameworkExtraBundle is no longer maintained as of Symfony 6.2. It will be updated to use Symfony Attributes Overview
  */
 class PropelParamConverter implements ParamConverterInterface
 {

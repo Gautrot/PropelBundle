@@ -102,7 +102,7 @@ abstract class BookQuery extends ModelCriteria
      * @return ChildBook|array|mixed the result, formatted by the current formatter
      * @throws PropelException
      */
-    public function findPk($key, ?ConnectionInterface $con = null): mixed
+    public function findPk($key, ?ConnectionInterface $con = null)
     {
         if ($key === null) {
             return null;
@@ -132,7 +132,7 @@ abstract class BookQuery extends ModelCriteria
      *
      * @return ChildBook|array|mixed the result, formatted by the current formatter
      */
-    protected function findPkComplex(mixed $key, ConnectionInterface $con): mixed
+    protected function findPkComplex($key, ConnectionInterface $con)
     {
         // As the query uses a PK condition, no limit(1) is necessary.
         $criteria = $this->isKeepQuery() ? clone $this : $this;
@@ -150,7 +150,7 @@ abstract class BookQuery extends ModelCriteria
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function filterByPrimaryKey(mixed $key): ChildBookQuery
+    public function filterByPrimaryKey($key): ChildBookQuery
     {
         return $this->addUsingAlias(BookTableMap::ID, $key, Criteria::EQUAL);
     }
@@ -165,7 +165,7 @@ abstract class BookQuery extends ModelCriteria
      * @return ChildBook|null A model object, or null if the key is not found
      * @throws PropelException
      */
-    protected function findPkSimple(mixed $key, ConnectionInterface $con): ?ChildBook
+    protected function findPkSimple($key, ConnectionInterface $con): ?ChildBook
     {
         $sql = 'SELECT ID, TITLE, ISBN, AUTHOR_ID FROM book WHERE ID = :p0';
         try {
@@ -197,7 +197,7 @@ abstract class BookQuery extends ModelCriteria
      *
      * @return ObjectCollection|array|mixed the list of results, formatted by the current formatter
      */
-    public function findPks(array $keys, ?ConnectionInterface $con = null): mixed
+    public function findPks(array $keys, ?ConnectionInterface $con = null)
     {
         if (null === $con) {
             $con = Propel::getServiceContainer()->getReadConnection($this->getDbName());
@@ -241,7 +241,7 @@ abstract class BookQuery extends ModelCriteria
      *
      * @return ChildBookQuery The current query, for fluid interface
      */
-    public function filterById(mixed $id = null, ?string $comparison = null): ChildBookQuery
+    public function filterById($id = null, ?string $comparison = null): ChildBookQuery
     {
         if (is_array($id)) {
             $useMinMax = false;
@@ -342,7 +342,7 @@ abstract class BookQuery extends ModelCriteria
      * @see       filterByAuthor()
      *
      */
-    public function filterByAuthorId(mixed $authorId = null, ?string $comparison = null): ChildBookQuery
+    public function filterByAuthorId($authorId = null, ?string $comparison = null): ChildBookQuery
     {
         if (is_array($authorId)) {
             $useMinMax = false;

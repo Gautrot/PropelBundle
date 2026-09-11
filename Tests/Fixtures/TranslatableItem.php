@@ -22,12 +22,12 @@ class TranslatableItem implements ActiveRecordInterface
     /**
      * @var mixed|null
      */
-    private mixed $id;
+    private $id;
 
     /**
      * @var mixed|array
      */
-    private mixed $currentTranslations;
+    private $currentTranslations;
 
     /**
      * @var

@@ -26,7 +26,7 @@ class TestCase extends BaseTestCase
     /**
      * @var PropelPDO|ConnectionWrapper|null
      */
-    protected PropelPDO|ConnectionWrapper|null $con = null;
+    protected $con = null;
 
     /**
      * The list of created temp files to be removed.

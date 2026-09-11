@@ -120,7 +120,7 @@ abstract class Book implements ActiveRecordInterface
      * @param mixed $obj The object to compare to.
      * @return bool Whether equal to the object specified.
      */
-    public function equals(mixed $obj): bool
+    public function equals($obj): bool
     {
         $thisclazz = get_class($this);
         if (!is_object($obj) || !($obj instanceof $thisclazz)) {
@@ -207,7 +207,7 @@ abstract class Book implements ActiveRecordInterface
      *
      * @return Book The current object, for fluid interface
      */
-    public function setVirtualColumn(string $name, mixed $value): static
+    public function setVirtualColumn(string $name, $value)
     {
         $this->virtualColumns[$name] = $value;
 
@@ -680,7 +680,9 @@ abstract class Book implements ActiveRecordInterface
 
         // Add binding for other direction of this n:n relationship.
         // If this object has already been added to the ChildAuthor object, it will not be re-added.
-        $v?->addBook($this);
+        if ($v !== null) {
+            $v->addBook($this);
+        }
 
         return $this;
     }
@@ -850,7 +852,7 @@ abstract class Book implements ActiveRecordInterface
      * @return mixed  Value of field.
      * @throws PropelException
      */
-    public function getByName(string $name, string $type = TableMap::TYPE_PHPNAME): mixed
+    public function getByName(string $name, string $type = TableMap::TYPE_PHPNAME)
     {
         $pos = BookTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
         return $this->getByPosition($pos);
@@ -863,15 +865,20 @@ abstract class Book implements ActiveRecordInterface
      * @param int $pos position in xml schema
      * @return string|int|null Value of field at $pos
      */
-    public function getByPosition(int $pos): string|int|null
+    public function getByPosition(int $pos)
     {
-        return match ($pos) {
-            0 => $this->getId(),
-            1 => $this->getName(),
-            2 => $this->getIsbn(),
-            3 => $this->getAuthorId(),
-            default => null,
-        }; // switch()
+        switch ($pos) {
+            case 0:
+                return $this->getId();
+            case 1:
+                return $this->getName();
+            case 2:
+                return $this->getIsbn();
+            case 3:
+                return $this->getAuthorId();
+            default:
+                return null;
+        } // switch()
     }
 
     /**
@@ -968,7 +975,7 @@ abstract class Book implements ActiveRecordInterface
      * @return void
      * @throws PropelException
      */
-    public function setByName(string $name, mixed $value, string $type = TableMap::TYPE_PHPNAME): void
+    public function setByName(string $name, $value, string $type = TableMap::TYPE_PHPNAME): void
     {
         $pos = BookTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
 
@@ -983,7 +990,7 @@ abstract class Book implements ActiveRecordInterface
      * @param mixed $value field value
      * @return void
      */
-    public function setByPosition(int $pos, mixed $value): void
+    public function setByPosition(int $pos, $value): void
     {
         switch ($pos) {
             case 0:
@@ -1033,7 +1040,7 @@ abstract class Book implements ActiveRecordInterface
      * @return ChildBook|Book Clone of current object.
      * @throws PropelException
      */
-    public function copy(bool $deepCopy = false): ChildBook|Book
+    public function copy(bool $deepCopy = false)
     {
         // we use get_class(), because this might be a subclass
         $clazz = get_class($this);
@@ -1071,7 +1078,7 @@ abstract class Book implements ActiveRecordInterface
      * @param ConnectionInterface|null $con Optional Connection object.
      * @return Author|ChildAuthor The associated ChildAuthor object.
      */
-    public function getAuthor(?ConnectionInterface $con = null): Author|ChildAuthor
+    public function getAuthor(?ConnectionInterface $con = null)
     {
         if ($this->aAuthor === null && ($this->author_id !== null)) {
             $this->aAuthor = ChildAuthorQuery::create()->findPk($this->author_id, $con);
@@ -1126,9 +1133,9 @@ abstract class Book implements ActiveRecordInterface
      * @throws PropelException
      * @throws PropelException
      */
-    public function __call(string $name, mixed $params)
+    public function __call(string $name, $params)
     {
-        if (str_starts_with($name, 'get')) {
+        if (strpos($name, 'get') === 0) {
             $virtualColumn = substr($name, 3);
             if ($this->hasVirtualColumn($virtualColumn)) {
                 return $this->getVirtualColumn($virtualColumn);
@@ -1140,13 +1147,13 @@ abstract class Book implements ActiveRecordInterface
             }
         }
 
-        if (str_starts_with($name, 'from')) {
+        if (strpos($name, 'from') === 0) {
             $format = substr($name, 4);
 
             return $this->importFrom($format, reset($params));
         }
 
-        if (str_starts_with($name, 'to')) {
+        if (strpos($name, 'to') === 0) {
             $format = substr($name, 2);
             $includeLazyLoadColumns = $params[0] ?? true;
 
@@ -1175,7 +1182,7 @@ abstract class Book implements ActiveRecordInterface
      *
      * @throws PropelException
      */
-    public function getVirtualColumn(string $name): mixed
+    public function getVirtualColumn(string $name)
     {
         if (!$this->hasVirtualColumn($name)) {
             throw new PropelException(sprintf('Cannot get value of inexistent virtual column %s.', $name));
@@ -1199,7 +1206,7 @@ abstract class Book implements ActiveRecordInterface
      * @throws PropelException
      * @throws PropelException
      */
-    public function importFrom(mixed $parser, string $data): static
+    public function importFrom($parser, string $data)
     {
         if (!$parser instanceof AbstractParser) {
             $parser = AbstractParser::getParser($parser);
@@ -1254,7 +1261,7 @@ abstract class Book implements ActiveRecordInterface
      * @return array|string
      * @throws PropelException
      */
-    public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = [], $includeForeignObjects = false): array|string
+    public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = [], $includeForeignObjects = false)
     {
         if (isset($alreadyDumpedObjects['Book'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
@@ -1295,7 +1302,7 @@ abstract class Book implements ActiveRecordInterface
      * @throws PropelException
      * @throws PropelException
      */
-    public function exportTo(mixed $parser, bool $includeLazyLoadColumns = true): string
+    public function exportTo($parser, bool $includeLazyLoadColumns = true): string
     {
         if (!$parser instanceof AbstractParser) {
             $parser = AbstractParser::getParser($parser);

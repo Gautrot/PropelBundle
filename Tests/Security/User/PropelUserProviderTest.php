@@ -55,7 +55,7 @@ class PropelUserProviderTest extends TestCase
             $builder->setSchema($schema);
             $classTargets = ['tablemap', 'object', 'query', /*'objectstub',*/'querystub'];
 
-            $this::$con = $builder->build(classTargets: $classTargets);
+            $this::$con = $builder->build(null, null, null, null, $classTargets);
         }
     }
 

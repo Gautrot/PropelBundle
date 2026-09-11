@@ -21,12 +21,12 @@ class Column
     /**
      * @var mixed
      */
-    private mixed $name;
+    private $name;
 
     /**
      * @var mixed
      */
-    private mixed $type;
+    private $type;
 
     /**
      * @param $name
@@ -63,10 +63,17 @@ class Column
             return false;
         }
 
-        return match ($this->type) {
-            PropelTypes::CHAR, PropelTypes::VARCHAR, PropelTypes::LONGVARCHAR, PropelTypes::BLOB, PropelTypes::CLOB, PropelTypes::CLOB_EMU => true,
-            default => false,
-        };
+        switch ($this->type) {
+            case PropelTypes::CHAR:
+            case PropelTypes::VARCHAR:
+            case PropelTypes::LONGVARCHAR:
+            case PropelTypes::BLOB:
+            case PropelTypes::CLOB:
+            case PropelTypes::CLOB_EMU:
+                return true;
+            default:
+                return false;
+        }
 
     }
 

@@ -110,7 +110,7 @@ class ModelType extends AbstractType
      * @internal This method is public to be usable as callback. It should not
      *           be used in user code.
      */
-    public static function createChoiceName(object $choice, int|string $key, string $value): string
+    public static function createChoiceName(object $choice, $key, string $value): string
     {
         return str_replace('-', '_', (string)$value);
     }

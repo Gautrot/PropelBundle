@@ -22,22 +22,22 @@ class Item implements ActiveRecordInterface
     /**
      * @var mixed|null
      */
-    private mixed $id;
+    private $id;
 
     /**
      * @var mixed|null
      */
-    private mixed $value;
+    private $value;
 
     /**
      * @var mixed|null
      */
-    private mixed $groupName;
+    private $groupName;
 
     /**
      * @var mixed|null
      */
-    private mixed $price;
+    private $price;
 
     /**
      * @param $id
