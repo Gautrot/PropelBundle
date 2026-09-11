@@ -1,14 +1,11 @@
 FROM ubuntu:24.04
 
-ENV SYMFONY_REQUIRE=7.4
-ENV PHP=8.2
+ENV SYMFONY_REQUIRE=8.1
+ENV PHP=8.4
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y composer git zip php$PHP \
     php$PHP-curl \

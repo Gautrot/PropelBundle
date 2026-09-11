@@ -13,6 +13,7 @@ The following branches are maintained:
 * `5.2`: contains Propel **2** (branch **2.0.0-beta4**) integration for Symfony **5.4** and PHP **7.4+**;
 * `6.1`: contains Propel **2** integration for Symfony **6.4** and PHP **8.1+**;
 * `7.1`: contains Propel **2** integration for Symfony **7.4** and PHP **8.2+**.
+* `8.0`: contains Propel **2** integration for Symfony **8.x** and PHP **8.4+**.
 
 ### Unmaintained branches
 

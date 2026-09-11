@@ -1,15 +1,11 @@
 FROM debian:13
 
-ENV SYMFONY_REQUIRE=7.4
-ENV PHP=8.2
+ENV SYMFONY_REQUIRE=8.1
+ENV PHP=8.4
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install -y apt-transport-https lsb-release ca-certificates wget
-RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y composer git zip php$PHP \
     php$PHP-curl \

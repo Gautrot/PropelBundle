@@ -2,8 +2,8 @@
 
 ---
 
-[![GitHub Actions status](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=7.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/7.1/graph/badge.svg?token=J4QC832AR0)](https://codecov.io/gh/gautrot/PropelBundle)
+[![GitHub Actions status](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=8.0)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/8.0/graph/badge.svg?token=J4QC832AR0)](https://codecov.io/gh/gautrot/PropelBundle)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
 
 This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony.
@@ -12,17 +12,17 @@ This is the official implementation of [Propel](https://www.propelorm.org/) in S
 
 ### Minimum requirements
 
-- [Symfony](https://symfony.com/releases/7.4): **7.4**
-- [PHP](https://www.php.net/releases/8.2/en.php): **8.2**
+- [Symfony](https://symfony.com/releases/8.4): **8.4**
+- [PHP](https://www.php.net/releases/8.4/en.php): **8.4**
 - [Propel](https://github.com/propelorm/Propel2/tree/2.0.0): **2.0.0**
 
 ### Composer
 
 ```shell
 composer require propel/propel "~2.0"
-composer require gautrot/propel-bundle "~7.1" # (or newer tag/release)
+composer require gautrot/propel-bundle "~8.0" # (or newer tag/release)
 # or
-composer require gautrot/propel-bundle "7.1.x-dev"
+composer require gautrot/propel-bundle "8.0.x-dev"
 ```
 
 #### composer.json
@@ -33,7 +33,7 @@ Stable release:
 {
   "require": {
     "propel/propel": "~2.0",
-    "gautrot/propel-bundle": "~7.1"
+    "gautrot/propel-bundle": "~8.0"
   }
 }
 ```
@@ -44,7 +44,7 @@ Nightly release:
 {
   "require": {
     "propel/propel": "~2.0",
-    "gautrot/propel-bundle": "7.1.x-dev"
+    "gautrot/propel-bundle": "8.0.x-dev"
   }
 }
 ```
@@ -66,16 +66,9 @@ Nightly release:
 * Propel's ParamConverter can be used
   with [Symfony Attributes](https://symfony.com/doc/7.4/reference/attributes.html).
 
-## New to version 7.1
+## New to version 8.0
 
-* Added support for Symfony 7.4
-    * Removed support for Symfony 6 and 7.0 to 7.3
-        * LTS for Symfony 6.4 was migrated to a new branch: [6.1](https://github.com/Gautrot/PropelBundle/tree/6.1)
-        * Extended LTS for Symfony 5.4 was migrated to a new branch: [5.2](https://github.com/Gautrot/PropelBundle/tree/5.2)
-* Added support for PHP 8.4 and 8.5
-    * Removed support for PHP 8.0 and 8.1
-    * Removed deprecated content introduced in PHP 8.4 and 8.5
-* Updated `propel/propel` minimum version to its official stable release (2.0.0)
+* Added support for Symfony 8.1
 
 You can also read the changelogs [here](CHANGELOG.md).
 
