@@ -13,9 +13,9 @@ for Symfony 6.4 only.
 
 ### Minimum requirements
 
-- [Symfony](https://symfony.com/releases/6.0): **6.4**
-- [PHP](https://www.php.net/releases/8.0/en.php): **8.1**
-- [Propel](https://github.com/propelorm/Propel2): **2.0.0**
+- [Symfony](https://symfony.com/releases/6.4): **6.4**
+- [PHP](https://www.php.net/releases/8.1/en.php): **8.1**
+- [Propel](https://github.com/propelorm/Propel2/tree/2.0.0): **2.0.0**
 
 ### Composer
 

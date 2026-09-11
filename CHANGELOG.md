@@ -4,13 +4,13 @@
 
 <!-- TOC -->
 
-* [6.1](#61)
+* [6.1.0](#610)
 
 <!-- TOC -->
 
 ---
 
-## 6.1
+## 6.1.0
 
 * Removed support for Symfony 6.0 to 6.3
 * Added support for PHP 8.4 and 8.5
