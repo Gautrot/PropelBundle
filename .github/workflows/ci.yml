@@ -1,12 +1,12 @@
-name: GitHub Actions - CI branch 6.1
+name: GitHub Actions - CI branch main
 
 on:
   push:
     branches:
-      - '6.1'
+      - 'main'
   pull_request:
     branches:
-      - '6.1'
+      - 'main'
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,13 +19,12 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '8.1'
           - '8.2'
           - '8.3'
           - '8.4'
           - '8.5'
         symfony-version:
-          - '6.4'
+          - '7.4'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -37,6 +36,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Composer get cache directory
         id: composer-cache
@@ -85,13 +86,12 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '8.1'
           - '8.2'
           - '8.3'
           - '8.4'
           - '8.5'
         symfony-version:
-          - '6.4'
+          - '7.4'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -103,6 +103,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Composer get cache directory
         id: composer-cache
@@ -148,13 +150,12 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '8.1'
           - '8.2'
           - '8.3'
           - '8.4'
           - '8.5'
         symfony-version:
-          - '6.4'
+          - '7.4'
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -166,6 +167,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Composer get cache directory
         id: composer-cache
