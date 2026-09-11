@@ -2,8 +2,8 @@
 
 ---
 
-[![Github actions Status](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=6.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/6.1/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/gautrot/PropelBundle)
+[![GitHub Actions status](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=6.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/6.1/graph/badge.svg?token=J4QC832AR0)](https://codecov.io/gh/gautrot/PropelBundle)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
 
 This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is a LTS version
@@ -56,15 +56,15 @@ Nightly release:
 * Insertion of SQL statements;
 * Runtime autoloading of Propel and generated classes;
 * Propel runtime initialization through the XML configuration;
-* [Propel Migrations](https://propelorm.org/documentation/09-migrations.html);
+* [Propel migrations](https://propelorm.org/documentation/09-migrations.html);
 * Reverse engineering
   from [existing database](https://propelorm.org/documentation/cookbook/working-with-existing-databases.html);
-* Integration to the Symfony Profiler;
-* Load SQL, YAML and XML fixtures;
-* Create/drop databases;
-* Integration with the Form component;
-* Integration with the Security component;
-* Propel ParamConverter can be used
+* Integration to [Symfony Profiler](https://symfony.com/doc/6.4/profiler.html);
+* Load SQL, YAML, and XML fixtures;
+* Create and drop databases;
+* Integration with the [Form component](https://symfony.com/doc/6.4/forms.html);
+* Integration with the [Security component](https://symfony.com/doc/6.4/security.html);
+* Propel's ParamConverter can be used
   with [Symfony Attributes Overview](https://symfony.com/doc/6.4/reference/attributes.html).
 
 ## New to version 6.1
