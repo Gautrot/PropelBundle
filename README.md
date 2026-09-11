@@ -64,7 +64,7 @@ Nightly release:
 * Integration with the [Form component](https://symfony.com/doc/7.4/forms.html);
 * Integration with the [Security component](https://symfony.com/doc/7.4/security.html);
 * Propel's ParamConverter can be used
-  with [Symfony Attributes Overview](https://symfony.com/doc/7.4/reference/attributes.html).
+  with [Symfony Attributes](https://symfony.com/doc/7.4/reference/attributes.html).
 
 ## New to version 7.1
 
