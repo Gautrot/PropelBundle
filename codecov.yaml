@@ -1,8 +1,60 @@
 component_management:
   individual_components:
-    - component_id: "project"
+    - component_id: "commands"
       paths:
-        - "./"
+        - "Command/"
+
+    - component_id: "controllers"
+      paths:
+        - "Controller/"
+
+    - component_id: "data_collectors"
+      paths:
+        - "DataCollector/"
+
+    - component_id: "data_fixtures"
+      paths:
+        - "DataFixtures/"
+
+    - component_id: "dependency_injections"
+      paths:
+        - "DependencyInjection/"
+
+    - component_id: "forms"
+      paths:
+        - "Form/"
+
+    - component_id: "loggers"
+      paths:
+        - "Logger/"
+
+    - component_id: "requests"
+      paths:
+        - "Request/"
+
+    - component_id: "resources"
+      paths:
+        - "Resource/"
+
+    - component_id: "security"
+      paths:
+        - "Security/"
+
+    - component_id: "services"
+      paths:
+        - "Service/"
+
+    - component_id: "twig"
+      paths:
+        - "Twig/"
+
+    - component_id: "utils"
+      paths:
+        - "Util/"
+
+    - component_id: "validators"
+      paths:
+        - "Validator/"
 
 comment:
   layout: "header, diff, flags, components"  # show component info in the PR comment
