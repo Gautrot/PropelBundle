@@ -13,10 +13,10 @@ version for Symfony 5.4 only.
 
 ### Minimum requirements
 
-- [Symfony](https://symfony.com/releases/6.0): **5.4**
-- [PHP](https://www.php.net/releases/8.0/en.php): **7.4**
+- [Symfony](https://symfony.com/releases/5.4): **5.4**
+- [PHP](https://www.php.net/): **7.4**
     - If you are using PHP 7.2 or 7.3, you **must** upgrade to PHP 7.4 at least.
-- [Propel](https://github.com/propelorm/Propel2): **2.0.0 - beta 4**
+- [Propel](https://github.com/propelorm/Propel2/tree/2.0.0-beta4): **2.0.0 - beta 4**
 
 ### Composer
 

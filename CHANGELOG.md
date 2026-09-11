@@ -4,13 +4,13 @@
 
 <!-- TOC -->
 
-* [5.2](#52)
+* [5.2.0](#520)
 
 <!-- TOC -->
 
 ---
 
-## 5.2
+## 5.2.0
 
 * Removed support for Symfony 5.0 to 5.3
 * Added support for PHP 8.4 and 8.5
