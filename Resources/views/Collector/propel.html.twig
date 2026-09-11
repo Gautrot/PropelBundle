@@ -40,32 +40,43 @@
 {% block panel %}
     {# the panel content #}
     <style type="text/css">
-    .SQLKeyword {
-        color: blue;
-        white-space: nowrap;
-    }
-    .SQLName {
-        color: #464646;
-        white-space: nowrap;
-    }
-    .SQLComment {
-        color: gray;
-        display: block;
-        font-size: 0.9em;
-        margin: 3px 0;
-    }
+        .SQLKeyword {
+            color: blue;
+            white-space: nowrap;
+        }
+        .theme-dark .SQLKeyword {
+            color: #ADADFF;
+        }
 
-    .SQLExplain {
-       margin: 5px;
-    }
+        .SQLName {
+            color: var(--gray-900);
+            white-space: nowrap;
+        }
+        .theme-dark .SQLName {
+            color: var(--gray-300);
+        }
 
-    .SQLExplain .error {
-        background-color: #F2DEDE;
-        border-color: #EED3D7;
-        color: #B94A48;
-        padding: 8px 35px 8px 14px;
-        font-weight: bold;
-    }
+        .SQLComment {
+            color: var(--gray-500);
+            display: block;
+            font-size: 0.9em;
+            margin: 3px 0;
+        }
+        .theme-dark .SQLComment {
+            color: var(--gray-100);
+        }
+
+        .SQLExplain {
+           margin: 5px;
+        }
+
+        .SQLExplain .error {
+            background-color: #F2DEDE;
+            border-color: #EED3D7;
+            color: #B94A48;
+            padding: 8px 35px 8px 14px;
+            font-weight: bold;
+        }
     </style>
 
     <h2>Query Metrics</h2>
