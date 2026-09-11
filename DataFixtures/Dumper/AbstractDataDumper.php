@@ -16,6 +16,7 @@ use Propel\Generator\Model\PropelTypes;
 use Propel\Runtime\Map\ColumnMap;
 use Propel\Runtime\Propel;
 use RuntimeException;
+use ValueError;
 
 /**
  * Abstract class to manage a common logic to dump data.
@@ -220,10 +221,31 @@ abstract class AbstractDataDumper extends AbstractDataHandler implements DataDum
      */
     protected function fixOrderingOfForeignKeyDataInSameTable(array $resultsSets, string $tableName, ColumnMap $column, ?string $in = null): array
     {
+        // Avoid SQL injection via string-based query concatenation for $tableName, $columnName, and $in
+        if (!preg_match('/^\w+$/', $tableName)) {
+            throw new ValueError("Invalid table name: $tableName");
+        }
+
+        $columnName = strtolower($column->getName());
+
+        if (!preg_match('/^\w+$/', $columnName)) {
+            throw new ValueError("Invalid column name: $columnName");
+        }
+
+        if ($in !== null) {
+            $values = explode(',', $in);
+
+            foreach ($values as $value) {
+                if (!preg_match('/^\w+$/', trim($value, " '"))) {
+                    throw new ValueError("Invalid \"IN\" value for SQL: $in");
+                }
+            }
+        }
+
         $sql = sprintf('SELECT * FROM %s WHERE %s %s',
             constant(constant($tableName . '::TABLE_MAP') . '::TABLE_NAME'),
-            strtolower($column->getName()),
-            null === $in ? 'IS NULL' : 'IN (' . $in . ')');
+            $columnName,
+            ($in === null) ? 'IS NULL' : "IN ($in)");
 
         $stmt = $this->con->prepare($sql);
         $stmt->execute();
