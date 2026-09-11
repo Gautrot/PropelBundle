@@ -1,0 +1,206 @@
+name: GitHub Actions - CI branch 6.1
+
+on:
+  push:
+    branches:
+      - '6.1'
+  pull_request:
+    branches:
+      - '6.1'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  testsuite_linux:
+    name: "Test Suite (Linux)"
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '8.1'
+          - '8.2'
+          - '8.3'
+          - '8.4'
+          - '8.5'
+        symfony-version:
+          - '6.4'
+
+    steps:
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          #extensions: json, libxml, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, sqlite3
+          coverage: pcov
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Composer get cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Composer cache dependencies
+        uses: actions/cache@v6
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Composer update (Symfony version ${{ matrix.symfony-version }})
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress --no-scripts --no-plugins symfony/flex
+          composer u --prefer-dist -n
+        env:
+          SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
+
+      - name: Run tests with PHP
+        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+
+      - name: Code Coverage Report
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./Tests/
+          files: ./Tests/coverage.xml
+          fail_ci_if_error: true
+          verbose: true
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+  testsuite_win:
+    name: "Test Suite (Windows)"
+    runs-on: windows-2022
+    defaults:
+      run:
+        shell: bash # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#defaultsrunshell
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '8.1'
+          - '8.2'
+          - '8.3'
+          - '8.4'
+          - '8.5'
+        symfony-version:
+          - '6.4'
+
+    steps:
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: pdo_sqlite
+          coverage: pcov
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Composer get cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Composer cache dependencies
+        uses: actions/cache@v6
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Composer update (Symfony version ${{ matrix.symfony-version }})
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress --no-scripts --no-plugins symfony/flex
+          composer u --prefer-dist -n
+        env:
+          SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
+
+      - name: Run tests with PHP
+        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+
+      - name: Code Coverage Report
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./Tests/
+          files: ./Tests/coverage.xml
+          fail_ci_if_error: true
+          verbose: true
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+  testsuite_macos:
+    name: "Test Suite (macOS)"
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '8.1'
+          - '8.2'
+          - '8.3'
+          - '8.4'
+          - '8.5'
+        symfony-version:
+          - '6.4'
+
+    steps:
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          #extensions: json, libxml, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, sqlite3
+          coverage: pcov
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Composer get cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Composer cache dependencies
+        uses: actions/cache@v6
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Composer update (Symfony version ${{ matrix.symfony-version }})
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress --no-scripts --no-plugins symfony/flex
+          composer u --prefer-dist -n
+        env:
+          SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
+
+      - name: Run tests with PHP
+        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+
+      - name: Code Coverage Report
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./Tests/
+          files: ./Tests/coverage.xml
+          fail_ci_if_error: true
+          verbose: true
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
