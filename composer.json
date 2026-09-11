@@ -1,7 +1,6 @@
 {
   "name": "gautrot/propel-bundle",
   "description": "Integration of Propel in Symfony",
-  "version": "6.1.x-dev",
   "keywords": [
     "propel",
     "orm",
