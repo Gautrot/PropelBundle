@@ -16,7 +16,7 @@ This is the official implementation of [Propel](https://www.propelorm.org/) in S
 |---------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------|
 | **[7.4](https://symfony.com/releases/7.4)** | [>= 8.2](https://www.php.net/releases/8.2/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[7.1](https://github.com/Gautrot/PropelBundle/tree/7.1)**                |
 | **[6.4](https://symfony.com/releases/6.4)** | [>= 8.1](https://www.php.net/releases/8.1/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[6.1](https://github.com/Gautrot/PropelBundle/tree/6.1)** (LTS)          |
-| **[5.4](https://symfony.com/releases/5.4)** | [>= 7.4](https://www.php.net/releases/7.4/en.php) | [2.0.0-beta4](https://github.com/propelorm/Propel2/tree/2.0.0-beta4) | **[5.2](https://github.com/Gautrot/PropelBundle/tree/5.2)** (Extended LTS) |
+| **[5.4](https://symfony.com/releases/5.4)** | >= 7.4                                            | [2.0.0-beta4](https://github.com/propelorm/Propel2/tree/2.0.0-beta4) | **[5.2](https://github.com/Gautrot/PropelBundle/tree/5.2)** (Extended LTS) |
 
 For Symfony 5.4, if you are using PHP 7.2 or 7.3, you **must** upgrade to PHP 7.4 at least.
 
