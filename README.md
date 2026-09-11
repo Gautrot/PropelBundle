@@ -67,8 +67,9 @@ Nightly release:
 * Integration with the [Security component](https://symfony.com/doc/5.x/security.html);
 * Propel's ParamConverter can be used
   with [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle).
-    * **Warning!**: This bundle is no longer maintained as of Symfony **6.2**. If you are still using it, you must
-      convert them to Symfony's [Attributes Overview](https://symfony.com/doc/6.4/reference/attributes.html).
+    * **Warning!**: This bundle is no longer maintained as of Symfony **6.2**. If you are still using it and going
+      through a major upgrade (5.4 → 6.4), you must convert them
+      to [Symfony Attributes](https://symfony.com/doc/6.4/reference/attributes.html).
 
 ## New to version 5.2
 
