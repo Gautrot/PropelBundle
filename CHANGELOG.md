@@ -5,10 +5,17 @@
 <!-- TOC -->
 
 * [6.1.0](#610)
+    * [6.1.0.1](#6101)
 
 <!-- TOC -->
 
 ---
+
+## 6.1.0.1
+
+* Fixed a potential SQL injection in AbstractDataDumper
+  ([AIKIDO](https://app.aikido.dev/issues/45323423/detail?status=closed))
+* Fixed font color in Symfony Profiler
 
 ## 6.1.0
 
