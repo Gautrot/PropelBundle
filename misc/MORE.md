@@ -14,7 +14,7 @@ The following branches are maintained:
 * `6.1`: contains Propel **2** integration for Symfony **6.4** and PHP **8.1+**;
 * `7.1`: contains Propel **2** integration for Symfony **7.4** and PHP **8.2+**;
 * `8.0`: will contain Propel **2** integration for Symfony **8.4** and PHP **8.4+**.
-  * Currently, it supports Symfony 8.1 and is in development state, which means it is unstable.
+    * Currently, it supports Symfony 8.1 and is in development state, which means it is unstable.
 
 ### Unmaintained branches
 
@@ -36,3 +36,8 @@ The following branches are no longer maintained, but are still available here fo
 * `6.0`: contains Propel **2** (branch **2.0.0-beta2**) integration for Symfony **6.x** and PHP **8.0.2+**;
 * `7.0`: contains Propel **2** (branches **2.0.0-beta2 - 2.0.0-beta4**) integration for Symfony **6.x - 7.x** and PHP
   **8.0.2+**.
+
+## Docker
+
+PropelBundle can be tested in Docker. See [docker-compose.yaml](docker/docker-compose.yaml) for more details about it.
+It currently has images for Debian, Ubuntu, and Alpine Linux, and their goal is to run unit tests.
