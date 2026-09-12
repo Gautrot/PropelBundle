@@ -5,10 +5,18 @@
 <!-- TOC -->
 
 * [5.2.0](#520)
+    * [5.2.0.1](#5201)
 
 <!-- TOC -->
 
 ---
+
+## 5.2.0.1
+
+* Fixed a potential SQL injection in AbstractDataDumper
+  ([AIKIDO](https://app.aikido.dev/issues/45323423/detail?status=closed))
+* Fixed font color in Symfony Profiler
+* Fixed Dockerfiles
 
 ## 5.2.0
 
