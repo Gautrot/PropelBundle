@@ -3,10 +3,28 @@
 ---
 
 <!-- TOC -->
+
+* [2026-09-12](#release-2026-09-12)
 * [2026-09-11](#release-2026-09-11)
+
 <!-- TOC -->
 
 ---
+
+## Release 2026-09-12
+
+### General
+
+* Added 8.0 branch for Symfony 8.4 in November 2027
+    * Currently in development, therefore unstable, and runs on Symfony 8.1
+* Re-added SkyFoxvn as part of the authors
+* Fixed a potential SQL injection in AbstractDataDumper
+  ([AIKIDO](https://app.aikido.dev/issues/45323423/detail?status=closed))
+* Fixed font color in Symfony Profiler
+
+### 5.2.0.1
+
+* Fixed Dockerfiles
 
 ## Release 2026-09-11
 
