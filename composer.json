@@ -57,7 +57,7 @@
     "ext-json": "*",
     "ext-pdo": "*",
     "ext-simplexml": "*",
-    "fakerphp/faker": "^1",
+    "fakerphp/faker": "^1.0",
     "mikey179/vfsstream": "^1.6",
     "phpstan/extension-installer": "^1.4",
     "phpstan/phpstan": "^2.0",
