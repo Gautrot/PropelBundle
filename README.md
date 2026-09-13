@@ -74,7 +74,7 @@ Nightly release:
     * **Warning!**: Version 5.2
       uses [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle), which is no longer
       maintained as of Symfony **6.2**. If you are still using it, you must convert them to
-      Symfony's [Attributes Overview](https://symfony.com/doc/6.4/reference/attributes.html).
+      [Symfony Attributes](https://symfony.com/doc/6.4/reference/attributes.html).
 
 ## New to version 7.1
 
