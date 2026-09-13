@@ -1,0 +1,81 @@
+# yaml-language-server: $schema=../../../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
+parameters:
+  propel.dbal.default_connection: default
+  propel.schema_locator.class: 'Propel\Bundle\PropelBundle\Service\SchemaLocator'
+  propel.data_collector.class: 'Propel\Bundle\PropelBundle\DataCollector\PropelDataCollector'
+  propel.logger.class: 'Propel\Bundle\PropelBundle\Logger\PropelLogger'
+  propel.twig.extension.syntax.class: 'Propel\Bundle\PropelBundle\Twig\Extension\SyntaxExtension'
+  form.type_guesser.propel.class: 'Propel\Bundle\PropelBundle\Form\TypeGuesser'
+  propel.form.type.model.class: 'Propel\Bundle\PropelBundle\Form\Type\ModelType'
+  propel.dumper.yaml.class: 'Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper'
+  propel.loader.yaml.class: 'Propel\Bundle\PropelBundle\DataFixtures\Loader\YamlDataLoader'
+  propel.loader.xml.class: 'Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader'
+
+services:
+  propel.schema_locator:
+    class: '%propel.schema_locator.class%'
+    public: true
+    arguments:
+      - '@service_container'
+      - '@file_locator'
+      - '%propel.configuration%'
+
+  propel.logger:
+    class: '%propel.logger.class%'
+    public: true
+    arguments:
+      - '@?logger'
+      - '@?debug.stopwatch'
+    tags:
+      - {
+        name: monolog.logger,
+        channel: propel
+      }
+
+  propel.data_collector:
+    class: '%propel.data_collector.class%'
+    arguments:
+      - '@propel.logger'
+    tags:
+      - {
+        name: data_collector,
+        template: '@Propel/Collector/propel',
+        id: propel
+      }
+
+  propel.twig.extension.syntax:
+    class: '%propel.twig.extension.syntax.class%'
+    tags:
+      - twig.extension
+
+  form.type_guesser.propel:
+    class: '%form.type_guesser.propel.class%'
+    tags:
+      - form.type_guesser
+
+  propel.form.type.model:
+    class: '%propel.form.type.model.class%'
+    tags:
+      - { name: form.type, alias: model }
+
+  propel.dumper.yaml:
+    class: '%propel.dumper.yaml.class%'
+    public: true
+    arguments:
+      - '%kernel.project_dir%'
+      - '%propel.configuration%'
+
+  propel.loader.yaml:
+    class: '%propel.loader.yaml.class%'
+    public: true
+    arguments:
+      - '%kernel.project_dir%'
+      - '%propel.configuration%'
+      - '@?faker.generator'
+
+  propel.loader.xml:
+    class: '%propel.loader.xml.class%'
+    public: true
+    arguments:
+      - '%kernel.project_dir%'
+      - '%propel.configuration%'

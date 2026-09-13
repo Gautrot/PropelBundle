@@ -10,15 +10,20 @@
 
 namespace Propel\Bundle\PropelBundle\DependencyInjection;
 
+use Exception;
+use LogicException;
 use Symfony\Bundle\WebProfilerBundle\DependencyInjection\WebProfilerExtension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\HttpKernel\Profiler\Profiler;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 /**
+ * # PropelExtension
+ *
  * PropelExtension loads the PropelBundle configuration.
  *
  * @author William DURAND <william.durand1@gmail.com>
@@ -28,7 +33,7 @@ class PropelExtension extends Extension
     /**
      * {@inheritdoc}
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -50,23 +55,35 @@ class PropelExtension extends Extension
 
         // Load services
         if (!$container->hasDefinition('propel')) {
-            $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-            $loader->load('propel.xml');
-            $loader->load('converters.xml');
-            $loader->load('security.xml');
-            $loader->load('console.xml');
+            $resources = ['propel', 'converters', 'security', 'console', 'services'];
+            $configDir = __DIR__ . '/../Resources/config';
+            $locator = new FileLocator($configDir);
 
-            $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-            $loader->load('services.yml');
+            if ($this->hasResources("$configDir/yaml", $resources)) {
+                $loader = new YamlFileLoader($container, $locator);
 
-            if (($env = $container->getParameter('kernel.environment')) === 'dev' && class_exists(WebProfilerExtension::class)) {
+                foreach ($resources as $resource) {
+                    $loader->load("yaml/$resource.yaml");
+                }
+            } elseif (Kernel::VERSION_ID < 80000) {
+                // Load XML service files if it's Symfony 7.4 and earlier, and there are no YAML service files available
+                $loader = new XmlFileLoader($container, $locator);
+
+                foreach ($resources as $resource) {
+                    $loader->load("xml/$resource.xml");
+                }
+            } else {
+                throw new LogicException('No service configuration files were found.');
+            }
+
+            if ($container->getParameter('kernel.environment') === 'dev' && class_exists(WebProfilerExtension::class)) {
                 $container->setAlias(Profiler::class, 'profiler');
             }
         }
     }
 
     /**
-     * @param array<mixed> $config
+     * @param array $config
      * @param ContainerBuilder $container
      *
      * @return Configuration
@@ -77,13 +94,29 @@ class PropelExtension extends Extension
     }
 
     /**
+     * @param string $directory The services path
+     * @param array $resources The service to load
+     * @return bool
+     */
+    private function hasResources(string $directory, array $resources): bool
+    {
+        foreach ($resources as $resource) {
+            if (!is_file("$directory/$resource.yaml")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Returns the base path for the XSD files.
      *
      * @return string The XSD base path
      */
     public function getXsdValidationBasePath(): string
     {
-        return __DIR__.'/../Resources/config/schema';
+        return __DIR__ . '/../Resources/config/schema';
     }
 
     /**

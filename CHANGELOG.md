@@ -11,6 +11,14 @@
 
 ---
 
+## Release 2026-xx-xx
+
+### General
+
+* Added YAML support for PropelBundle
+    * XmlFileLoader has been [deprecated](https://symfony.com/blog/new-in-symfony-7-4-deprecated-xml-configuration)
+      since Symfony 7.4 and was removed since Symfony 8
+
 ## Release 2026-09-12
 
 ### General

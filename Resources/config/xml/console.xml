@@ -74,5 +74,4 @@
             <tag name="console.command" command="propel:table:drop"/>
         </service>
     </services>
-
 </container>
