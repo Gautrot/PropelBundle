@@ -12,6 +12,6 @@
 /phpstan-baseline.neon
 
 /.phpunit*
-junit.xml
+/junit.xml
 /act
-.secrets
+/.secrets
