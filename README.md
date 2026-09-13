@@ -2,10 +2,10 @@
 
 ---
 
-![Latest stable version](https://img.shields.io/packagist/v/gautrot/propel-bundle)
+[![Latest stable version](https://img.shields.io/packagist/v/gautrot/propel-bundle)](https://packagist.org/packages/gautrot/propel-bundle)
 ![Minimum PHP version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)
-![GitHub Actions workflow status](https://img.shields.io/github/actions/workflow/status/Gautrot/PropelBundle/ci.yml?branch=dev&label=GitHub%20Actions%20-%20CI%20branch%20dev)
-![Codecov (dev)](https://img.shields.io/codecov/c/github/gautrot/PropelBundle/dev)
+[![GitHub Actions workflow status](https://img.shields.io/github/actions/workflow/status/Gautrot/PropelBundle/ci.yml?branch=dev&label=GitHub%20Actions%20-%20CI%20branch%20dev)](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml)
+[![Codecov (dev)](https://img.shields.io/codecov/c/github/gautrot/PropelBundle/dev)](https://codecov.io/gh/gautrot/PropelBundle/tree/dev)
 
 **PropelBundle** is the official implementation of [Propel](https://www.propelorm.org/) in Symfony.
 
