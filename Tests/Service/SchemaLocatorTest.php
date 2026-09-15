@@ -11,11 +11,10 @@
 namespace Propel\Bundle\PropelBundle\Tests\Service;
 
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\MockObject\MockObject;
 use Propel\Bundle\PropelBundle\Service\SchemaLocator;
-use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\FakeBundle\FakeBundle;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\HttpKernel\Kernel;
@@ -26,22 +25,10 @@ use Symfony\Component\HttpKernel\Kernel;
 class SchemaLocatorTest extends TestCase
 {
     /**
-     * @var Kernel
-     */
-    private Kernel $kernelMock;
-
-    /*
-     * container generated for the tasts
-     */
-    /**
+     * container generated for the tests
      * @var ContainerBuilder
      */
     private ContainerBuilder $container;
-
-    /**
-     * @var vfsStreamDirectory
-     */
-    private vfsStreamDirectory $root;
 
     /**
      * @var array
@@ -66,27 +53,29 @@ class SchemaLocatorTest extends TestCase
         $pathStructure = [
             'configuration' => [
                 'directory' => [
-                    'schema.xml' => 'Schema from configuration'
+                    'schema.xml' => 'XML schema from configuration',
+                    'schema.yaml' => 'YAML schema from configuration',
+                    'schema.yml' => 'YAML schema from configuration',
                 ]
             ],
         ];
-        $this->root = vfsStream::setup('projectDir');
+        $root = vfsStream::setup('projectDir');
         vfsStream::create($pathStructure);
 
-        $this->kernelMock = $this->getMockBuilder(Kernel::class)->disableOriginalConstructor()->getMock();
-        $this->kernelMock->method('getProjectDir')->willReturn($this->root->url());
-        $this->kernelMock->method('locateResource')->willReturnCallback(function ($argument) {
+        $kernelMock = $this->getMockBuilder(Kernel::class)->disableOriginalConstructor()->getMock();
+        $kernelMock->method('getProjectDir')->willReturn($root->url());
+        $kernelMock->method('locateResource')->willReturnCallback(function ($argument) {
             return (str_replace('@', __DIR__ . '/../Fixtures/', $argument));
         });
 
         // attach kernel service to container
         $this->container = $this->getContainer();
-        $this->container->set('kernel', $this->kernelMock);
+        $this->container->set('kernel', $kernelMock);
 
         $this->bundleMock = new FakeBundle();
 
         $this->configuration['paths']['schemaDir'] = vfsStream::url('projectDir/configuration/directory');
-        $this->fileLocator = new FileLocator($this->kernelMock);
+        $this->fileLocator = new FileLocator($kernelMock);
     }
 
     /**
@@ -97,11 +86,14 @@ class SchemaLocatorTest extends TestCase
         $locator = new SchemaLocator($this->container, $this->fileLocator, $this->configuration);
         $files = $locator->locateFromBundle($this->bundleMock);
 
-        $this->assertCount(1, $files);
+        $this->assertCount(2, $files);
+        $path = '/../Fixtures/FakeBundle/Resources/config';
+        $fileName = 'bundle.schema';
 
-        $this->assertTrue(isset($files[__DIR__ . '/../Fixtures/FakeBundle/Resources/config/bundle.schema.xml']));
-        $this->assertEquals('bundle.schema.xml', $files[__DIR__ . '/../Fixtures/FakeBundle/Resources/config/bundle.schema.xml'][1]->getFileName());
-
+        $this->assertTrue(isset($files[__DIR__ . "$path/$fileName.xml"]));
+        $this->assertEquals("$fileName.xml", $files[__DIR__ . "$path/$fileName.xml"][1]->getFileName());
+        $this->assertTrue(isset($files[__DIR__ . "$path/$fileName.yaml"]));
+        $this->assertEquals("$fileName.yaml", $files[__DIR__ . "$path/$fileName.yaml"][1]->getFileName());
     }
 
     /**
@@ -114,11 +106,24 @@ class SchemaLocatorTest extends TestCase
             [$this->bundleMock]
         );
 
-        $this->assertCount(2, $files);
-        $this->assertTrue(isset($files[__DIR__ . '/../Fixtures/FakeBundle/Resources/config/bundle.schema.xml']));
-        $this->assertEquals('bundle.schema.xml', $files[__DIR__ . '/../Fixtures/FakeBundle/Resources/config/bundle.schema.xml'][1]->getFileName());
-        $this->assertTrue(isset($files['vfs://projectDir/configuration/directory/schema.xml']));
-        $this->assertEquals('schema.xml', $files['vfs://projectDir/configuration/directory/schema.xml'][1]->getFileName());
+        $this->assertCount(5, $files);
+        $path = '/../Fixtures/FakeBundle/Resources/config';
+        $vfsPath = 'vfs://projectDir/configuration/directory';
+        $fileName = 'bundle.schema';
+        $vfsFileName = 'schema';
 
+        // XML
+        $this->assertTrue(isset($files[__DIR__ . "$path/$fileName.xml"]));
+        $this->assertEquals("$fileName.xml", $files[__DIR__ . "$path/$fileName.xml"][1]->getFileName());
+        $this->assertTrue(isset($files["$vfsPath/$vfsFileName.xml"]));
+        $this->assertEquals("$vfsFileName.xml", $files["$vfsPath/$vfsFileName.xml"][1]->getFileName());
+
+        // YAML / YML
+        $this->assertTrue(isset($files[__DIR__ . "$path/$fileName.yaml"]));
+        $this->assertEquals("$fileName.yaml", $files[__DIR__ . "$path/$fileName.yaml"][1]->getFileName());
+        $this->assertTrue(isset($files["$vfsPath/$vfsFileName.yaml"]));
+        $this->assertEquals("$vfsFileName.yaml", $files["$vfsPath/$vfsFileName.yaml"][1]->getFileName());
+        $this->assertTrue(isset($files["$vfsPath/$vfsFileName.yml"]));
+        $this->assertEquals("$vfsFileName.yml", $files["$vfsPath/$vfsFileName.yml"][1]->getFileName());
     }
 }

@@ -54,7 +54,9 @@
     "symfony/yaml": "^7.4.11"
   },
   "require-dev": {
+    "ext-dom": "*",
     "ext-json": "*",
+    "ext-libxml": "*",
     "ext-pdo": "*",
     "ext-simplexml": "*",
     "fakerphp/faker": "^1.0",

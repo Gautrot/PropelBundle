@@ -61,6 +61,10 @@
                  id="propel_bundle_propel.command.model_build_command">
             <tag name="console.command" command="propel:model:build"/>
         </service>
+        <service class="Propel\Bundle\PropelBundle\Command\SchemaConvertCommand"
+                 id="propel_bundle_propel.command.schema_convert_command">
+            <tag name="console.command" command="propel:schema:convert"/>
+        </service>
         <service class="Propel\Bundle\PropelBundle\Command\SqlBuildCommand"
                  id="propel_bundle_propel.command.sql_build_command">
             <tag name="console.command" command="propel:sql:build"/>

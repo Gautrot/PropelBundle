@@ -42,9 +42,11 @@ class PropelExtensionTest extends TestCase
         ]], $container);
 
         $this->assertTrue($container->hasDefinition('propel.schema_locator'));
+        $this->assertTrue($container->hasDefinition('propel.schema_converter'));
         $this->assertTrue($container->hasDefinition('propel.converter.propel.orm'));
         $this->assertTrue($container->hasDefinition('propel.security.user.provider'));
         $this->assertTrue($container->hasDefinition('propel_bundle_propel.command.build_command'));
+        $this->assertTrue($container->hasDefinition('propel_bundle_propel.command.schema_convert_command'));
     }
 
     /**
@@ -58,16 +60,18 @@ class PropelExtensionTest extends TestCase
             'propel.configuration' => [],
         ]));
         $loader = new YamlFileLoader($container, new FileLocator(dirname(__DIR__, 2) . '/Resources/config'));
-        $resources = ['propel', 'converters', 'security', 'console', 'services'];
+        $resources = ['propel.yaml', 'converters.yaml', 'security.yaml', 'console.yaml', 'services.yaml'];
 
         foreach ($resources as $resource) {
-            $loader->load("yaml/$resource.yaml");
+            $loader->load("yaml/$resource");
         }
 
         $this->assertTrue($container->hasDefinition('propel.schema_locator'));
+        $this->assertTrue($container->hasDefinition('propel.schema_converter'));
         $this->assertTrue($container->hasDefinition('propel.converter.propel.orm'));
         $this->assertTrue($container->hasDefinition('propel.security.user.provider'));
         $this->assertTrue($container->hasDefinition('propel_bundle_propel.command.build_command'));
+        $this->assertTrue($container->hasDefinition('propel_bundle_propel.command.schema_convert_command'));
     }
 
     /**
@@ -92,8 +96,10 @@ class PropelExtensionTest extends TestCase
         }
 
         $this->assertTrue($container->hasDefinition('propel.schema_locator'));
+        $this->assertTrue($container->hasDefinition('propel.schema_converter'));
         $this->assertTrue($container->hasDefinition('propel.converter.propel.orm'));
         $this->assertTrue($container->hasDefinition('propel.security.user.provider'));
         $this->assertTrue($container->hasDefinition('propel_bundle_propel.command.build_command'));
+        $this->assertTrue($container->hasDefinition('propel_bundle_propel.command.schema_convert_command'));
     }
 }

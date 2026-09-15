@@ -57,7 +57,7 @@ Nightly release:
 
 ## Features
 
-* Generation of model classes based on an XML schema only, placed under `BundleName/Resources/*schema.xml`;
+* Generation of model classes based on XML or YAML schemas, placed under `BundleName/Resources/config/*schema.{xml,yaml,yml}`;
 * Insertion of SQL statements;
 * Runtime autoloading of Propel and generated classes;
 * Propel runtime initialization through Symfony configuration;
@@ -94,6 +94,9 @@ Nightly release:
     * Removed deprecated content introduced in PHP 8.4 and 8.5
 * Updated `propel/propel` minimum version to its official stable release (2.0.0) for `7.1` and `6.1` and last beta
   release (2.0.0-beta4) for `5.2`
+* Added support for YAML format (schemas, services)
+    * XmlFileLoader has been deprecated since Symfony 7.4
+    * YAML schemas are backports of Propel 1.x's YAML schemas
 
 You can also read the changelogs [here](CHANGELOG.md).
 

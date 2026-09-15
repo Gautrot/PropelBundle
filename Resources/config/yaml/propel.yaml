@@ -2,6 +2,7 @@
 parameters:
   propel.dbal.default_connection: default
   propel.schema_locator.class: 'Propel\Bundle\PropelBundle\Service\SchemaLocator'
+  propel.schema_converter.class: 'Propel\Bundle\PropelBundle\Service\SchemaConverter'
   propel.data_collector.class: 'Propel\Bundle\PropelBundle\DataCollector\PropelDataCollector'
   propel.logger.class: 'Propel\Bundle\PropelBundle\Logger\PropelLogger'
   propel.twig.extension.syntax.class: 'Propel\Bundle\PropelBundle\Twig\Extension\SyntaxExtension'
@@ -12,6 +13,11 @@ parameters:
   propel.loader.xml.class: 'Propel\Bundle\PropelBundle\DataFixtures\Loader\XmlDataLoader'
 
 services:
+
+  propel.schema_converter:
+    class: '%propel.schema_converter.class%'
+    public: true
+
   propel.schema_locator:
     class: '%propel.schema_locator.class%'
     public: true

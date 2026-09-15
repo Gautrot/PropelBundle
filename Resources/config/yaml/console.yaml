@@ -76,6 +76,11 @@ services:
     tags:
       - { name: console.command, command: 'propel:model:build' }
 
+  propel_bundle_propel.command.schema_convert_command:
+    class: 'Propel\Bundle\PropelBundle\Command\SchemaConvertCommand'
+    tags:
+      - { name: console.command, command: 'propel:schema:convert' }
+
   propel_bundle_propel.command.sql_build_command:
     class: 'Propel\Bundle\PropelBundle\Command\SqlBuildCommand'
     tags:
