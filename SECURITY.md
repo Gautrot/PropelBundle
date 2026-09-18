@@ -10,4 +10,4 @@
 | 6.1.x   | :white_check_mark: | LTS version, will be maintained until November 2027                     |
 | 6.0.x   | :x:                | No longer maintained, kept for archive purpose                          |
 | 5.2.x   | :white_check_mark: | Extended LTS version, will be maintained until February 2029            |
-| < 5.1   | :x:                | No longer maintained, kept for archive purpose                          |
+| < 5.2   | :x:                | No longer maintained, kept for archive purpose                          |
