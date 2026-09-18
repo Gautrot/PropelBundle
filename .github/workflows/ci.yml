@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   testsuite_linux_arm:
-    name: "Test Suite (Linux ARM)"
+    name: "Test Suite (Linux arm64)"
     runs-on: ubuntu-26.04-arm
     strategy:
       fail-fast: false
@@ -81,7 +81,7 @@ jobs:
           verbose: true
 
   testsuite_linux:
-    name: "Test Suite (Linux)"
+    name: "Test Suite (Linux x64)"
     runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
@@ -149,7 +149,7 @@ jobs:
           verbose: true
 
   testsuite_win_arm:
-    name: "Test Suite (Windows ARM)"
+    name: "Test Suite (Windows arm64)"
     runs-on: windows-11-arm
     defaults:
       run:
@@ -221,7 +221,7 @@ jobs:
           verbose: true
 
   testsuite_win:
-    name: "Test Suite (Windows)"
+    name: "Test Suite (Windows x64)"
     runs-on: windows-2025
     defaults:
       run:
@@ -293,7 +293,7 @@ jobs:
           verbose: true
 
   testsuite_macos:
-    name: "Test Suite (macOS)"
+    name: "Test Suite (macOS arm64)"
     runs-on: macos-26
     strategy:
       fail-fast: false
