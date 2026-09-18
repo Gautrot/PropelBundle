@@ -59,7 +59,7 @@ jobs:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
       - name: Run tests with PHP
-        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml --log-junit=Tests/junit.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
@@ -76,6 +76,10 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           report_type: test_results
+          files: ./Tests/junit.xml
+          disable_search: true
+          fail_ci_if_error: true
+          verbose: true
   testsuite_win:
     name: "Test Suite (Windows)"
     runs-on: windows-2022
@@ -126,7 +130,7 @@ jobs:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
       - name: Run tests with PHP
-        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml --log-junit=Tests/junit.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
@@ -143,6 +147,10 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           report_type: test_results
+          files: ./Tests/junit.xml
+          disable_search: true
+          fail_ci_if_error: true
+          verbose: true
   testsuite_macos:
     name: "Test Suite (macOS)"
     runs-on: macos-14
@@ -190,7 +198,7 @@ jobs:
           SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
       - name: Run tests with PHP
-        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml
+        run: vendor/bin/phpunit --display-deprecations --display-notices --display-warnings --coverage-clover=Tests/coverage.xml --log-junit=Tests/junit.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
@@ -207,3 +215,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           report_type: test_results
+          files: ./Tests/junit.xml
+          disable_search: true
+          fail_ci_if_error: true
+          verbose: true
