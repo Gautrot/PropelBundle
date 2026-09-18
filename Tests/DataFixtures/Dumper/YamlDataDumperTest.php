@@ -14,7 +14,6 @@ use Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper;
 use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBook;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor;
-use stdClass;
 
 /**
  * # YamlDataDumperTest
@@ -31,15 +30,17 @@ class YamlDataDumperTest extends TestCase
         $author = new CoolBookAuthor();
         $author->setName('A famous one')->save($this->con);
 
-        $complementary = new stdClass();
-        $complementary->first_word_date = '2012-01-01';
-
         $book = new CoolBook();
         $book
             ->setName('An important one')
             ->setAuthorId(1)
-            ->setComplementaryInfos($complementary)
             ->save($this->con);
+
+        $statement = $this->con->prepare('UPDATE cool_book SET complementary_infos = :value WHERE id = :id');
+        $statement->execute([
+            'value' => json_encode(['first_word_date' => '2012-01-01'], JSON_THROW_ON_ERROR),
+            'id' => 1,
+        ]);
 
         $filename = $this->getTempFile();
 
@@ -56,7 +57,7 @@ class YamlDataDumperTest extends TestCase
         id: '1'
         name: 'An important one'
         author_id: CoolBookAuthor_1
-        complementary_infos: !php/object 'O:8:"stdClass":1:{s:15:"first_word_date";s:10:"2012-01-01";}'
+        complementary_infos: { first_word_date: '2012-01-01' }
 
 YAML;
         $result = file_get_contents($filename);

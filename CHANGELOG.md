@@ -4,6 +4,7 @@
 
 <!-- TOC -->
 
+* [2026-xx-xx](#release-2026-xx-xx)
 * [2026-09-12](#release-2026-09-12)
 * [2026-09-11](#release-2026-09-11)
 
@@ -21,6 +22,7 @@
 * Added YAML Propel schemas
     * Uses the Propel 1.x YAML schema syntaxes
     * `propel:schema:convert` converts a schema between XML and YAML
+* Fixed remote code execution with `unserialize` ([AIKIDO](https://app.aikido.dev/issues/45986784/detail))
 
 ## Release 2026-09-12
 
@@ -29,8 +31,7 @@
 * Added 8.0 branch for Symfony 8.4 in November 2027
     * Currently in development, therefore unstable, and runs on Symfony 8.1
 * Re-added SkyFoxvn as part of the authors
-* Fixed a potential SQL injection in AbstractDataDumper
-  ([AIKIDO](https://app.aikido.dev/issues/45323423/detail?status=closed))
+* Fixed SQL injection in AbstractDataDumper ([AIKIDO](https://app.aikido.dev/issues/45323423/detail))
 * Fixed font color in Symfony Profiler
 
 ### 5.2.0.1
