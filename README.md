@@ -13,8 +13,8 @@
 
 ### Minimum requirements
 
-| [Symfony](https://symfony.com/)                             | [PHP](https://www.php.net/)                       | [Propel](https://propelorm.org/)                                     | PropelBundle                                                                 |
-|-------------------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [Symfony](https://symfony.com/)                             | [PHP](https://www.php.net/)                    | [Propel](https://propelorm.org/)                                     | PropelBundle                                                                 |
+|-------------------------------------------------------------|------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------------|
 | **[8.4](https://symfony.com/releases/8.4)** (Currently 8.1) | [8.4](https://www.php.net/releases/8.4/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[8.0](https://github.com/Gautrot/PropelBundle/tree/8.0)** (In development) |
 | **[7.4](https://symfony.com/releases/7.4)**                 | [8.2](https://www.php.net/releases/8.2/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[7.1](https://github.com/Gautrot/PropelBundle/tree/7.1)**                  |
 | **[6.4](https://symfony.com/releases/6.4)**                 | [8.1](https://www.php.net/releases/8.1/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[6.1](https://github.com/Gautrot/PropelBundle/tree/6.1)** (LTS)            |
@@ -57,7 +57,8 @@ Nightly release:
 
 ## Features
 
-* Generation of model classes based on XML or YAML schemas, placed under `BundleName/Resources/config/*schema.{xml,yaml,yml}`;
+* Generation of model classes based on XML or YAML schemas, placed under
+  `BundleName/Resources/config/*schema.{xml,yaml,yml}`;
 * Insertion of SQL statements;
 * Runtime autoloading of Propel and generated classes;
 * Propel runtime initialization through Symfony configuration;
@@ -74,9 +75,9 @@ Nightly release:
 
 ### Deprecated
 
-* For Propel's ParamConverter: Version 5.2
-  uses [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle), which is no longer
-  maintained as of Symfony **6.2**. If you are still using it, you must convert them to Symfony Attributes.
+* [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle), has been deprecated since
+  Symfony **6.2**. If you are still using it, you must convert them
+  to [Symfony Attributes](https://symfony.com/doc/6.4/reference/attributes.html).
 * XmlFileLoader has been [deprecated](https://symfony.com/blog/new-in-symfony-7-4-deprecated-xml-configuration) since
   Symfony **7.4**. If you are using XML schemas, you must convert them to YAML schemas.
 
