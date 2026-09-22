@@ -847,10 +847,10 @@ abstract class Book implements ActiveRecordInterface
      *                      one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_STUDLYPHPNAME
      *                      TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                      Defaults to TableMap::TYPE_PHPNAME.
-     * @return mixed  Value of field.
+     * @return string|int|null  Value of field.
      * @throws PropelException
      */
-    public function getByName(string $name, string $type = TableMap::TYPE_PHPNAME): mixed
+    public function getByName(string $name, string $type = TableMap::TYPE_PHPNAME): string|int|null
     {
         $pos = BookTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
         return $this->getByPosition($pos);
