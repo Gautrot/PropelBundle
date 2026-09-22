@@ -31,4 +31,4 @@
 
 * Trimmed the package
     * Removed misc. content
-* Updated composer.json
+* Removed more deprecated content
