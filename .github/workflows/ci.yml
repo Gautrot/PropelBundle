@@ -298,7 +298,7 @@ jobs:
 
   testsuite_macos:
     name: "Test Suite (macOS arm64)"
-    runs-on: macos-26
+    runs-on: macos-15
     strategy:
       fail-fast: false
       matrix:
@@ -367,7 +367,7 @@ jobs:
 
   testsuite_macos_intel:
     name: "Test Suite (macOS Intel)"
-    runs-on: macos-26-intel
+    runs-on: macos-15-intel
     strategy:
       fail-fast: false
       matrix:

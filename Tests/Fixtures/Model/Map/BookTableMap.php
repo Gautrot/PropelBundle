@@ -110,13 +110,13 @@ class BookTableMap extends TableMap
      * first dimension keys are the type constants
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
-    protected static $fieldNames = array(
-        self::TYPE_PHPNAME => array('Id', 'Name', 'Slug', 'Isbn', 'AuthorId',),
-        self::TYPE_CAMELNAME => array('id', 'name', 'slug', 'isbn', 'authorId',),
-        self::TYPE_COLNAME => array(BookTableMap::ID, BookTableMap::NAME, BookTableMap::SLUG, BookTableMap::ISBN, BookTableMap::AUTHOR_ID,),
-        self::TYPE_FIELDNAME => array('id', 'name', 'slug', 'ISBN', 'author_id',),
-        self::TYPE_NUM => array(0, 1, 2, 3, 4,)
-    );
+    protected static array $fieldNames = [
+        self::TYPE_PHPNAME => ['Id', 'Name', 'Slug', 'Isbn', 'AuthorId',],
+        self::TYPE_CAMELNAME => ['id', 'name', 'slug', 'isbn', 'authorId',],
+        self::TYPE_COLNAME => [BookTableMap::ID, BookTableMap::NAME, BookTableMap::SLUG, BookTableMap::ISBN, BookTableMap::AUTHOR_ID,],
+        self::TYPE_FIELDNAME => ['id', 'name', 'slug', 'ISBN', 'author_id',],
+        self::TYPE_NUM => [0, 1, 2, 3, 4,]
+    ];
 
     /**
      * holds an array of keys for quick access to the fieldnames array
@@ -124,15 +124,15 @@ class BookTableMap extends TableMap
      * first dimension keys are the type constants
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
-    protected static $fieldKeys = array(
-        self::TYPE_PHPNAME => array('Id' => 0, 'Name' => 1, 'Slug' => 2, 'Isbn' => 3, 'AuthorId' => 4,),
-        self::TYPE_CAMELNAME => array('id' => 0, 'name' => 1, 'slug' => 2, 'isbn' => 3, 'authorId' => 4,),
-        self::TYPE_COLNAME => array(BookTableMap::ID => 0, BookTableMap::NAME => 1, BookTableMap::SLUG => 2, BookTableMap::ISBN => 3, BookTableMap::AUTHOR_ID => 4,),
-        self::TYPE_FIELDNAME => array('id' => 0, 'name' => 1, 'slug' => 2, 'ISBN' => 3, 'author_id' => 4,),
-        self::TYPE_NUM => array(0, 1, 2, 3, 4,)
-    );
+    protected static array $fieldKeys = [
+        self::TYPE_PHPNAME => ['Id' => 0, 'Name' => 1, 'Slug' => 2, 'Isbn' => 3, 'AuthorId' => 4,],
+        self::TYPE_CAMELNAME => ['id' => 0, 'name' => 1, 'slug' => 2, 'isbn' => 3, 'authorId' => 4,],
+        self::TYPE_COLNAME => [BookTableMap::ID => 0, BookTableMap::NAME => 1, BookTableMap::SLUG => 2, BookTableMap::ISBN => 3, BookTableMap::AUTHOR_ID => 4,],
+        self::TYPE_FIELDNAME => ['id' => 0, 'name' => 1, 'slug' => 2, 'ISBN' => 3, 'author_id' => 4,],
+        self::TYPE_NUM => [0, 1, 2, 3, 4,]
+    ];
 
-        /**
+    /**
      * Retrieves the primary key from the DB resultset row
      * For tables with a single-column primary key, that simple pkey value will be returned.  For tables with
      * a multi-column primary key, an array of the primary key columns will be returned.
@@ -142,9 +142,10 @@ class BookTableMap extends TableMap
      * @param string $indexType One of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                          TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM
      *
-     * @return mixed The primary key of the row
+     * @return int The primary key of the row
+     * @throws PropelException
      */
-    public static function getPrimaryKeyFromRow($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
+    public static function getPrimaryKeyFromRow(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): int
     {
         return (int)$row[$indexType == TableMap::TYPE_NUM
             ? 0 + $offset
@@ -164,7 +165,7 @@ class BookTableMap extends TableMap
      * @throws PropelException Any exceptions caught during processing will be
      *                         rethrown wrapped into a PropelException.
      */
-    public static function populateObject($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
+    public static function populateObject(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): array
     {
         $key = BookTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
         if (null !== ($obj = BookTableMap::getInstanceFromPool($key))) {
@@ -179,7 +180,7 @@ class BookTableMap extends TableMap
             BookTableMap::addInstanceToPool($obj, $key);
         }
 
-        return array($obj, $col);
+        return [$obj, $col];
     } // buildRelations()
 
     /**
@@ -192,8 +193,9 @@ class BookTableMap extends TableMap
      * @param int $offset The 0-based offset for reading from the resultset row.
      * @param string $indexType One of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                          TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM
+     * @throws PropelException
      */
-    public static function getPrimaryKeyHashFromRow($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
+    public static function getPrimaryKeyHashFromRow(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): ?string
     {
         // If the PK cannot be derived from the row, return NULL.
         if ($row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)] === null) {
@@ -212,9 +214,9 @@ class BookTableMap extends TableMap
      * @throws PropelException      Any exceptions caught during processing will be
      *                                          rethrown wrapped into a PropelException.
      */
-    public static function populateObjects(DataFetcherInterface $dataFetcher)
+    public static function populateObjects(DataFetcherInterface $dataFetcher): array
     {
-        $results = array();
+        $results = [];
 
         // set the class once to avoid overhead in the loop
         $cls = static::getOMClass(false);
@@ -245,12 +247,12 @@ class BookTableMap extends TableMap
      * relative to a location on the PHP include_path.
      * (e.g. path.to.MyClass -> 'path/to/MyClass.php')
      *
-     * @param boolean $withPrefix Whether or not to return the path with the class name
+     * @param bool $row Whether or not to return the path with the class name
      * @return string  path.to.ClassName
      */
-    public static function getOMClass($withPrefix = true)
+    public static function getOMClass(bool $row = true): string
     {
-        return $withPrefix ? BookTableMap::CLASS_DEFAULT : BookTableMap::OM_CLASS;
+        return $row ? BookTableMap::CLASS_DEFAULT : BookTableMap::OM_CLASS;
     }
 
     /**
@@ -261,11 +263,9 @@ class BookTableMap extends TableMap
      * on demand.
      *
      * @param Criteria $criteria object containing the columns to add.
-     * @param string $alias optional table alias
-     * @throws PropelException Any exceptions caught during processing will be
-     *                                  rethrown wrapped into a PropelException.
+     * @param string|null $alias optional table alias
      */
-    public static function addSelectColumns(Criteria $criteria, $alias = null)
+    public static function addSelectColumns(Criteria $criteria, ?string $alias = null): void
     {
         if (null === $alias) {
             $criteria->addSelectColumn(BookTableMap::ID);
@@ -289,7 +289,7 @@ class BookTableMap extends TableMap
      * @throws PropelException Any exceptions caught during processing will be
      *                         rethrown wrapped into a PropelException.
      */
-    public static function getTableMap()
+    public static function getTableMap(): TableMap
     {
         return Propel::getServiceContainer()->getDatabaseMap(BookTableMap::DATABASE_NAME)->getTable(BookTableMap::TABLE_NAME);
     }
@@ -297,7 +297,7 @@ class BookTableMap extends TableMap
     /**
      * Add a TableMap instance to the database for this tableMap class.
      */
-    public static function buildTableMap()
+    public static function buildTableMap(): void
     {
         $dbMap = Propel::getServiceContainer()->getDatabaseMap(BookTableMap::DATABASE_NAME);
         if (!$dbMap->hasTable(BookTableMap::TABLE_NAME)) {
@@ -310,13 +310,13 @@ class BookTableMap extends TableMap
      *
      * @param mixed $values Criteria or Book object or primary key or array of primary keys
      *                                     which is used to create the DELETE statement
-     * @param ConnectionInterface $con the connection to use
+     * @param ConnectionInterface|null $con the connection to use
      * @return int                 The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
      *                                    if supported by native driver or if emulated using Propel.
      * @throws PropelException     Any exceptions caught during processing will be
      *                                    rethrown wrapped into a PropelException.
      */
-    public static function doDelete($values, ConnectionInterface $con = null)
+    public static function doDelete(mixed $values, ?ConnectionInterface $con = null): int
     {
         if (null === $con) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
@@ -349,10 +349,10 @@ class BookTableMap extends TableMap
     /**
      * Deletes all rows from the book table.
      *
-     * @param ConnectionInterface $con the connection to use
+     * @param ConnectionInterface|null $con the connection to use
      * @return int                 The number of affected rows (if supported by underlying database driver).
      */
-    public static function doDeleteAll(ConnectionInterface $con = null)
+    public static function doDeleteAll(?ConnectionInterface $con = null): int
     {
         return BookQuery::create()->doDeleteAll($con);
     }
@@ -361,12 +361,12 @@ class BookTableMap extends TableMap
      * Performs an INSERT on the database, given a Book or Criteria object.
      *
      * @param mixed $criteria Criteria or Book object containing data that is used to create the INSERT statement.
-     * @param ConnectionInterface $con the ConnectionInterface connection to use
+     * @param ConnectionInterface|null $con the ConnectionInterface connection to use
      * @return mixed               The new primary key.
      * @throws PropelException     Any exceptions caught during processing will be
      *                                      rethrown wrapped into a PropelException.
      */
-    public static function doInsert($criteria, ConnectionInterface $con = null)
+    public static function doInsert(mixed $criteria, ?ConnectionInterface $con = null): mixed
     {
         if (null === $con) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
@@ -404,8 +404,7 @@ class BookTableMap extends TableMap
      * Relations are not initialized by this method since they are lazy loaded
      *
      * @return void
-     * @throws PropelException
-     */
+ */
     public function initialize(): void
     {
         // attributes
@@ -415,11 +414,11 @@ class BookTableMap extends TableMap
         $this->setPackage('src.Acme.DemoBundle.Model');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('NAME', 'Name', 'VARCHAR', false, 100, null);
-        $this->addColumn('SLUG', 'Slug', 'VARCHAR', false, 100, null);
+        $this->addPrimaryKey('ID', 'Id', 'INTEGER', true);
+        $this->addColumn('NAME', 'Name', 'VARCHAR', false, 100);
+        $this->addColumn('SLUG', 'Slug', 'VARCHAR', false, 100);
         $this->getColumn('NAME', false)->setPrimaryString(true);
-        $this->addColumn('ISBN', 'Isbn', 'VARCHAR', false, 20, null);
+        $this->addColumn('ISBN', 'Isbn', 'VARCHAR', false, 20);
     }
 
 /**
