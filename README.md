@@ -7,8 +7,7 @@
 [![Codecov (5.2)](https://img.shields.io/codecov/c/github/gautrot/PropelBundle/5.2)](https://codecov.io/gh/gautrot/PropelBundle/tree/5.2)
 
 **PropelBundle** is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is an
-extended LTS
-version for Symfony 5.4 only.
+extended LTS version for Symfony 5.4 only.
 
 ## Installation
 

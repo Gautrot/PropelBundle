@@ -207,7 +207,7 @@ abstract class Book implements ActiveRecordInterface
      *
      * @return Book The current object, for fluid interface
      */
-    public function setVirtualColumn(string $name, $value)
+    public function setVirtualColumn(string $name, $value): self
     {
         $this->virtualColumns[$name] = $value;
 
@@ -849,7 +849,7 @@ abstract class Book implements ActiveRecordInterface
      *                      one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_STUDLYPHPNAME
      *                      TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                      Defaults to TableMap::TYPE_PHPNAME.
-     * @return mixed  Value of field.
+     * @return string|int|null  Value of field.
      * @throws PropelException
      */
     public function getByName(string $name, string $type = TableMap::TYPE_PHPNAME)
@@ -1115,7 +1115,7 @@ abstract class Book implements ActiveRecordInterface
      *
      * @return string The value of the 'name' column
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }
@@ -1130,7 +1130,6 @@ abstract class Book implements ActiveRecordInterface
      * @param mixed $params
      *
      * @return array|string
-     * @throws PropelException
      * @throws PropelException
      */
     public function __call(string $name, $params)
@@ -1204,9 +1203,8 @@ abstract class Book implements ActiveRecordInterface
      *
      * @return Book The current object, for fluid interface
      * @throws PropelException
-     * @throws PropelException
      */
-    public function importFrom($parser, string $data)
+    public function importFrom($parser, string $data): self
     {
         if (!$parser instanceof AbstractParser) {
             $parser = AbstractParser::getParser($parser);
@@ -1261,7 +1259,7 @@ abstract class Book implements ActiveRecordInterface
      * @return array|string
      * @throws PropelException
      */
-    public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = [], $includeForeignObjects = false)
+    public function toArray(string $keyType = TableMap::TYPE_PHPNAME, bool $includeLazyLoadColumns = true, array $alreadyDumpedObjects = [], bool $includeForeignObjects = false)
     {
         if (isset($alreadyDumpedObjects['Book'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
@@ -1299,7 +1297,6 @@ abstract class Book implements ActiveRecordInterface
      * @param mixed $parser A AbstractParser instance, or a format name ('XML', 'YAML', 'JSON', 'CSV')
      * @param bool $includeLazyLoadColumns (optional) Whether to include lazy load(ed) columns. Defaults to TRUE.
      * @return string  The exported data
-     * @throws PropelException
      * @throws PropelException
      */
     public function exportTo($parser, bool $includeLazyLoadColumns = true): string
