@@ -6,9 +6,6 @@
          bootstrap="vendor/autoload.php"
          cacheDirectory=".phpunit.cache"
 >
-    <php>
-        <!-- <server name="SYMFONY" value="/path/to/symfony" /> -->
-    </php>
     <testsuites>
         <testsuite name="PropelBundle Test Suite">
             <directory>./Tests</directory>

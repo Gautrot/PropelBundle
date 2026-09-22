@@ -6,16 +6,11 @@
 
 * [7.1.0](#710)
     * [7.1.0.1](#7101)
+    * [7.1.0.2](#7102)
 
 <!-- TOC -->
 
 ---
-
-## 7.1.0.1
-
-* Fixed a potential SQL injection in AbstractDataDumper
-  ([AIKIDO](https://app.aikido.dev/issues/45323423/detail?status=closed))
-* Fixed font color in Symfony Profiler
 
 ## 7.1.0
 
@@ -28,3 +23,15 @@
     * Removed support for PHP 8.0 and 8.1
     * Removed deprecated content introduced in PHP 8.4 and 8.5
 * Updated `propel/propel` minimum version to its official stable release (2.0.0)
+
+### 7.1.0.1
+
+* Fixed a potential SQL injection in AbstractDataDumper
+  ([AIKIDO](https://app.aikido.dev/issues/45323423/detail?status=closed))
+* Fixed font color in Symfony Profiler
+
+### 7.1.0.2
+
+* Trimmed the package
+    * Removed misc. content
+* Updated composer.json
