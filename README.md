@@ -2,11 +2,12 @@
 
 ---
 
-[![GitHub Actions status](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=5.2)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/5.2/graph/badge.svg?token=J4QC832AR0)](https://codecov.io/gh/gautrot/PropelBundle)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
+![Minimum PHP version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)
+[![GitHub Actions workflow status](https://img.shields.io/github/actions/workflow/status/Gautrot/PropelBundle/ci.yml?branch=5.2&label=GitHub%20Actions%20-%20CI%20branch%205.2)](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml)
+[![Codecov (5.2)](https://img.shields.io/codecov/c/github/gautrot/PropelBundle/5.2)](https://codecov.io/gh/gautrot/PropelBundle/tree/5.2)
 
-This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is an extended LTS
+**PropelBundle** is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is an
+extended LTS
 version for Symfony 5.4 only.
 
 ## Installation
@@ -67,9 +68,11 @@ Nightly release:
 * Integration with the [Security component](https://symfony.com/doc/5.x/security.html);
 * Propel's ParamConverter can be used
   with [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle).
-    * **Warning!**: This bundle is no longer maintained as of Symfony **6.2**. If you are still using it and going
-      through a major upgrade (5.4 → 6.4), you must convert them
-      to [Symfony Attributes](https://symfony.com/doc/6.4/reference/attributes.html).
+
+### Deprecated
+
+* Sensio Framework Extra Bundle, has been deprecated since Symfony **6.2**. If you are still using it, you must convert
+  them to [Symfony Attributes](https://symfony.com/doc/6.4/reference/attributes.html).
 
 ## New to version 5.2
 
