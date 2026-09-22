@@ -2,11 +2,13 @@
 
 ---
 
-[![GitHub Actions status](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=6.1)](https://github.com/gautrot/PropelBundle/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/6.1/graph/badge.svg?token=J4QC832AR0)](https://codecov.io/gh/gautrot/PropelBundle)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
+[![Latest stable version](https://img.shields.io/packagist/v/gautrot/propel-bundle)](https://packagist.org/packages/gautrot/propel-bundle)
+![Minimum PHP version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)
+[![GitHub Actions workflow status](https://img.shields.io/github/actions/workflow/status/Gautrot/PropelBundle/ci.yml?branch=6.1&label=GitHub%20Actions%20-%20CI%20branch%206.1)](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml)
+[![Codecov (6.1)](https://img.shields.io/codecov/c/github/gautrot/PropelBundle/6.1)](https://codecov.io/gh/gautrot/PropelBundle/tree/6.1)
 
-This is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is a LTS version
+**PropelBundle** is the official implementation of [Propel](https://www.propelorm.org/) in Symfony. This version is a
+LTS version
 for Symfony 6.4 only.
 
 ## Installation
