@@ -5,6 +5,7 @@
 <!-- TOC -->
 
 * [2026-09-23](#release-2026-09-23)
+* [2026-09-22](#release-2026-09-22)
 * [2026-09-12](#release-2026-09-12)
 * [2026-09-11](#release-2026-09-11)
 
@@ -13,6 +14,13 @@
 ---
 
 ## Release 2026-09-23
+
+### General
+
+* Updated `composer.json`
+* Removed more deprecated content
+
+## Release 2026-09-22
 
 ### General
 
