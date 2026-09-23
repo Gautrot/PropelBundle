@@ -48,7 +48,6 @@
     "symfony/http-kernel": "^5.4.19",
     "symfony/routing": "^5.4.52",
     "symfony/security-bundle": "^5.4.19",
-    "symfony/security-core": "^5.4.19",
     "symfony/security-http": "^5.4.52",
     "symfony/translation": "^5.4.42",
     "symfony/validator": "^5.4.42",
@@ -56,7 +55,9 @@
     "symfony/yaml": "^5.4.51"
   },
   "require-dev": {
+    "ext-dom": "*",
     "ext-json": "*",
+    "ext-libxml": "*",
     "ext-pdo": "*",
     "ext-simplexml": "*",
     "fakerphp/faker": "^1.0",
@@ -67,7 +68,9 @@
     "phpstan/phpstan-symfony": "^2.0",
     "phpunit/phpunit": ">=9.6.33",
     "symfony/form": "^5.4.19",
+    "symfony/profiler-pack": "^1.0.4",
     "symfony/stopwatch": "^5.4.19",
+    "symfony/web-profiler-bundle": "^5.4",
     "twig/twig": "<=3.19||^3.26"
   },
   "config": {

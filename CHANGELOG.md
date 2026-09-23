@@ -7,6 +7,7 @@
 * [5.2.0](#520)
     * [5.2.0.1](#5201)
     * [5.2.0.2](#5202)
+    * [5.2.0.3](#5203)
 
 <!-- TOC -->
 
@@ -31,4 +32,9 @@
 
 * Trimmed the package
     * Removed misc. content
+* Removed more deprecated content
+
+### 5.2.0.3
+
+* Updated `composer.json`
 * Removed more deprecated content
