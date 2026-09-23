@@ -97,7 +97,7 @@ class Item implements ActiveRecordInterface
      * @param mixed|null $id
      * @return void
      */
-    public function setId($id): void
+    public function setId($id = null): void
     {
         $this->id = $id;
     }
@@ -106,7 +106,7 @@ class Item implements ActiveRecordInterface
      * @param mixed|null $primaryKey
      * @return void
      */
-    public function setPrimaryKey($primaryKey): void
+    public function setPrimaryKey($primaryKey = null): void
     {
         $this->setId($primaryKey);
     }
@@ -116,7 +116,7 @@ class Item implements ActiveRecordInterface
      */
     public function isPrimaryKeyNull(): bool
     {
-        return null === $this->getId();
+        return $this->getId() === null;
     }
 
     /**
@@ -147,14 +147,14 @@ class Item implements ActiveRecordInterface
      * @param $b
      * @return void
      */
-    public function setNew($b)
+    public function setNew($b): void
     {
     }
 
     /**
      * @return void
      */
-    public function resetModified()
+    public function resetModified(): void
     {
     }
 
@@ -170,7 +170,7 @@ class Item implements ActiveRecordInterface
      * @param $b
      * @return void
      */
-    public function setDeleted($b)
+    public function setDeleted($b): void
     {
     }
 
@@ -178,7 +178,7 @@ class Item implements ActiveRecordInterface
      * @param ConnectionInterface|null $con
      * @return void
      */
-    public function delete(?ConnectionInterface $con = null)
+    public function delete(?ConnectionInterface $con = null): void
     {
     }
 
@@ -186,7 +186,7 @@ class Item implements ActiveRecordInterface
      * @param ConnectionInterface|null $con
      * @return void
      */
-    public function save(?ConnectionInterface $con = null)
+    public function save(?ConnectionInterface $con = null): void
     {
     }
 }

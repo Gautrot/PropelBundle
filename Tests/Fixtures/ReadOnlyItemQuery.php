@@ -22,7 +22,7 @@ class ReadOnlyItemQuery
     /**
      * @return $this
      */
-    public function getTableMap(): ReadOnlyItemQuery
+    public function getTableMap(): self
     {
         // Allows to define methods in this class
         // to avoid a lot of mock classes

@@ -42,13 +42,13 @@ class PropelInflectorTest extends TestCase
     }
 
     /**
-     * @param $word
-     * @param $expected
+     * @param mixed $word
+     * @param string $expected
      * @return void
      * @dataProvider dataProviderForTestCamelize
      */
     #[DataProvider('dataProviderForTestCamelize')]
-    public function testCamelize($word, $expected): void
+    public function testCamelize($word, string $expected): void
     {
         $this->assertEquals($expected, PropelInflector::camelize($word));
     }

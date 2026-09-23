@@ -30,20 +30,20 @@ class TranslatableItem implements ActiveRecordInterface
     private $currentTranslations;
 
     /**
-     * @var
+     * @var mixed
      */
     private $groupName;
 
     /**
-     * @var
+     * @var mixed
      */
     private $price;
 
     /**
      * @param mixed|null $id
-     * @param array $translations
+     * @param mixed|array $translations
      */
-    public function __construct($id = null, array $translations = [])
+    public function __construct($id = null, $translations = [])
     {
         $this->id = $id;
         $this->currentTranslations = $translations;
@@ -82,19 +82,19 @@ class TranslatableItem implements ActiveRecordInterface
     }
 
     /**
-     * @param $id
+     * @param mixed|null $id
      * @return void
      */
-    public function setId($id): void
+    public function setId($id = null): void
     {
         $this->id = $id;
     }
 
     /**
-     * @param $primaryKey
+     * @param mixed|null $primaryKey
      * @return void
      */
-    public function setPrimaryKey($primaryKey): void
+    public function setPrimaryKey($primaryKey = null): void
     {
         $this->setId($primaryKey);
     }
@@ -104,7 +104,7 @@ class TranslatableItem implements ActiveRecordInterface
      */
     public function isPrimaryKeyNull(): bool
     {
-        return null === $this->getId();
+        return $this->getId() === null;
     }
 
     /**
@@ -135,14 +135,14 @@ class TranslatableItem implements ActiveRecordInterface
      * @param $b
      * @return void
      */
-    public function setNew($b)
+    public function setNew($b): void
     {
     }
 
     /**
      * @return void
      */
-    public function resetModified()
+    public function resetModified(): void
     {
     }
 
@@ -158,7 +158,7 @@ class TranslatableItem implements ActiveRecordInterface
      * @param $b
      * @return void
      */
-    public function setDeleted($b)
+    public function setDeleted($b): void
     {
     }
 
@@ -166,7 +166,7 @@ class TranslatableItem implements ActiveRecordInterface
      * @param ConnectionInterface|null $con
      * @return void
      */
-    public function delete(?ConnectionInterface $con = null)
+    public function delete(?ConnectionInterface $con = null): void
     {
     }
 
@@ -174,16 +174,16 @@ class TranslatableItem implements ActiveRecordInterface
      * @param ConnectionInterface|null $con
      * @return void
      */
-    public function save(?ConnectionInterface $con = null)
+    public function save(?ConnectionInterface $con = null): void
     {
     }
 
     /**
-     * @param string $locale
+     * @param mixed|null $locale
      * @param ConnectionInterface|null $con
      * @return mixed|TranslatableItemI18n
      */
-    public function getTranslation(string $locale = 'de', ?ConnectionInterface $con = null)
+    public function getTranslation($locale = 'de', ?ConnectionInterface $con = null)
     {
         if (!isset($this->currentTranslations[$locale])) {
             $translation = new TranslatableItemI18n();

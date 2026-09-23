@@ -73,19 +73,19 @@ class TranslatableItemI18n implements ActiveRecordInterface
     }
 
     /**
-     * @param $id
+     * @param mixed|null $id
      * @return void
      */
-    public function setId($id): void
+    public function setId($id = null): void
     {
         $this->id = $id;
     }
 
     /**
-     * @param $primaryKey
+     * @param mixed|null $primaryKey
      * @return void
      */
-    public function setPrimaryKey($primaryKey): void
+    public function setPrimaryKey($primaryKey = null): void
     {
         $this->setId($primaryKey);
     }
@@ -95,7 +95,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
      */
     public function isPrimaryKeyNull(): bool
     {
-        return null === $this->getId();
+        return $this->getId() === null;
     }
 
     /**
@@ -126,14 +126,14 @@ class TranslatableItemI18n implements ActiveRecordInterface
      * @param $b
      * @return void
      */
-    public function setNew($b)
+    public function setNew($b): void
     {
     }
 
     /**
      * @return void
      */
-    public function resetModified()
+    public function resetModified(): void
     {
     }
 
@@ -149,7 +149,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
      * @param $b
      * @return void
      */
-    public function setDeleted($b)
+    public function setDeleted($b): void
     {
     }
 
@@ -157,7 +157,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
      * @param ConnectionInterface|null $con
      * @return void
      */
-    public function delete(?ConnectionInterface $con = null)
+    public function delete(?ConnectionInterface $con = null): void
     {
     }
 
@@ -165,7 +165,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
      * @param ConnectionInterface|null $con
      * @return void
      */
-    public function save(?ConnectionInterface $con = null)
+    public function save(?ConnectionInterface $con = null): void
     {
     }
 
@@ -178,10 +178,10 @@ class TranslatableItemI18n implements ActiveRecordInterface
     }
 
     /**
-     * @param $locale
+     * @param mixed|null $locale
      * @return void
      */
-    public function setLocale($locale): void
+    public function setLocale($locale = null): void
     {
         $this->locale = $locale;
     }
@@ -195,7 +195,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
     }
 
     /**
-     * @param $item
+     * @param mixed $item
      * @return void
      */
     public function setItem($item): void
@@ -212,10 +212,10 @@ class TranslatableItemI18n implements ActiveRecordInterface
     }
 
     /**
-     * @param $value
+     * @param mixed|null $value
      * @return void
      */
-    public function setValue($value): void
+    public function setValue($value = null): void
     {
         $this->value = $value;
     }
@@ -229,7 +229,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
     }
 
     /**
-     * @param $value2
+     * @param mixed $value2
      * @return void
      */
     public function setValue2($value2): void

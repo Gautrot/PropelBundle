@@ -159,15 +159,15 @@ class TypeGuesserTest extends TestCase
     }
 
     /**
-     * @param $property
-     * @param $type
-     * @param $confidence
-     * @param $multiple
+     * @param string $property
+     * @param mixed $type
+     * @param mixed $confidence
+     * @param mixed|null $multiple
      * @return void
      * @dataProvider dataProviderForGuessType
      */
     #[DataProvider('dataProviderForGuessType')]
-    public function testGuessType($property, $type, $confidence, $multiple = null): void
+    public function testGuessType(string $property, $type, $confidence, $multiple = null): void
     {
         $value = $this->guesser->guessType(self::CLASS_NAME, $property);
 

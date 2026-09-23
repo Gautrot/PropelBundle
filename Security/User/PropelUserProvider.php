@@ -42,7 +42,7 @@ class PropelUserProvider implements UserProviderInterface
      *
      * @var string|null
      */
-    protected ?string $property;
+    protected ?string $property = null;
 
     /**
      * Default constructor

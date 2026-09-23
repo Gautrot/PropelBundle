@@ -29,7 +29,7 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
-     * @param $key
+     * @param mixed $key
      * @param ConnectionInterface|null $con
      * @return Book|null
      */
@@ -47,11 +47,11 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
-     * @param $slug
-     * @param $comparison
+     * @param mixed $slug
+     * @param mixed|null $comparison
      * @return $this
      */
-    public function filterByAuthorSlug($slug = null, $comparison = null): BookQuery
+    public function filterByAuthorSlug($slug = null, $comparison = null): self
     {
         if ($slug === 'my-author') {
             $this->byAuthorSlug = true;
@@ -62,11 +62,11 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
-     * @param $slug
-     * @param $comparison
+     * @param mixed $slug
+     * @param mixed|null $comparison
      * @return $this
      */
-    public function filterBySlug($slug = null, $comparison = null): BookQuery
+    public function filterBySlug($slug = null, $comparison = null): self
     {
         if ($slug === 'my-book') {
             $this->bySlug = true;
@@ -77,8 +77,8 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
-     * @param $name
-     * @param $comparison
+     * @param mixed|null $name
+     * @param mixed|null $comparison
      * @return mixed
      * @throws Exception
      */
@@ -94,14 +94,14 @@ class BookQuery extends BaseBookQuery
      */
     public function findOne(?ConnectionInterface $con = null): ?Book
     {
-        if ($this->bySlug === true) {
+        if ($this->bySlug) {
             $book = new Book();
             $book->setId(1);
             $book->setName('My Book');
             $book->setSlug('my-book');
 
             return $book;
-        } elseif ($this->byAuthorSlug === true) {
+        } elseif ($this->byAuthorSlug) {
             $book = new Book();
             $book->setId(2);
             $book->setName('My Kewl Book');
