@@ -11,11 +11,10 @@
 namespace Propel\Bundle\PropelBundle\Tests\Service;
 
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\MockObject\MockObject;
 use Propel\Bundle\PropelBundle\Service\SchemaLocator;
-use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\FakeBundle\FakeBundle;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\HttpKernel\Kernel;

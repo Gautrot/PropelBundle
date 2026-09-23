@@ -7,7 +7,6 @@ use LogicException;
 use Propel\Bundle\PropelBundle\Request\ParamConverter\PropelParamConverter;
 use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Generator\Util\QuickBuilder;
-use Propel\Runtime\Connection\ConnectionWrapper;
 use Propel\Runtime\Propel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;

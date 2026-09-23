@@ -75,6 +75,6 @@ class Column
      */
     public function isNotNull(): bool
     {
-        return 'id' === $this->name;
+        return $this->name === 'id';
     }
 }

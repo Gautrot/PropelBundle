@@ -76,7 +76,7 @@ class TranslatableItemI18n implements ActiveRecordInterface
      * @param mixed|null $id
      * @return void
      */
-    public function setId(mixed $id): void
+    public function setId(mixed $id = null): void
     {
         $this->id = $id;
     }
