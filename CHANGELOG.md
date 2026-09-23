@@ -4,12 +4,21 @@
 
 <!-- TOC -->
 
+* [2026-09-23](#release-2026-09-23)
 * [2026-09-12](#release-2026-09-12)
 * [2026-09-11](#release-2026-09-11)
 
 <!-- TOC -->
 
 ---
+
+## Release 2026-09-23
+
+### General
+
+* Trimmed the release branches by removing the `misc` folder
+  * Dockerfiles are now only available in the `main` and `dev` branches
+* Removed more deprecated content
 
 ## Release 2026-09-12
 

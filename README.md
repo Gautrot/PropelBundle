@@ -2,10 +2,10 @@
 
 ---
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/gautrot/propel-bundle.svg)](https://packagist.org/packages/gautrot/propel-bundle)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
-[![GitHub Actions status](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gautrot/PropelBundle/branch/main/graph/badge.svg?token=J4QC832AR0)](https://codecov.io/gh/gautrot/PropelBundle)
+[![Latest stable version](https://img.shields.io/packagist/v/gautrot/propel-bundle)](https://packagist.org/packages/gautrot/propel-bundle)
+![Minimum PHP version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)
+[![GitHub Actions workflow status](https://img.shields.io/github/actions/workflow/status/Gautrot/PropelBundle/ci.yml?branch=main&label=GitHub%20Actions%20-%20CI%20branch%20main)](https://github.com/Gautrot/PropelBundle/actions/workflows/ci.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/gautrot/PropelBundle/main)](https://codecov.io/gh/gautrot/PropelBundle)
 
 **PropelBundle** is the official implementation of [Propel](https://www.propelorm.org/) in Symfony.
 
@@ -13,12 +13,12 @@
 
 ### Minimum requirements
 
-| [Symfony](https://symfony.com/)                             | [PHP](https://www.php.net/)                       | [Propel](https://propelorm.org/)                                     | PropelBundle                                                                 |
-|-------------------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------------|
-| **[8.4](https://symfony.com/releases/8.4)** (Currently 8.1) | [>= 8.4](https://www.php.net/releases/8.4/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[8.0](https://github.com/Gautrot/PropelBundle/tree/8.0)** (In development) |
-| **[7.4](https://symfony.com/releases/7.4)**                 | [>= 8.2](https://www.php.net/releases/8.2/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[7.1](https://github.com/Gautrot/PropelBundle/tree/7.1)**                  |
-| **[6.4](https://symfony.com/releases/6.4)**                 | [>= 8.1](https://www.php.net/releases/8.1/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[6.1](https://github.com/Gautrot/PropelBundle/tree/6.1)** (LTS)            |
-| **[5.4](https://symfony.com/releases/5.4)**                 | >= 7.4                                            | [2.0.0-beta4](https://github.com/propelorm/Propel2/tree/2.0.0-beta4) | **[5.2](https://github.com/Gautrot/PropelBundle/tree/5.2)** (Extended LTS)   |
+| [Symfony](https://symfony.com/)                             | [PHP](https://www.php.net/)                    | [Propel](https://propelorm.org/)                                     | PropelBundle                                                                 |
+|-------------------------------------------------------------|------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **[8.4](https://symfony.com/releases/8.4)** (Currently 8.1) | [8.4](https://www.php.net/releases/8.4/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[8.0](https://github.com/Gautrot/PropelBundle/tree/8.0)** (In development) |
+| **[7.4](https://symfony.com/releases/7.4)**                 | [8.2](https://www.php.net/releases/8.2/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[7.1](https://github.com/Gautrot/PropelBundle/tree/7.1)**                  |
+| **[6.4](https://symfony.com/releases/6.4)**                 | [8.1](https://www.php.net/releases/8.1/en.php) | [2.0.0](https://github.com/propelorm/Propel2/tree/2.0.0)             | **[6.1](https://github.com/Gautrot/PropelBundle/tree/6.1)** (LTS)            |
+| **[5.4](https://symfony.com/releases/5.4)**                 | 7.4                                            | [2.0.0-beta4](https://github.com/propelorm/Propel2/tree/2.0.0-beta4) | **[5.2](https://github.com/Gautrot/PropelBundle/tree/5.2)** (Extended LTS)   |
 
 For Symfony 5.4, if you are using PHP 7.2 or 7.3, you **must** upgrade to PHP 7.4 at least.
 
@@ -71,9 +71,14 @@ Nightly release:
 * Integration with the [Security component](https://symfony.com/doc/7.4/security.html);
 * Propel's ParamConverter can be used
   with [Symfony Attributes](https://symfony.com/doc/7.4/reference/attributes.html).
-    * **Warning!**: Version 5.2
-      uses [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle), which is no longer
-      maintained as of Symfony **6.2**. If you are still using it, you must convert them to Symfony Attributes.
+
+### Deprecated
+
+* [Sensio Framework Extra Bundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle), has been deprecated since
+  Symfony **6.2**. If you are still using it, you must convert them
+  to [Symfony Attributes](https://symfony.com/doc/6.4/reference/attributes.html).
+* XmlFileLoader has been [deprecated](https://symfony.com/blog/new-in-symfony-7-4-deprecated-xml-configuration) since
+  Symfony **7.4**. If you are using XML schemas, you must convert them to YAML schemas.
 
 ## New to version 7.1
 
