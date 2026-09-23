@@ -7,6 +7,7 @@
 * [6.1.0](#610)
     * [6.1.0.1](#6101)
     * [6.1.0.2](#6102)
+    * [6.1.0.3](#6103)
 
 <!-- TOC -->
 
@@ -30,4 +31,9 @@
 
 * Trimmed the package
     * Removed misc. content
+* Removed more deprecated content
+
+### 6.1.0.3
+
+* Updated `composer.json`
 * Removed more deprecated content
