@@ -48,6 +48,7 @@
     "symfony/http-kernel": "^5.4.19",
     "symfony/routing": "^5.4.52",
     "symfony/security-bundle": "^5.4.19",
+    "symfony/security-core": "^5.4.19",
     "symfony/security-http": "^5.4.52",
     "symfony/translation": "^5.4.42",
     "symfony/validator": "^5.4.42",
