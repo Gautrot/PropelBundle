@@ -18,18 +18,34 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * @return array|string[]
+     * @return void
      */
-    public function getRoles(): array
+    public function getRoles(): void
     {
         // TODO: Implement getRoles() method.
     }
 
     /**
-     * @return string
+     * @return void
      */
-    public function getUserIdentifier(): string
+    public function getUserIdentifier(): void
     {
         // TODO: Implement getUserIdentifier() method.
+    }
+
+    /**
+     * @return void
+     */
+    public function getPassword(): void
+    {
+        // TODO: Implement getPassword() method.
+    }
+
+    /**
+     * @return void
+     */
+    public function getSalt(): void
+    {
+        // TODO: Implement getSalt() method.
     }
 }

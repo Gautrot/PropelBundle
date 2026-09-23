@@ -43,7 +43,7 @@ class TranslationCollectionTypeTest extends TypeTestCase
     /**
      * @return void
      */
-    public function testTranslationsAdded()
+    public function testTranslationsAdded(): void
     {
         $item = new TranslatableItem();
         $item->addTranslatableItemI18n(new TranslatableItemI18n(1, 'fr', 'val1'));
@@ -83,7 +83,7 @@ class TranslationCollectionTypeTest extends TypeTestCase
     /**
      * @return void
      */
-    public function testNotPresentTranslationsAdded()
+    public function testNotPresentTranslationsAdded(): void
     {
         $item = new TranslatableItem();
 
@@ -107,9 +107,9 @@ class TranslationCollectionTypeTest extends TypeTestCase
     }
 
     /**
-     *
+     * @return void
      */
-    public function testNoArrayGiven()
+    public function testNoArrayGiven(): void
     {
         $item = new Item(null, 'val');
 
@@ -131,9 +131,9 @@ class TranslationCollectionTypeTest extends TypeTestCase
     }
 
     /**
-     *
+     * @return void
      */
-    public function testNoDataClassAdded()
+    public function testNoDataClassAdded(): void
     {
         $this->expectException(MissingOptionsException::class);
 
@@ -146,9 +146,9 @@ class TranslationCollectionTypeTest extends TypeTestCase
     }
 
     /**
-     *
+     * @return void
      */
-    public function testNoLanguagesAdded()
+    public function testNoLanguagesAdded(): void
     {
         $this->expectException(MissingOptionsException::class);
 
@@ -161,9 +161,9 @@ class TranslationCollectionTypeTest extends TypeTestCase
     }
 
     /**
-     *
+     * @return void
      */
-    public function testNoColumnsAdded()
+    public function testNoColumnsAdded(): void
     {
         $this->expectException(MissingOptionsException::class);
 
@@ -176,7 +176,7 @@ class TranslationCollectionTypeTest extends TypeTestCase
     }
 
     /**
-     * @return array|\Symfony\Component\Form\FormExtensionInterface[]
+     * @return array
      */
     protected function getExtensions(): array
     {

@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PropelParamConverterTest extends TestCase
 {
     /**
-     * @var ConnectionWrapper $con
+     * @var mixed $con
      */
     protected mixed $con = null;
 
@@ -51,7 +51,7 @@ class PropelParamConverterTest extends TestCase
     /**
      * @return void
      */
-    public function testParamConverterSupport()
+    public function testParamConverterSupport(): void
     {
         $paramConverter = new PropelParamConverter();
 
@@ -69,7 +69,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindPk()
+    public function testParamConverterFindPk(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['id' => 1, 'book' => null]);
@@ -87,7 +87,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindPkNotFound()
+    public function testParamConverterFindPkNotFound(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['id' => 2, 'book' => null]);
@@ -102,7 +102,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindSlug()
+    public function testParamConverterFindSlug(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['slug' => 'my-book', 'book' => null]);
@@ -116,7 +116,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindCamelCasedSlug()
+    public function testParamConverterFindCamelCasedSlug(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['author_slug' => 'my-author', 'slug' => 'my-kewl-book', 'book' => null]);
@@ -131,7 +131,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindSlugNotFound()
+    public function testParamConverterFindSlugNotFound(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['slug' => 'my-foo', 'book' => null]);
@@ -146,7 +146,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindBySlugNotByName()
+    public function testParamConverterFindBySlugNotByName(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['slug' => 'my-book', 'name' => 'foo', 'book' => null]);
@@ -161,7 +161,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindByAllParamExcluded()
+    public function testParamConverterFindByAllParamExcluded(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['slug' => 'my-book', 'name' => 'foo', 'book' => null]);
@@ -180,7 +180,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindByIdExcluded()
+    public function testParamConverterFindByIdExcluded(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['id' => '1234', 'book' => null]);
@@ -199,7 +199,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindLogicError()
+    public function testParamConverterFindLogicError(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['book' => null]);
@@ -214,7 +214,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindWithOptionalParam()
+    public function testParamConverterFindWithOptionalParam(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['book' => null]);
@@ -229,7 +229,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindWithMapping()
+    public function testParamConverterFindWithMapping(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['toto' => 1, 'book' => null]);
@@ -244,7 +244,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConverterFindSlugWithMapping()
+    public function testParamConverterFindSlugWithMapping(): void
     {
         $paramConverter = new PropelParamConverter();
         $request = new Request([], [], ['slugParam_special' => 'my-book', 'book' => null]);
@@ -259,7 +259,7 @@ class PropelParamConverterTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testParamConvertWithOptionWith()
+    public function testParamConvertWithOptionWith(): void
     {
         $this->loadFixtures();
 
@@ -340,7 +340,7 @@ XML;
      * @return void
      * @throws Exception
      */
-    public function testParamConvertWithOptionWithLeftJoin()
+    public function testParamConvertWithOptionWithLeftJoin(): void
     {
         $this->loadFixtures();
 
@@ -372,7 +372,7 @@ XML;
      * @return void
      * @throws Exception
      */
-    public function testParamConvertWithOptionWithFindPk()
+    public function testParamConvertWithOptionWithFindPk(): void
     {
         $this->loadFixtures();
 
@@ -400,7 +400,7 @@ XML;
      * @return void
      * @throws Exception
      */
-    public function testConfigurationReadFromRequestAttributesIfEmpty()
+    public function testConfigurationReadFromRequestAttributesIfEmpty(): void
     {
         $this->loadFixtures();
 
