@@ -25,6 +25,13 @@
     * `propel:schema:convert` converts a schema between XML and YAML
 * Fixed remote code execution with `unserialize` ([AIKIDO](https://app.aikido.dev/issues/45986784/detail))
 
+## Release 2026-09-23
+
+### General
+
+* Updated `composer.json`
+* Removed more deprecated content
+
 ## Release 2026-09-22
 
 ### General
