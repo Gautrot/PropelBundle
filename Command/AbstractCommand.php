@@ -45,9 +45,9 @@ abstract class AbstractCommand extends Command
 
     /**
      * @param ContainerInterface $container
-     * @param $name
+     * @param string|null $name
      */
-    public function __construct(ContainerInterface $container, $name = null)
+    public function __construct(ContainerInterface $container, ?string $name = null)
     {
         $this->container = $container;
 
@@ -55,7 +55,9 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
@@ -82,6 +84,7 @@ abstract class AbstractCommand extends Command
     /**
      * Create all the files needed by Propel's commands.
      *
+     * @return void
      * @throws DOMException
      */
     protected function setupBuildTimeFiles(): void
@@ -100,6 +103,7 @@ abstract class AbstractCommand extends Command
     /**
      * @param KernelInterface $kernel The application kernel.
      * @param string $cacheDir The directory in which the schemas will be copied.
+     * @return void
      * @throws DOMException
      */
     protected function copySchemas(KernelInterface $kernel, string $cacheDir): void

@@ -10,6 +10,7 @@
 
 namespace Propel\Bundle\PropelBundle\Tests\DataFixtures\Dumper;
 
+use JsonException;
 use Propel\Bundle\PropelBundle\DataFixtures\Dumper\YamlDataDumper;
 use Propel\Bundle\PropelBundle\Tests\DataFixtures\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBook;
@@ -24,6 +25,7 @@ class YamlDataDumperTest extends TestCase
 {
     /**
      * @return void
+     * @throws JsonException
      */
     public function testYamlDump(): void
     {

@@ -142,7 +142,7 @@ class TranslatableItem implements ActiveRecordInterface
     /**
      * @return void
      */
-    public function resetModified()
+    public function resetModified(): void
     {
     }
 

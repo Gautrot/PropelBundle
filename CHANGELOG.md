@@ -5,7 +5,7 @@
 <!-- TOC -->
 
 * [2026-xx-xx](#release-2026-xx-xx)
-* [2026-09-23](#release-2026-09-23)
+* [2026-09-22](#release-2026-09-22)
 * [2026-09-12](#release-2026-09-12)
 * [2026-09-11](#release-2026-09-11)
 
@@ -25,7 +25,7 @@
     * `propel:schema:convert` converts a schema between XML and YAML
 * Fixed remote code execution with `unserialize` ([AIKIDO](https://app.aikido.dev/issues/45986784/detail))
 
-## Release 2026-09-23
+## Release 2026-09-22
 
 ### General
 

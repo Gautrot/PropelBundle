@@ -27,7 +27,9 @@ use ValueError;
 abstract class AbstractDataDumper extends AbstractDataHandler implements DataDumperInterface
 {
     /**
-     * {@inheritdoc}
+     * @param string|null $filename
+     * @param string|null $connectionName
+     * @return void
      * @throws JsonException
      */
     public function dump(?string $filename, ?string $connectionName = null): void

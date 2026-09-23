@@ -47,6 +47,7 @@
     "symfony/http-kernel": "^7.4.11",
     "symfony/routing": "^7.4.12",
     "symfony/security-bundle": "^7.4",
+    "symfony/security-core": "^7.4",
     "symfony/security-http": "^7.4.12",
     "symfony/translation": "^7.4",
     "symfony/validator": "^7.4",
@@ -65,11 +66,11 @@
     "phpstan/phpstan": "^2.0",
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-symfony": "^2.0",
-    "phpunit/phpunit": "^11.5.49",
+    "phpunit/phpunit": ">=11.5.50",
     "symfony/form": "^7.4",
     "symfony/profiler-pack": "^1.0.4",
     "symfony/stopwatch": "^7.4",
-    "symfony/web-profiler-bundle": "^7.4.12",
+    "symfony/web-profiler-bundle": "^7.4.11",
     "twig/twig": "^3.26"
   },
   "config": {

@@ -31,8 +31,9 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 class PropelExtension extends Extension
 {
     /**
-     * {@inheritdoc}
-     *
+     * @param array $configs
+     * @param ContainerBuilder $container
+     * @return void
      * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
