@@ -7,6 +7,7 @@
 * [7.1.0](#710)
     * [7.1.0.1](#7101)
     * [7.1.0.2](#7102)
+    * [7.1.0.3](#7103)
 
 <!-- TOC -->
 
@@ -34,4 +35,9 @@
 
 * Trimmed the package
     * Removed misc. content
+* Removed more deprecated content
+
+### 7.1.0.3
+
+* Updated `composer.json`
 * Removed more deprecated content
