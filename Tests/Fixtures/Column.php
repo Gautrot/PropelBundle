@@ -29,8 +29,8 @@ class Column
     private $type;
 
     /**
-     * @param $name
-     * @param $type
+     * @param mixed $name
+     * @param mixed $type
      */
     public function __construct($name, $type)
     {

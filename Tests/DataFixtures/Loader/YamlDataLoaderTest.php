@@ -134,7 +134,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testLoaderWithPhp()
+    public function testLoaderWithPhp(): void
     {
         $fixtures = <<<YAML
 Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor:
@@ -162,7 +162,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testLoadWithoutFaker()
+    public function testLoadWithoutFaker(): void
     {
         $fixtures = <<<YAML
 Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor:
@@ -190,7 +190,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testLoadWithFaker()
+    public function testLoadWithFaker(): void
     {
         if (!class_exists('Faker\Factory')) {
             $this->markTestSkipped('Faker is mandatory');
@@ -225,7 +225,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testYamlLoadManyToMany()
+    public function testYamlLoadManyToMany(): void
     {
         $schema = <<<XML
 <database name="default" package="vendor.bundles.Propel.Bundle.PropelBundle.Tests.Fixtures.DataFixtures.Loader" namespace="Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader" defaultIdMethod="native">
@@ -311,7 +311,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testYamlLoadManyToManyMultipleFiles()
+    public function testYamlLoadManyToManyMultipleFiles(): void
     {
         $schema = <<<XML
 <database name="default" package="vendor.bundles.Propel.Bundle.PropelBundle.Tests.Fixtures.DataFixtures.Loader" namespace="Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader" defaultIdMethod="native">
@@ -403,7 +403,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testLoadWithInheritedRelationship()
+    public function testLoadWithInheritedRelationship(): void
     {
         $schema = <<<XML
 <database name="default" package="vendor.bundles.Propel.Bundle.PropelBundle.Tests.Fixtures.DataFixtures.Loader" namespace="Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader" defaultIdMethod="native">
@@ -464,7 +464,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testLoadArrayToObjectType()
+    public function testLoadArrayToObjectType(): void
     {
         $schema = <<<XML
 <database name="default" package="vendor.bundles.Propel.Bundle.PropelBundle.Tests.Fixtures.DataFixtures.Loader" namespace="Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader" defaultIdMethod="native">
@@ -501,7 +501,7 @@ YAML;
      * @return void
      * @throws Exception
      */
-    public function testLoadDelegatedOnPrimaryKey()
+    public function testLoadDelegatedOnPrimaryKey(): void
     {
         $schema = <<<XML
 <database name="default" package="vendor.bundles.Propel.Bundle.PropelBundle.Tests.Fixtures.DataFixtures.Loader" namespace="Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader" defaultIdMethod="native">

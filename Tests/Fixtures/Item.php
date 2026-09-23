@@ -40,10 +40,10 @@ class Item implements ActiveRecordInterface
     private $price;
 
     /**
-     * @param $id
-     * @param $value
-     * @param $groupName
-     * @param $price
+     * @param mixed|null $id
+     * @param mixed|null $value
+     * @param mixed|null $groupName
+     * @param mixed|null $price
      */
     public function __construct($id = null, $value = null, $groupName = null, $price = null)
     {
@@ -94,7 +94,7 @@ class Item implements ActiveRecordInterface
     }
 
     /**
-     * @param $id
+     * @param mixed|null $id
      * @return void
      */
     public function setId($id): void
@@ -103,7 +103,7 @@ class Item implements ActiveRecordInterface
     }
 
     /**
-     * @param $primaryKey
+     * @param mixed|null $primaryKey
      * @return void
      */
     public function setPrimaryKey($primaryKey): void
@@ -128,10 +128,9 @@ class Item implements ActiveRecordInterface
     }
 
     /**
-     * @param $col
      * @return bool
      */
-    public function isColumnModified($col): bool
+    public function isColumnModified(): bool
     {
         return false;
     }

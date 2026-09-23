@@ -152,7 +152,7 @@ class BookTableMap extends TableMap
             : self::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
     } // initialize()
 
-        /**
+    /**
      * Populates an object of the default type or an object that inherit from the default.
      *
      * @param array $row row returned by DataFetcher->fetch().
@@ -168,7 +168,9 @@ class BookTableMap extends TableMap
     public static function populateObject(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): array
     {
         $key = BookTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
-        if (null !== ($obj = BookTableMap::getInstanceFromPool($key))) {
+        $obj = BookTableMap::getInstanceFromPool($key);
+
+        if ($obj !== null) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $offset, true); // rehydrate
@@ -223,7 +225,9 @@ class BookTableMap extends TableMap
         // populate the object(s)
         while ($row = $dataFetcher->fetch()) {
             $key = BookTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
-            if (null !== ($obj = BookTableMap::getInstanceFromPool($key))) {
+            $obj = BookTableMap::getInstanceFromPool($key);
+
+            if ($obj !== null) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -267,7 +271,7 @@ class BookTableMap extends TableMap
      */
     public static function addSelectColumns(Criteria $criteria, ?string $alias = null): void
     {
-        if (null === $alias) {
+        if ($alias === null) {
             $criteria->addSelectColumn(BookTableMap::ID);
             $criteria->addSelectColumn(BookTableMap::NAME);
             $criteria->addSelectColumn(BookTableMap::SLUG);
@@ -316,7 +320,7 @@ class BookTableMap extends TableMap
      */
     public static function doDelete($values, ?ConnectionInterface $con = null): int
     {
-        if (null === $con) {
+        if ($con === null) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
         }
 
@@ -366,7 +370,7 @@ class BookTableMap extends TableMap
      */
     public static function doInsert($criteria, ?ConnectionInterface $con = null)
     {
-        if (null === $con) {
+        if ($con === null) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
         }
 
@@ -397,12 +401,12 @@ class BookTableMap extends TableMap
         return $pk;
     }
 
-/**
+    /**
      * Initialize the table attributes and columns
      * Relations are not initialized by this method since they are lazy loaded
      *
      * @return void
- */
+     */
     public function initialize(): void
     {
         // attributes
@@ -419,7 +423,7 @@ class BookTableMap extends TableMap
         $this->addColumn('ISBN', 'Isbn', 'VARCHAR', false, 20);
     }
 
-/**
+    /**
      * Build the RelationMap objects for this table relationships
      */
     public function buildRelations(): void

@@ -45,9 +45,9 @@ class TranslatableItemI18n implements ActiveRecordInterface
     private $item;
 
     /**
-     * @param $id
-     * @param $locale
-     * @param $value
+     * @param mixed|null $id
+     * @param mixed|null $locale
+     * @param mixed|null $value
      */
     public function __construct($id = null, $locale = null, $value = null)
     {
@@ -107,10 +107,9 @@ class TranslatableItemI18n implements ActiveRecordInterface
     }
 
     /**
-     * @param $col
      * @return bool
      */
-    public function isColumnModified($col): bool
+    public function isColumnModified(): bool
     {
         return false;
     }

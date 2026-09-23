@@ -35,7 +35,7 @@ class BookQuery extends BaseBookQuery
      */
     public function findPk($key, ?ConnectionInterface $con = null): ?Book
     {
-        if (1 === $key) {
+        if ($key === 1) {
             $book = new Book();
             $book->setId(1);
 
@@ -53,7 +53,7 @@ class BookQuery extends BaseBookQuery
      */
     public function filterByAuthorSlug($slug = null, $comparison = null): BookQuery
     {
-        if ('my-author' === $slug) {
+        if ($slug === 'my-author') {
             $this->byAuthorSlug = true;
         }
 
@@ -68,7 +68,7 @@ class BookQuery extends BaseBookQuery
      */
     public function filterBySlug($slug = null, $comparison = null): BookQuery
     {
-        if ('my-book' == $slug) {
+        if ($slug === 'my-book') {
             $this->bySlug = true;
         }
 
@@ -77,6 +77,9 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
+     * @param $name
+     * @param $comparison
+     * @return mixed
      * @throws Exception
      */
     public function filterByName($name = null, $comparison = null)
@@ -91,14 +94,14 @@ class BookQuery extends BaseBookQuery
      */
     public function findOne(?ConnectionInterface $con = null): ?Book
     {
-        if (true === $this->bySlug) {
+        if ($this->bySlug === true) {
             $book = new Book();
             $book->setId(1);
             $book->setName('My Book');
             $book->setSlug('my-book');
 
             return $book;
-        } elseif (true === $this->byAuthorSlug) {
+        } elseif ($this->byAuthorSlug === true) {
             $book = new Book();
             $book->setId(2);
             $book->setName('My Kewl Book');

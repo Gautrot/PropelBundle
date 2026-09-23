@@ -60,7 +60,7 @@ class ItemQuery
 
     /**
      * Method from the TableMap API
-     * @param $column
+     * @param mixed $column
      * @return Column|null
      */
     public function getColumn($column): ?Column
@@ -74,7 +74,7 @@ class ItemQuery
 
     /**
      * Method from the TableMap API
-     * @param $column
+     * @param mixed $column
      * @return bool
      */
     public function hasColumn($column): bool

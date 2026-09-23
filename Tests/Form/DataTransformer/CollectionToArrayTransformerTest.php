@@ -30,7 +30,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testTransform()
+    public function testTransform(): void
     {
         $result = $this->transformer->transform(new ObjectCollection());
 
@@ -41,7 +41,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testTransformWithNull()
+    public function testTransformWithNull(): void
     {
         $result = $this->transformer->transform(null);
 
@@ -50,9 +50,9 @@ class CollectionToArrayTransformerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
      */
-    public function testTransformThrowsExceptionIfNotObjectCollection()
+    public function testTransformThrowsExceptionIfNotObjectCollection(): void
     {
         $this->expectException(TransformationFailedException::class);
 
@@ -62,7 +62,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testTransformWithData()
+    public function testTransformWithData(): void
     {
         $coll = new ObjectCollection();
         $coll->setData([$a = new stdClass, $b = new stdClass]);
@@ -78,7 +78,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testReverseTransformWithNull()
+    public function testReverseTransformWithNull(): void
     {
         $result = $this->transformer->reverseTransform(null);
 
@@ -89,7 +89,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testReverseTransformWithEmptyString()
+    public function testReverseTransformWithEmptyString(): void
     {
         $result = $this->transformer->reverseTransform('');
 
@@ -98,9 +98,9 @@ class CollectionToArrayTransformerTest extends TestCase
     }
 
     /**
-     *
+     * @return void
      */
-    public function testReverseTransformThrowsExceptionIfNotArray()
+    public function testReverseTransformThrowsExceptionIfNotArray(): void
     {
         $this->expectException(TransformationFailedException::class);
 
@@ -110,7 +110,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testReverseTransformWithData()
+    public function testReverseTransformWithData(): void
     {
         $inputData = [$a = new stdClass, $b = new stdClass];
 

@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Kernel;
 class SchemaLocatorTest extends TestCase
 {
     /**
-     * container generated for the tasts
+     * container generated for the tests
      * @var ContainerBuilder
      */
     private ContainerBuilder $container;

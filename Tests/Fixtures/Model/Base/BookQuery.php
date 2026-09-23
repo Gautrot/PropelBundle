@@ -56,9 +56,9 @@ abstract class BookQuery extends ModelCriteria
      *
      * @param string $dbName The database name
      * @param string $modelName The phpName of a model, e.g. 'Book'
-     * @param string $modelAlias The alias for the model in this query, e.g. 'b'
+     * @param string|null $modelAlias The alias for the model in this query, e.g. 'b'
      */
-    public function __construct($dbName = 'default', $modelName = '\\Propel\\Bundle\\PropelBundle\\Tests\\Fixtures\\Model\\Book', $modelAlias = null)
+    public function __construct(string $dbName = 'default', string $modelName = '\\Propel\\Bundle\\PropelBundle\\Tests\\Fixtures\\Model\\Book', ?string $modelAlias = null)
     {
         parent::__construct($dbName, $modelName, $modelAlias);
     }
@@ -107,7 +107,9 @@ abstract class BookQuery extends ModelCriteria
         if ($key === null) {
             return null;
         }
-        if ((null !== ($obj = BookTableMap::getInstanceFromPool((string)$key))) && !$this->formatter) {
+        $obj = BookTableMap::getInstanceFromPool((string)$key);
+
+        if ($obj !== null && !$this->formatter) {
             // the object is already in the instance pool
             return $obj;
         }
@@ -199,7 +201,7 @@ abstract class BookQuery extends ModelCriteria
      */
     public function findPks(array $keys, ?ConnectionInterface $con = null)
     {
-        if (null === $con) {
+        if ($con === null) {
             $con = Propel::getServiceContainer()->getReadConnection($this->getDbName());
         }
         $this->basePreSelect($con);
@@ -281,7 +283,7 @@ abstract class BookQuery extends ModelCriteria
      */
     public function filterByTitle(?string $title = null, ?string $comparison = null): ChildBookQuery
     {
-        if (null === $comparison) {
+        if ($comparison === null) {
             if (is_array($title)) {
                 $comparison = Criteria::IN;
             } elseif (preg_match('/[\%\*]/', $title)) {
@@ -310,7 +312,7 @@ abstract class BookQuery extends ModelCriteria
      */
     public function filterByIsbn(?string $isbn = null, ?string $comparison = null): ChildBookQuery
     {
-        if (null === $comparison) {
+        if ($comparison === null) {
             if (is_array($isbn)) {
                 $comparison = Criteria::IN;
             } elseif (preg_match('/[\%\*]/', $isbn)) {
@@ -422,7 +424,7 @@ abstract class BookQuery extends ModelCriteria
      */
     public function doDeleteAll(?ConnectionInterface $con = null): int
     {
-        if (null === $con) {
+        if ($con === null) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
@@ -450,7 +452,7 @@ abstract class BookQuery extends ModelCriteria
      */
     public function delete(?ConnectionInterface $con = null): int
     {
-        if (null === $con) {
+        if ($con === null) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
         }
 
