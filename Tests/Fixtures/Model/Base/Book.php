@@ -4,8 +4,8 @@ namespace Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Base;
 
 use Exception;
 use PDO;
-use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\BookQuery as ChildBookQuery;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Book as ChildBook;
+use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\BookQuery as ChildBookQuery;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\Map\BookTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -131,8 +131,8 @@ abstract class Book implements ActiveRecordInterface
             return true;
         }
 
-        if (null === $this->getPrimaryKey()
-            || null === $obj->getPrimaryKey()) {
+        if ($this->getPrimaryKey() === null
+            || $obj->getPrimaryKey() === null) {
             return false;
         }
 
@@ -182,7 +182,7 @@ abstract class Book implements ActiveRecordInterface
      */
     public function hashCode(): int
     {
-        if (null !== $this->getPrimaryKey()) {
+        if ($this->getPrimaryKey() !== null) {
             return crc32(serialize($this->getPrimaryKey()));
         }
 
@@ -253,7 +253,7 @@ abstract class Book implements ActiveRecordInterface
         return $this->slug;
     }
 
-/**
+    /**
      * Set the value of [slug] column.
      *
      * @param string $v new value
@@ -269,7 +269,7 @@ abstract class Book implements ActiveRecordInterface
         return $this;
     } // setSlug()
 
-/**
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -436,7 +436,7 @@ abstract class Book implements ActiveRecordInterface
      */
     public function resetModified(?string $col = null): void
     {
-        if (null !== $col) {
+        if ($col !== null) {
             while (false !== ($offset = array_search($col, $this->modifiedColumns))) {
                 array_splice($this->modifiedColumns, $offset, 1);
             }
@@ -445,7 +445,7 @@ abstract class Book implements ActiveRecordInterface
         }
     }
 
-/**
+    /**
      * Checks and repairs the internal consistency of the object.
      *
      * This method is executed after an already-instantiated object is re-hydrated
@@ -503,7 +503,7 @@ abstract class Book implements ActiveRecordInterface
         }
     }
 
-        /**
+    /**
      * Code to be run before deleting the object in database
      * @param ConnectionInterface|null $con
      * @return bool
@@ -513,7 +513,7 @@ abstract class Book implements ActiveRecordInterface
         return true;
     }
 
-        /**
+    /**
      * Code to be run after deleting the object in database
      * @param ConnectionInterface|null $con
      */
@@ -522,7 +522,7 @@ abstract class Book implements ActiveRecordInterface
 
     }
 
-        /**
+    /**
      * Persists this object to the database.
      *
      * If the object is new, it inserts it; otherwise an update is performed.
@@ -575,7 +575,7 @@ abstract class Book implements ActiveRecordInterface
         }
     }
 
-        /**
+    /**
      * Code to be run before persisting the object
      * @param ConnectionInterface|null $con
      * @return bool
@@ -585,7 +585,7 @@ abstract class Book implements ActiveRecordInterface
         return true;
     }
 
-        /**
+    /**
      * Code to be run before inserting to database
      * @param ConnectionInterface|null $con
      * @return bool
@@ -595,7 +595,7 @@ abstract class Book implements ActiveRecordInterface
         return true;
     }
 
-        /**
+    /**
      * Code to be run before updating the object in database
      * @param ConnectionInterface|null $con
      * @return bool
@@ -605,7 +605,7 @@ abstract class Book implements ActiveRecordInterface
         return true;
     }
 
-/**
+    /**
      * Performs the work of inserting or updating the row in the database.
      *
      * If the object is new, it inserts it; otherwise an update is performed.
@@ -652,7 +652,7 @@ abstract class Book implements ActiveRecordInterface
         return $affectedRows;
     } // doSave()
 
-        /**
+    /**
      * Returns whether the object has been modified.
      *
      * @return bool True if the object has been modified.
@@ -768,7 +768,7 @@ abstract class Book implements ActiveRecordInterface
         return in_array($col, $this->modifiedColumns);
     }
 
-        /**
+    /**
      * Logs a message using Propel::log().
      *
      * @param string $msg
@@ -1018,7 +1018,7 @@ abstract class Book implements ActiveRecordInterface
      */
     public function isPrimaryKeyNull(): bool
     {
-        return null === $this->getId();
+        return $this->getId() === null;
     }
 
     /**

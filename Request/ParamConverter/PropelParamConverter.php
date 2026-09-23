@@ -5,10 +5,10 @@ namespace Propel\Bundle\PropelBundle\Request\ParamConverter;
 use Propel\Bundle\PropelBundle\Util\PropelInflector;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * PropelParamConverter
@@ -60,7 +60,7 @@ class PropelParamConverter implements ValueResolverInterface
     protected $hasWith = false;
 
     /**
-     * @param Request $request
+     * @param Request          $request
      * @param ArgumentMetadata $argument
      *
      * @return iterable
@@ -181,6 +181,65 @@ class PropelParamConverter implements ValueResolverInterface
     }
 
     /**
+     * Try to find the object with the id
+     *
+     * @param string  $classQuery the query class
+     * @param Request $request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    protected function findPk(string $classQuery, Request $request)
+    {
+        if (in_array($this->pk, $this->exclude) || !$request->attributes->has($this->pk)) {
+            return false;
+        }
+
+        $query = $this->getQuery($classQuery);
+
+        if (!$this->hasWith) {
+            return $query->findPk($request->attributes->get($this->pk));
+        } else {
+            return $query->filterByPrimaryKey($request->attributes->get($this->pk))->find()->getFirst();
+        }
+    }
+
+    /**
+     * Try to find the object with all params from the $request
+     *
+     * @param string  $classQuery the query class
+     * @param Request $request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    protected function findOneBy($classQuery, Request $request)
+    {
+        $query = $this->getQuery($classQuery);
+        $hasCriteria = false;
+        foreach ($this->filters as $column => $value) {
+            if (!in_array($column, $this->exclude)) {
+                try {
+                    $query->{'filterBy' . PropelInflector::camelize($column)}($value);
+                    $hasCriteria = true;
+                } catch (\Exception $e) { }
+            }
+        }
+
+        if (!$hasCriteria) {
+            return false;
+        }
+
+        if (!$this->hasWith) {
+            return $query->findOne();
+        } else {
+            return $query->find()->getFirst();
+        }
+    }
+
+    /**
      * Init the query class with optional joinWith
      *
      * @param string $classQuery
@@ -201,7 +260,7 @@ class PropelParamConverter implements ValueResolverInterface
                 } else {
                     throw new \Exception(sprintf('ParamConverter : "with" parameter "%s" is invalid,
                             only string relation name (e.g. "Book") or an array with two keys (e.g. {"Book", "LEFT_JOIN"}) are allowed',
-                        var_export($with, true)));
+                            var_export($with, true)));
                 }
             } else {
                 $query->joinWith($with);
@@ -234,66 +293,6 @@ class PropelParamConverter implements ValueResolverInterface
 
         throw new \Exception(sprintf('ParamConverter : "with" parameter "%s" is invalid,
                 only "left", "right" or "inner" are allowed for join option',
-            var_export($with, true)));
-    }
-
-    /**
-     * Try to find the object with the id
-     *
-     * @param string $classQuery the query class
-     * @param Request $request
-     *
-     * @return mixed
-     *
-     * @throws \Exception
-     */
-    protected function findPk(string $classQuery, Request $request)
-    {
-        if (in_array($this->pk, $this->exclude) || !$request->attributes->has($this->pk)) {
-            return false;
-        }
-
-        $query = $this->getQuery($classQuery);
-
-        if (!$this->hasWith) {
-            return $query->findPk($request->attributes->get($this->pk));
-        } else {
-            return $query->filterByPrimaryKey($request->attributes->get($this->pk))->find()->getFirst();
-        }
-    }
-
-    /**
-     * Try to find the object with all params from the $request
-     *
-     * @param string $classQuery the query class
-     * @param Request $request
-     *
-     * @return mixed
-     *
-     * @throws \Exception
-     */
-    protected function findOneBy($classQuery, Request $request)
-    {
-        $query = $this->getQuery($classQuery);
-        $hasCriteria = false;
-        foreach ($this->filters as $column => $value) {
-            if (!in_array($column, $this->exclude)) {
-                try {
-                    $query->{'filterBy' . PropelInflector::camelize($column)}($value);
-                    $hasCriteria = true;
-                } catch (\Exception $e) {
-                }
-            }
-        }
-
-        if (!$hasCriteria) {
-            return false;
-        }
-
-        if (!$this->hasWith) {
-            return $query->findOne();
-        } else {
-            return $query->find()->getFirst();
-        }
+                var_export($with, true)));
     }
 }

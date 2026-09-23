@@ -81,7 +81,7 @@ class SchemaLocatorTest extends TestCase
     /**
      * @return void
      */
-    public function testLocateFromBundle()
+    public function testLocateFromBundle(): void
     {
         $locator = new SchemaLocator($this->container, $this->fileLocator, $this->configuration);
         $files = $locator->locateFromBundle($this->bundleMock);
@@ -99,7 +99,7 @@ class SchemaLocatorTest extends TestCase
     /**
      * @return void
      */
-    public function testLocateFromBundlesAndConfiguration()
+    public function testLocateFromBundlesAndConfiguration(): void
     {
         $locator = new SchemaLocator($this->container, $this->fileLocator, $this->configuration);
         $files = $locator->locateFromBundlesAndConfiguration(

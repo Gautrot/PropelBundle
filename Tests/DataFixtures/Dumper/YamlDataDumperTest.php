@@ -25,7 +25,7 @@ class YamlDataDumperTest extends TestCase
     /**
      * @return void
      */
-    public function testYamlDump()
+    public function testYamlDump(): void
     {
         $author = new CoolBookAuthor();
         $author->setName('A famous one')->save($this->con);

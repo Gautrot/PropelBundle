@@ -148,11 +148,11 @@ class BookTableMap extends TableMap
     public static function getPrimaryKeyFromRow(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): int
     {
         return (int)$row[$indexType == TableMap::TYPE_NUM
-            ? 0 + $offset
+            ? $offset
             : self::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
     } // initialize()
 
-        /**
+    /**
      * Populates an object of the default type or an object that inherit from the default.
      *
      * @param array $row row returned by DataFetcher->fetch().
@@ -168,7 +168,9 @@ class BookTableMap extends TableMap
     public static function populateObject(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): array
     {
         $key = BookTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
-        if (null !== ($obj = BookTableMap::getInstanceFromPool($key))) {
+        $obj = BookTableMap::getInstanceFromPool($key);
+
+        if ($obj !== null) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $offset, true); // rehydrate
@@ -198,11 +200,11 @@ class BookTableMap extends TableMap
     public static function getPrimaryKeyHashFromRow(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): ?string
     {
         // If the PK cannot be derived from the row, return NULL.
-        if ($row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)] === null) {
+        if ($row[TableMap::TYPE_NUM == $indexType ? $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)] === null) {
             return null;
         }
 
-        return (string)$row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
+        return (string)$row[TableMap::TYPE_NUM == $indexType ? $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
     }
 
     /**
@@ -223,7 +225,9 @@ class BookTableMap extends TableMap
         // populate the object(s)
         while ($row = $dataFetcher->fetch()) {
             $key = BookTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
-            if (null !== ($obj = BookTableMap::getInstanceFromPool($key))) {
+            $obj = BookTableMap::getInstanceFromPool($key);
+
+            if ($obj !== null) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -267,7 +271,7 @@ class BookTableMap extends TableMap
      */
     public static function addSelectColumns(Criteria $criteria, ?string $alias = null): void
     {
-        if (null === $alias) {
+        if ($alias === null) {
             $criteria->addSelectColumn(BookTableMap::ID);
             $criteria->addSelectColumn(BookTableMap::NAME);
             $criteria->addSelectColumn(BookTableMap::SLUG);
@@ -286,8 +290,6 @@ class BookTableMap extends TableMap
      * Returns the TableMap related to this object.
      * This method is not needed for general use but a specific application could have a need.
      * @return TableMap
-     * @throws PropelException Any exceptions caught during processing will be
-     *                         rethrown wrapped into a PropelException.
      */
     public static function getTableMap(): TableMap
     {
@@ -318,7 +320,7 @@ class BookTableMap extends TableMap
      */
     public static function doDelete(mixed $values, ?ConnectionInterface $con = null): int
     {
-        if (null === $con) {
+        if ($con === null) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
         }
 
@@ -368,7 +370,7 @@ class BookTableMap extends TableMap
      */
     public static function doInsert(mixed $criteria, ?ConnectionInterface $con = null): mixed
     {
-        if (null === $con) {
+        if ($con === null) {
             $con = Propel::getServiceContainer()->getWriteConnection(BookTableMap::DATABASE_NAME);
         }
 
@@ -399,12 +401,12 @@ class BookTableMap extends TableMap
         return $pk;
     }
 
-/**
+    /**
      * Initialize the table attributes and columns
      * Relations are not initialized by this method since they are lazy loaded
      *
      * @return void
- */
+     */
     public function initialize(): void
     {
         // attributes
@@ -421,7 +423,7 @@ class BookTableMap extends TableMap
         $this->addColumn('ISBN', 'Isbn', 'VARCHAR', false, 20);
     }
 
-/**
+    /**
      * Build the RelationMap objects for this table relationships
      */
     public function buildRelations(): void

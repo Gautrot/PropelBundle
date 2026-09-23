@@ -29,13 +29,13 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
-     * @param $key
+     * @param mixed $key
      * @param ConnectionInterface|null $con
      * @return Book|null
      */
-    public function findPk($key, ?ConnectionInterface $con = null): ?Book
+    public function findPk(mixed $key, ?ConnectionInterface $con = null): ?Book
     {
-        if (1 === $key) {
+        if ($key === 1) {
             $book = new Book();
             $book->setId(1);
 
@@ -47,13 +47,13 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
-     * @param $slug
-     * @param $comparison
+     * @param mixed $slug
+     * @param mixed|null $comparison
      * @return $this
      */
-    public function filterByAuthorSlug($slug = null, $comparison = null): static
+    public function filterByAuthorSlug(mixed $slug = null, mixed $comparison = null): self
     {
-        if ('my-author' === $slug) {
+        if ($slug === 'my-author') {
             $this->byAuthorSlug = true;
         }
 
@@ -62,13 +62,13 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
-     * @param $slug
-     * @param $comparison
+     * @param mixed $slug
+     * @param mixed|null $comparison
      * @return $this
      */
-    public function filterBySlug($slug = null, $comparison = null): static
+    public function filterBySlug(mixed $slug = null, mixed $comparison = null): self
     {
-        if ('my-book' == $slug) {
+        if ($slug === 'my-book') {
             $this->bySlug = true;
         }
 
@@ -77,9 +77,12 @@ class BookQuery extends BaseBookQuery
 
     /**
      * fake for test
+     * @param mixed|null $name
+     * @param mixed|null $comparison
+     * @return mixed
      * @throws Exception
      */
-    public function filterByName($name = null, $comparison = null)
+    public function filterByName(mixed $name = null, mixed $comparison = null): mixed
     {
         throw new Exception('Test should never call this method');
     }
@@ -91,14 +94,14 @@ class BookQuery extends BaseBookQuery
      */
     public function findOne(?ConnectionInterface $con = null): ?Book
     {
-        if (true === $this->bySlug) {
+        if ($this->bySlug) {
             $book = new Book();
             $book->setId(1);
             $book->setName('My Book');
             $book->setSlug('my-book');
 
             return $book;
-        } elseif (true === $this->byAuthorSlug) {
+        } elseif ($this->byAuthorSlug) {
             $book = new Book();
             $book->setId(2);
             $book->setName('My Kewl Book');

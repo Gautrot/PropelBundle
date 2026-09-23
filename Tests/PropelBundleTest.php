@@ -59,7 +59,7 @@ class PropelBundleTest extends TestCase
     /**
      * @return void
      */
-    public function testConfigureConnections()
+    public function testConfigureConnections(): void
     {
         /**
          * set single connection without slaves
