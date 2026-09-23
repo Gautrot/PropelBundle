@@ -26,7 +26,7 @@ class PropelBundleTest extends TestCase
     use VfsTrait;
 
     /**
-     * cant be tested with current implementation because it load PropelExtension which look for file
+     * cant be tested with current implementation because it loads PropelExtension which look for file
      * @NOTE: need refactoring
      * @return void
      */
@@ -59,7 +59,7 @@ class PropelBundleTest extends TestCase
     /**
      * @return void
      */
-    public function testConfigureConnections()
+    public function testConfigureConnections(): void
     {
         /**
          * set single connection without slaves

@@ -30,29 +30,29 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testTransform()
+    public function testTransform(): void
     {
         $result = $this->transformer->transform(new ObjectCollection());
 
         $this->assertTrue(is_array($result));
-        $this->assertEquals(0, count($result));
+        $this->assertCount(0, $result);
     }
 
     /**
      * @return void
      */
-    public function testTransformWithNull()
+    public function testTransformWithNull(): void
     {
         $result = $this->transformer->transform(null);
 
         $this->assertTrue(is_array($result));
-        $this->assertEquals(0, count($result));
+        $this->assertCount(0, $result);
     }
 
     /**
-     *
+     * @return void
      */
-    public function testTransformThrowsExceptionIfNotObjectCollection()
+    public function testTransformThrowsExceptionIfNotObjectCollection(): void
     {
         $this->expectException(TransformationFailedException::class);
 
@@ -62,7 +62,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testTransformWithData()
+    public function testTransformWithData(): void
     {
         $coll = new ObjectCollection();
         $coll->setData([$a = new stdClass, $b = new stdClass]);
@@ -70,7 +70,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $result = $this->transformer->transform($coll);
 
         $this->assertTrue(is_array($result));
-        $this->assertEquals(2, count($result));
+        $this->assertCount(2, $result);
         $this->assertSame($a, $result[0]);
         $this->assertSame($b, $result[1]);
     }
@@ -78,29 +78,29 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testReverseTransformWithNull()
+    public function testReverseTransformWithNull(): void
     {
         $result = $this->transformer->reverseTransform(null);
 
         $this->assertInstanceOf('\Propel\Runtime\Collection\ObjectCollection', $result);
-        $this->assertEquals(0, count($result->getData()));
+        $this->assertCount(0, $result->getData());
     }
 
     /**
      * @return void
      */
-    public function testReverseTransformWithEmptyString()
+    public function testReverseTransformWithEmptyString(): void
     {
         $result = $this->transformer->reverseTransform('');
 
         $this->assertInstanceOf('\Propel\Runtime\Collection\ObjectCollection', $result);
-        $this->assertEquals(0, count($result->getData()));
+        $this->assertCount(0, $result->getData());
     }
 
     /**
-     *
+     * @return void
      */
-    public function testReverseTransformThrowsExceptionIfNotArray()
+    public function testReverseTransformThrowsExceptionIfNotArray(): void
     {
         $this->expectException(TransformationFailedException::class);
 
@@ -110,7 +110,7 @@ class CollectionToArrayTransformerTest extends TestCase
     /**
      * @return void
      */
-    public function testReverseTransformWithData()
+    public function testReverseTransformWithData(): void
     {
         $inputData = [$a = new stdClass, $b = new stdClass];
 
@@ -120,7 +120,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->assertInstanceOf('\Propel\Runtime\Collection\ObjectCollection', $result);
 
         $this->assertTrue(is_array($data));
-        $this->assertEquals(2, count($data));
+        $this->assertCount(2, $data);
         $this->assertSame($a, $data[0]);
         $this->assertSame($b, $data[1]);
         $this->assertsame($inputData, $data);

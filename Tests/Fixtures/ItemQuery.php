@@ -40,7 +40,7 @@ class ItemQuery
     /**
      * @return $this
      */
-    public function getTableMap(): static
+    public function getTableMap(): self
     {
         // Allows to define methods in this class
         // to avoid a lot of mock classes
@@ -60,10 +60,10 @@ class ItemQuery
 
     /**
      * Method from the TableMap API
-     * @param $column
+     * @param mixed $column
      * @return Column|null
      */
-    public function getColumn($column): ?Column
+    public function getColumn(mixed $column): ?Column
     {
         if ($this->hasColumn($column)) {
             return new Column($column, $this->map[$column]);
@@ -74,10 +74,10 @@ class ItemQuery
 
     /**
      * Method from the TableMap API
-     * @param $column
+     * @param mixed $column
      * @return bool
      */
-    public function hasColumn($column): bool
+    public function hasColumn(mixed $column): bool
     {
         return in_array($column, array_keys($this->map));
     }

@@ -26,7 +26,7 @@ class YamlDataDumperTest extends TestCase
     /**
      * @return void
      */
-    public function testYamlDump()
+    public function testYamlDump(): void
     {
         $author = new CoolBookAuthor();
         $author->setName('A famous one')->save($this->con);
@@ -43,7 +43,7 @@ class YamlDataDumperTest extends TestCase
 
         $filename = $this->getTempFile();
 
-        $loader = new YamlDataDumper(__DIR__ . '/../../Fixtures/DataFixtures/Loader', array());
+        $loader = new YamlDataDumper(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
         $loader->dump($filename);
 
         $expected = <<<YAML

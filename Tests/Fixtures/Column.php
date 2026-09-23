@@ -29,10 +29,10 @@ class Column
     private mixed $type;
 
     /**
-     * @param $name
-     * @param $type
+     * @param mixed $name
+     * @param mixed $type
      */
-    public function __construct($name, $type)
+    public function __construct(mixed $name, mixed $type)
     {
         $this->name = $name;
         $this->type = $type;
@@ -41,7 +41,7 @@ class Column
     /**
      * @return mixed
      */
-    public function getType()
+    public function getType(): mixed
     {
         return $this->type;
     }
@@ -75,6 +75,6 @@ class Column
      */
     public function isNotNull(): bool
     {
-        return ('id' === $this->name);
+        return $this->name === 'id';
     }
 }
