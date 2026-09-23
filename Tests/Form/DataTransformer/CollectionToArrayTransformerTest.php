@@ -35,7 +35,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $result = $this->transformer->transform(new ObjectCollection());
 
         $this->assertTrue(is_array($result));
-        $this->assertEquals(0, count($result));
+        $this->assertCount(0, $result);
     }
 
     /**
@@ -46,7 +46,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $result = $this->transformer->transform(null);
 
         $this->assertTrue(is_array($result));
-        $this->assertEquals(0, count($result));
+        $this->assertCount(0, $result);
     }
 
     /**
@@ -70,7 +70,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $result = $this->transformer->transform($coll);
 
         $this->assertTrue(is_array($result));
-        $this->assertEquals(2, count($result));
+        $this->assertCount(2, $result);
         $this->assertSame($a, $result[0]);
         $this->assertSame($b, $result[1]);
     }
@@ -83,7 +83,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $result = $this->transformer->reverseTransform(null);
 
         $this->assertInstanceOf('\Propel\Runtime\Collection\ObjectCollection', $result);
-        $this->assertEquals(0, count($result->getData()));
+        $this->assertCount(0, $result->getData());
     }
 
     /**
@@ -94,7 +94,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $result = $this->transformer->reverseTransform('');
 
         $this->assertInstanceOf('\Propel\Runtime\Collection\ObjectCollection', $result);
-        $this->assertEquals(0, count($result->getData()));
+        $this->assertCount(0, $result->getData());
     }
 
     /**
@@ -120,7 +120,7 @@ class CollectionToArrayTransformerTest extends TestCase
         $this->assertInstanceOf('\Propel\Runtime\Collection\ObjectCollection', $result);
 
         $this->assertTrue(is_array($data));
-        $this->assertEquals(2, count($data));
+        $this->assertCount(2, $data);
         $this->assertSame($a, $data[0]);
         $this->assertSame($b, $data[1]);
         $this->assertsame($inputData, $data);

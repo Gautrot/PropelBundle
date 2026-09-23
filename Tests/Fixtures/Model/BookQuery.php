@@ -51,7 +51,7 @@ class BookQuery extends BaseBookQuery
      * @param $comparison
      * @return $this
      */
-    public function filterByAuthorSlug($slug = null, $comparison = null)
+    public function filterByAuthorSlug($slug = null, $comparison = null): BookQuery
     {
         if ('my-author' === $slug) {
             $this->byAuthorSlug = true;
@@ -66,7 +66,7 @@ class BookQuery extends BaseBookQuery
      * @param $comparison
      * @return $this
      */
-    public function filterBySlug($slug = null, $comparison = null)
+    public function filterBySlug($slug = null, $comparison = null): BookQuery
     {
         if ('my-book' == $slug) {
             $this->bySlug = true;

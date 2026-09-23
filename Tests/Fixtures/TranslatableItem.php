@@ -40,10 +40,10 @@ class TranslatableItem implements ActiveRecordInterface
     private $price;
 
     /**
-     * @param $id
-     * @param $translations
+     * @param mixed|null $id
+     * @param array $translations
      */
-    public function __construct($id = null, $translations = [])
+    public function __construct($id = null, array $translations = [])
     {
         $this->id = $id;
         $this->currentTranslations = $translations;
@@ -116,10 +116,9 @@ class TranslatableItem implements ActiveRecordInterface
     }
 
     /**
-     * @param $col
      * @return bool
      */
-    public function isColumnModified($col): bool
+    public function isColumnModified(): bool
     {
         return false;
     }
@@ -180,11 +179,11 @@ class TranslatableItem implements ActiveRecordInterface
     }
 
     /**
-     * @param $locale
+     * @param string $locale
      * @param ConnectionInterface|null $con
      * @return mixed|TranslatableItemI18n
      */
-    public function getTranslation($locale = 'de', ?ConnectionInterface $con = null)
+    public function getTranslation(string $locale = 'de', ?ConnectionInterface $con = null)
     {
         if (!isset($this->currentTranslations[$locale])) {
             $translation = new TranslatableItemI18n();

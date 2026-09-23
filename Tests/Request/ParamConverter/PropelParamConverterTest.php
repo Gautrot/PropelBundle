@@ -16,14 +16,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * # PropelParamConverterTest
  *
- * @deprecated SensioFrameworkExtraBundle is no longer maintained as of Symfony 6.2. It will be updated to use Symfony Attributes
+ * @deprecated SensioFrameworkExtraBundle is deprecated as of Symfony 6.2. It will be updated to use Symfony Attributes
  */
 class PropelParamConverterTest extends TestCase
 {
     /**
-     * @var ConnectionWrapper $con
+     * @var ConnectionWrapper|null $con
      */
-    protected $con = null;
+    protected ?ConnectionWrapper $con = null;
 
     /**
      * @return void

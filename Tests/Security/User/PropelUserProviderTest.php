@@ -11,8 +11,8 @@
 namespace Propel\Bundle\PropelBundle\Tests\Security\User;
 
 use Propel\Bundle\PropelBundle\Security\User\PropelUserProvider;
-use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Bundle\PropelBundle\Tests\Fixtures\Model\User;
+use Propel\Bundle\PropelBundle\Tests\TestCase;
 use Propel\Generator\Util\QuickBuilder;
 use Propel\Runtime\Connection\ConnectionWrapper;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -53,7 +53,8 @@ class PropelUserProviderTest extends TestCase
 
             $builder = new QuickBuilder();
             $builder->setSchema($schema);
-            $classTargets = ['tablemap', 'object', 'query', /*'objectstub',*/'querystub'];
+            $classTargets = ['tablemap', 'object', 'query', /*'objectstub',*/
+                'querystub'];
 
             $this::$con = $builder->build(null, null, null, null, $classTargets);
         }
@@ -70,7 +71,7 @@ class PropelUserProviderTest extends TestCase
     /**
      * @return void
      */
-    public function testRefreshUserGetsUserByPrimaryKey()
+    public function testRefreshUserGetsUserByPrimaryKey(): void
     {
         $user1 = new User();
         $user1->setUsername('user1');
@@ -91,9 +92,11 @@ class PropelUserProviderTest extends TestCase
 
     /**
      * @return void
+     * @deprecated since Symfony 5.3, use loadUserByIdentifier() instead
      */
-    public function testLoadUserByUsername()
+    public function testLoadUserByUsername(): void
     {
+        $this->markTestSkipped('testLoadUserByUsername is deprecated since Symfony 5.3. Skipping...');
         $user1 = new User();
         $user1->setUsername('user1');
         $user1->save();
@@ -112,7 +115,7 @@ class PropelUserProviderTest extends TestCase
     /**
      * @return void
      */
-    public function testSupportsClass()
+    public function testSupportsClass(): void
     {
         $class = 'Propel\Bundle\PropelBundle\Tests\Fixtures\Model\User';
 
@@ -125,7 +128,7 @@ class PropelUserProviderTest extends TestCase
     /**
      * @return void
      */
-    public function testLoadUserByIdentifier()
+    public function testLoadUserByIdentifier(): void
     {
         $user1 = new User();
         $user1->setUsername('user1');
@@ -139,6 +142,6 @@ class PropelUserProviderTest extends TestCase
         // not existing one
         $this->expectException(UserNotFoundException::class);
 
-        $provider->loadUserByUsername('not_exists');
+        $provider->loadUserByIdentifier('not_exists');
     }
 }

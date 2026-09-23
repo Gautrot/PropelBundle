@@ -38,7 +38,7 @@ class YamlDataLoaderTest extends TestCase
      * @return void
      * @throws Exception
      */
-    public function testYamlLoadOneToMany()
+    public function testYamlLoadOneToMany(): void
     {
         $fixtures = <<<YAML
 \Propel\Bundle\PropelBundle\Tests\Fixtures\DataFixtures\Loader\CoolBookAuthor:
@@ -67,7 +67,7 @@ YAML;
     /**
      * @throws Exception
      */
-    public function testYamlLoadOneToManyExternalReference()
+    public function testYamlLoadOneToManyExternalReference(): void
     {
         $loader = new YamlDataLoader(__DIR__ . '/../../Fixtures/DataFixtures/Loader', []);
 

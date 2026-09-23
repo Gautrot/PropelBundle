@@ -148,7 +148,7 @@ class BookTableMap extends TableMap
     public static function getPrimaryKeyFromRow(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): int
     {
         return (int)$row[$indexType == TableMap::TYPE_NUM
-            ? 0 + $offset
+            ? $offset
             : self::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
     } // initialize()
 
@@ -198,11 +198,11 @@ class BookTableMap extends TableMap
     public static function getPrimaryKeyHashFromRow(array $row, int $offset = 0, string $indexType = TableMap::TYPE_NUM): ?string
     {
         // If the PK cannot be derived from the row, return NULL.
-        if ($row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)] === null) {
+        if ($row[TableMap::TYPE_NUM == $indexType ? $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)] === null) {
             return null;
         }
 
-        return (string)$row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
+        return (string)$row[TableMap::TYPE_NUM == $indexType ? $offset : static::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
     }
 
     /**
@@ -286,8 +286,6 @@ class BookTableMap extends TableMap
      * Returns the TableMap related to this object.
      * This method is not needed for general use but a specific application could have a need.
      * @return TableMap
-     * @throws PropelException Any exceptions caught during processing will be
-     *                         rethrown wrapped into a PropelException.
      */
     public static function getTableMap(): TableMap
     {

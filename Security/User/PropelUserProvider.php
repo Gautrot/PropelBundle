@@ -11,10 +11,10 @@
 
 namespace Propel\Bundle\PropelBundle\Security\User;
 
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 /**
  * Provides easy to use provisioning for Propel model users.
@@ -28,61 +28,74 @@ class PropelUserProvider implements UserProviderInterface
      *
      * @var string
      */
-    protected $class;
+    protected string $class;
 
     /**
      * A Query class name.
      *
      * @var string
      */
-    protected $queryClass;
+    protected string $queryClass;
 
     /**
      * A property to use to retrieve the user.
      *
-     * @var string
+     * @var string|null
      */
-    protected $property;
+    protected ?string $property;
 
     /**
      * Default constructor
      *
-     * @param string      $class    The User model class.
+     * @param string $class The User model class.
      * @param string|null $property The property to use to retrieve a user.
      */
-    public function __construct($class, $property = null)
+    public function __construct(string $class, ?string $property = null)
     {
         $this->class = $class;
-        $this->queryClass = $class.'Query';
+        $this->queryClass = $class . 'Query';
         $this->property = $property;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param string $username
+     * @return UserInterface
+     * @throws UserNotFoundException
+     * @deprecated since Symfony 5.3, use loadUserByIdentifier() instead
      */
-    public function loadUserByUsername($username): UserInterface
+    public function loadUserByUsername(string $username): UserInterface
+    {
+        return $this->loadUserByIdentifier($username);
+    }
+
+    /**
+     * @param string $identifier
+     * @return UserInterface
+     */
+    public function loadUserByIdentifier(string $identifier): UserInterface
     {
         $queryClass = $this->queryClass;
-        $query      = $queryClass::create();
+        $query = $queryClass::create();
 
-        if (null !== $this->property) {
-            $filter = 'filterBy'.ucfirst($this->property);
-            $query->$filter($username);
+        if ($this->property !== null) {
+            $filter = 'filterBy' . ucfirst($this->property);
+            $query->$filter($identifier);
         } else {
-            $query->filterByUsername($username);
+            $query->filterByUsername($identifier);
         }
 
-        if (null === $user = $query->findOne()) {
-            throw new UserNotFoundException(sprintf('User "%s" not found.', $username));
+        $user = $query->findOne();
+
+        if ($user === null) {
+            throw new UserNotFoundException("User \"$identifier\" not found.");
         }
 
         return $user;
     }
 
     /**
-     * {@inheritdoc}
+     * @param UserInterface $user
+     * @return UserInterface
      */
     public function refreshUser(UserInterface $user): UserInterface
     {
@@ -96,17 +109,11 @@ class PropelUserProvider implements UserProviderInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param string $class
+     * @return bool
      */
-    public function supportsClass($class): bool
+    public function supportsClass(string $class): bool
     {
         return $class === $this->class;
-    }
-
-    public function loadUserByIdentifier(string $identifier): UserInterface
-    {
-        return $this->loadUserByUsername($identifier);
     }
 }
