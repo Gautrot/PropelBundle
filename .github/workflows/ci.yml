@@ -326,7 +326,7 @@ jobs:
 
   testsuite_macos:
     name: "Test Suite (macOS arm64)"
-    runs-on: macos-15
+    runs-on: macos-26
     strategy:
       fail-fast: false
       matrix:
@@ -402,17 +402,11 @@ jobs:
 
   testsuite_macos_intel:
     name: "Test Suite (macOS Intel)"
-    runs-on: macos-15-intel
+    runs-on: macos-26-intel
     strategy:
       fail-fast: false
       matrix:
         php-version:
-          - '7.4'
-          - '8.0'
-          - '8.1'
-          - '8.2'
-          - '8.3'
-          - '8.4'
           - '8.5'
         symfony-version:
           - '5.4'
