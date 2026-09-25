@@ -25,8 +25,14 @@ use Throwable;
  */
 class PropelDataCollector extends DataCollector
 {
+    /**
+     * @var PropelLogger
+     */
     protected PropelLogger $logger;
 
+    /**
+     * @param PropelLogger $logger
+     */
     public function __construct(PropelLogger $logger)
     {
         $this->logger = $logger;
@@ -37,10 +43,10 @@ class PropelDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, ?Throwable $exception = null): void
     {
-        $this->data = array(
-            'queries'       => $this->cloneVar($this->buildQueries()),
-            'querycount'    => $this->countQueries(),
-        );
+        $this->data = [
+            'queries' => $this->cloneVar($this->buildQueries()),
+            'querycount' => $this->countQueries(),
+        ];
     }
 
     /**
@@ -113,6 +119,6 @@ class PropelDataCollector extends DataCollector
      */
     public function reset(): void
     {
-        // TODO: Implement reset() method.
+        $this->logger = new PropelLogger();
     }
 }

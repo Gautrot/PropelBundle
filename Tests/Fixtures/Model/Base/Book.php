@@ -24,6 +24,7 @@ abstract class Book implements ActiveRecordInterface
 {
     /**
      * TableMap class name
+     * @var string
      */
     const TABLE_MAP = '\\Propel\\Bundle\\PropelBundle\\Tests\\Fixtures\\Model\\Map\\BookTableMap';
 
@@ -785,7 +786,7 @@ abstract class Book implements ActiveRecordInterface
      *
      * @param ConnectionInterface $con
      *
-     * @return Integer Number of updated rows
+     * @return int Number of updated rows
      * @see doSave()
      */
     protected function doUpdate(ConnectionInterface $con): int

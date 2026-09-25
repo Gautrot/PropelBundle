@@ -41,7 +41,7 @@ class PropelExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        if (1 === count($config['database']['connections'])) {
+        if (count($config['database']['connections']) === 1) {
             $defaultConnection = array_keys($config['database']['connections'])[0];
             if (!isset($config['runtime']['defaultConnection'])) {
                 $config['runtime']['defaultConnection'] = $defaultConnection;

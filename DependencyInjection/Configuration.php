@@ -18,10 +18,23 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
  */
 class Configuration extends PropelConfiguration
 {
+    /**
+     * @var bool
+     */
     private bool $debug;
+    /**
+     * @var string
+     */
     private string $defaultDir;
+    /**
+     * @var string
+     */
     private string $kernelDir;
 
+    /**
+     * @param bool $debug
+     * @param string $kernelDir
+     */
     public function __construct(bool $debug, string $kernelDir)
     {
         $this->debug = $debug;
@@ -29,6 +42,10 @@ class Configuration extends PropelConfiguration
         $this->kernelDir = $kernelDir;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     * @return void
+     */
     protected function addPathsSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -43,10 +60,13 @@ class Configuration extends PropelConfiguration
                         ->scalarNode('loaderScriptDir')->defaultValue($this->kernelDir.'/generated-conf')->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     * @return void
+     */
     protected function addRuntimeSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -66,7 +86,7 @@ class Configuration extends PropelConfiguration
                                 ->children()
                                     ->scalarNode('type')->end()
                                     ->scalarNode('path')->end()
-                                    ->enumNode('level')->values(array(100, 200, 250, 300, 400, 500, 550, 600))->end()
+                                    ->enumNode('level')->values([100, 200, 250, 300, 400, 500, 550, 600])->end()
                                 ->end()
                             ->end()
                         ->end()
@@ -115,9 +135,13 @@ class Configuration extends PropelConfiguration
             ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     * @return void
+     */
     protected function addDatabaseSection(ArrayNodeDefinition $node): void
     {
-        $validAdapters = array('mysql', 'pgsql', 'sqlite', 'mssql', 'sqlsrv', 'oracle');
+        $validAdapters = ['mysql', 'pgsql', 'sqlite', 'mssql', 'sqlsrv', 'oracle'];
 
         $node
             ->children()
@@ -131,7 +155,7 @@ class Configuration extends PropelConfiguration
                             ->always()
                                 ->then(function($connections) {
                                     foreach ($connections as $name => $connection) {
-                                        if (strpos($name, '.') !== false) {
+                                        if (str_contains($name, '.')) {
                                             throw new \InvalidArgumentException('Dots are not allowed in connection names');
                                         }
                                     }
@@ -170,7 +194,7 @@ class Configuration extends PropelConfiguration
                                     ->scalarNode('user')->isRequired()->end()
                                     ->scalarNode('password')->isRequired()->treatNullLike('')->end()
                                     ->arrayNode('options')
-                                    	->addDefaultsIfNotSet()
+                                        ->addDefaultsIfNotSet()
                                         ->children()
                                             ->booleanNode('ATTR_PERSISTENT')->defaultFalse()->end()
                                             ->scalarNode('MYSQL_ATTR_SSL_CA')->end()
@@ -180,7 +204,7 @@ class Configuration extends PropelConfiguration
                                         ->end()
                                     ->end()
                                     ->arrayNode('attributes')
-                                    	->addDefaultsIfNotSet()
+                                        ->addDefaultsIfNotSet()
                                         ->children()
                                             ->booleanNode('ATTR_EMULATE_PREPARES')->defaultFalse()->end()
                                             ->scalarNode('SQLSRV_ATTR_ENCODING')->end()
@@ -242,7 +266,6 @@ class Configuration extends PropelConfiguration
                         ->end() //adapters
                     ->end()
                 ->end() //database
-            ->end()
-        ;
+            ->end();
     }
 }

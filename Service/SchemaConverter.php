@@ -23,7 +23,13 @@ use Symfony\Component\Yaml\Yaml;
  */
 class SchemaConverter
 {
+    /**
+     * @var string
+     */
     public const FORMAT_XML = 'xml';
+    /**
+     * @var string
+     */
     public const FORMAT_YAML = 'yaml';
 
     /**
@@ -89,7 +95,7 @@ class SchemaConverter
         if (!$document->documentElement instanceof DOMElement) {
             throw new InvalidArgumentException("Schema \"$source\" does not have a root element.");
         }
-        if ('database' !== $document->documentElement->tagName) {
+        if ($document->documentElement->tagName !== 'database') {
             throw new InvalidArgumentException("Schema \"$source\" must use a \"database\" root element.");
         }
 
@@ -293,10 +299,10 @@ class SchemaConverter
             unset($attributes['defaultValue']);
         }
 
-        if (isset($attributes['type']) && 1 === count($attributes)) {
+        if (isset($attributes['type']) && count($attributes) === 1) {
             return (string)$attributes['type'];
         }
-        if (isset($attributes['type'], $attributes['size']) && 2 === count($attributes)) {
+        if (isset($attributes['type'], $attributes['size']) && count($attributes) === 2) {
             return "{$attributes['type']}({$attributes['size']})";
         }
 
@@ -785,7 +791,7 @@ class SchemaConverter
             $behavior = $document->createElement('behavior');
             $behavior->setAttribute('name', $name);
             $table->appendChild($behavior);
-            if (null === $parameters) {
+            if ($parameters === null) {
                 continue;
             }
             if (!is_array($parameters) || array_is_list($parameters)) {
@@ -848,7 +854,7 @@ class SchemaConverter
      */
     private function columnDefinitionToAttributes(string $name, mixed $definition, string $path): array
     {
-        if (null === $definition) {
+        if ($definition === null) {
             return $this->inferColumnAttributes($name);
         }
         if (is_string($definition)) {

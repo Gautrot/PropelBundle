@@ -39,7 +39,7 @@ class PropelBundle extends Bundle
             if ($this->container->getParameter('propel.logging')) {
                 $this->configureLogging();
             }
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
     }
 

@@ -22,9 +22,9 @@ use Symfony\Component\Yaml\Yaml;
 class YamlDataLoader extends AbstractDataLoader
 {
     /**
-     * @var Generator
+     * @var Generator|null
      */
-    private $faker;
+    private ?Generator $faker;
 
     /**
      * {@inheritdoc}
@@ -41,18 +41,18 @@ class YamlDataLoader extends AbstractDataLoader
      */
     protected function transformDataToArray(string $file): array
     {
-        if (strpos($file, "\n") === false && is_file($file)) {
-            if (false === is_readable($file)) {
+        if (!str_contains($file, "\n") && is_file($file)) {
+            if (is_readable($file) === false) {
                 throw new ParseException(sprintf('Unable to parse "%s" as the file is not readable.', $file));
             }
 
-            if (null !== $this->faker) {
+            if ($this->faker !== null) {
                 $generator = $this->faker;
                 $faker = function ($type) use ($generator) {
                     $args = func_get_args();
                     array_shift($args);
 
-                    echo Yaml::dump(call_user_func_array(array($generator, $type), $args)) . "\n";
+                    echo Yaml::dump(call_user_func_array([$generator, $type], $args)) . "\n";
                 };
             } else {
                 $faker = function ($text) {
@@ -61,7 +61,7 @@ class YamlDataLoader extends AbstractDataLoader
             }
 
             ob_start();
-            $retval = include $file;
+            $retval = include_once $file;
             $content = ob_get_clean();
 
             // if an array is returned by the config file assume it's in plain php form else in YAML

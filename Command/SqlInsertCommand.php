@@ -11,8 +11,8 @@
 namespace Propel\Bundle\PropelBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -30,8 +30,7 @@ class SqlInsertCommand extends WrappedCommand
             ->setDescription('Insert SQL statements')
             ->addOption('force', null, InputOption::VALUE_NONE, 'Set this parameter to execute this action.')
             ->addOption('sql-dir', null, InputOption::VALUE_REQUIRED, 'The SQL files directory')
-            ->addOption('connection', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Connection to use. Example: default, bookstore')
-        ;
+            ->addOption('connection', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Connection to use. Example: default, bookstore');
     }
 
     /**
@@ -63,9 +62,9 @@ class SqlInsertCommand extends WrappedCommand
         $config = $this->getConfig();
         $defaultSqlDir = $config['paths']['sqlDir'];
 
-        return array(
-            '--connection'  => $this->getConnections($input->getOption('connection')),
-            '--sql-dir'     => $input->getOption('sql-dir') ?: $defaultSqlDir,
-        );
+        return [
+            '--connection' => $this->getConnections($input->getOption('connection')),
+            '--sql-dir' => $input->getOption('sql-dir') ?: $defaultSqlDir,
+        ];
     }
 }

@@ -37,6 +37,9 @@
   },
   "require": {
     "php": ">=8.2",
+    "ext-dom": "*",
+    "ext-pdo": "*",
+    "ext-simplexml": "*",
     "propel/propel": "^2.0",
     "symfony/cache": "^7.4.10",
     "symfony/config": "^7.4",
@@ -55,11 +58,8 @@
     "symfony/yaml": "^7.4.11"
   },
   "require-dev": {
-    "ext-dom": "*",
     "ext-json": "*",
     "ext-libxml": "*",
-    "ext-pdo": "*",
-    "ext-simplexml": "*",
     "fakerphp/faker": "^1.0",
     "mikey179/vfsstream": "^1.6",
     "phpstan/extension-installer": "^1.4",

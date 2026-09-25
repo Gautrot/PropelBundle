@@ -24,15 +24,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
 trait BundleTrait
 {
     /**
-     * @return ContainerInterface
-     */
-    abstract protected function getContainer(): ContainerInterface;
-
-    /**
      * Returns the selected bundle.
      * If no bundle argument is set, the user will get ask for it.
      *
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
      *
      * @return BundleInterface
@@ -44,7 +39,7 @@ trait BundleTrait
             ->getContainer()
             ->get('kernel');
 
-        if ($input->hasArgument('bundle') && !empty($input->getArgument('bundle')) && '@' === substr($input->getArgument('bundle'), 0, 1)) {
+        if ($input->hasArgument('bundle') && !empty($input->getArgument('bundle')) && str_starts_with($input->getArgument('bundle'), '@')) {
             return $kernel->getBundle(substr($input->getArgument('bundle'), 1));
         }
 
@@ -75,4 +70,9 @@ trait BundleTrait
 
         return $kernel->getBundle($bundleName);
     }
+
+    /**
+     * @return ContainerInterface
+     */
+    abstract protected function getContainer(): ContainerInterface;
 }

@@ -24,6 +24,7 @@
     * Uses the Propel 1.x YAML schema syntaxes
     * `propel:schema:convert` converts a schema between XML and YAML
 * Fixed remote code execution with `unserialize` ([AIKIDO](https://app.aikido.dev/issues/45986784/detail))
+* Expanded PHPUnit coverage
 
 ## Release 2026-09-23
 
@@ -31,6 +32,14 @@
 
 * Updated `composer.json`
 * Removed more deprecated content
+
+### 7.1.0.3
+
+* Removed loadUserByUsername
+
+### 6.1.0.3
+
+* Removed loadUserByUsername
 
 ## Release 2026-09-22
 

@@ -58,9 +58,9 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 class ModelType extends AbstractType
 {
     /**
-     * @var ChoiceListFactoryInterface
+     * @var ChoiceListFactoryInterface|PropertyAccessDecorator
      */
-    private $choiceListFactory;
+    private PropertyAccessDecorator|ChoiceListFactoryInterface $choiceListFactory;
 
     /**
      * ModelType constructor.
@@ -112,7 +112,7 @@ class ModelType extends AbstractType
      */
     public static function createChoiceName(object $choice, int|string $key, string $value): string
     {
-        return str_replace('-', '_', (string)$value);
+        return str_replace('-', '_', $value);
     }
 
     /**
@@ -133,16 +133,14 @@ class ModelType extends AbstractType
     {
         $choiceLoader = function (Options $options) {
             // Unless the choices are given explicitly, load them on demand
-            if (null === $options['choices']) {
+            if ($options['choices'] === null) {
 
-                $propelChoiceLoader = new PropelChoiceLoader(
+                return new PropelChoiceLoader(
                     $this->choiceListFactory,
                     $options['class'],
                     $options['query'],
                     $options['index_property']
                 );
-
-                return $propelChoiceLoader;
             }
 
             return null;
@@ -153,14 +151,14 @@ class ModelType extends AbstractType
             /** @var ModelCriteria $query */
             $query = $options['query'];
             if ($options['index_property']) {
-                $identifier = array($query->getTableMap()->getColumn($options['index_property']));
+                $identifier = [$query->getTableMap()->getColumn($options['index_property'])];
             } else {
                 $identifier = $query->getTableMap()->getPrimaryKeys();
             }
             /** @var ColumnMap $firstIdentifier */
             $firstIdentifier = current($identifier);
             if (count($identifier) === 1 && $firstIdentifier->getPdoType() === PDO::PARAM_INT) {
-                return array(__CLASS__, 'createChoiceName');
+                return [__CLASS__, 'createChoiceName'];
             }
             return null;
         };
@@ -170,7 +168,7 @@ class ModelType extends AbstractType
             /** @var ModelCriteria $query */
             $query = $options['query'];
             if ($options['index_property']) {
-                $identifier = array($query->getTableMap()->getColumn($options['index_property']));
+                $identifier = [$query->getTableMap()->getColumn($options['index_property'])];
             } else {
                 $identifier = $query->getTableMap()->getPrimaryKeys();
             }
@@ -209,7 +207,7 @@ class ModelType extends AbstractType
         $choiceLabelNormalizer = function (Options $options, $choiceLabel) {
             if ($choiceLabel === null) {
                 if ($options['property'] == null) {
-                    $choiceLabel = array(__CLASS__, 'createChoiceLabel');
+                    $choiceLabel = [__CLASS__, 'createChoiceLabel'];
                 } else {
                     $valueProperty = $options['property'];
                     /** @var ModelCriteria $query */
@@ -242,17 +240,23 @@ class ModelType extends AbstractType
             'by_reference' => false,
         ]);
 
-        $resolver->setRequired(array('class'));
+        $resolver->setRequired(['class']);
         $resolver->setNormalizer('query', $queryNormalizer);
         $resolver->setNormalizer('choice_label', $choiceLabelNormalizer);
         $resolver->setAllowedTypes('query', ['null', 'Propel\Runtime\ActiveQuery\ModelCriteria']);
     }
 
+    /**
+     * @return string
+     */
     public function getBlockPrefix(): string
     {
         return 'model';
     }
 
+    /**
+     * @return string|null
+     */
     public function getParent(): ?string
     {
         return 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';

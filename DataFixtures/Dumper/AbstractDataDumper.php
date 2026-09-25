@@ -150,7 +150,7 @@ abstract class AbstractDataDumper extends AbstractDataHandler implements DataDum
                                     $values[$col] = strlen($row[$col]) ? $relatedTable->getPhpName() . '_' . $row[$col] : '';
                                 }
                             } elseif (!$isPrimaryKey || !$tableMap->isUseIdGenerator()) {
-                                if (!empty($row[$col]) && PropelTypes::PHP_ARRAY === $column->getType()) {
+                                if (!empty($row[$col]) && $column->getType() === PropelTypes::PHP_ARRAY) {
                                     $serialized = substr($row[$col], 2, -2);
                                     $row[$col] = $serialized ? explode(' | ', $serialized) : [];
                                 }

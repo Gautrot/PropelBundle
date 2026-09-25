@@ -16,7 +16,9 @@ use Symfony\Component\Form\ChoiceList\Factory\ChoiceListFactoryInterface;
 use Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory;
 use Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator;
 use Symfony\Component\Form\FormTypeGuesserInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
@@ -28,14 +30,14 @@ class PropelExtension extends AbstractExtension
 {
 
     /**
-     * @var PropertyAccessorInterface
+     * @var PropertyAccessor|PropertyAccessorInterface
      */
-    protected $propertyAccessor;
+    protected PropertyAccessor|PropertyAccessorInterface $propertyAccessor;
 
     /**
-     * @var ChoiceListFactoryInterface
+     * @var ChoiceListFactoryInterface|PropertyAccessDecorator
      */
-    protected $choiceListFactory;
+    protected PropertyAccessDecorator|ChoiceListFactoryInterface $choiceListFactory;
 
     /**
      * PropelExtension constructor.
@@ -49,15 +51,21 @@ class PropelExtension extends AbstractExtension
         $this->choiceListFactory = $choiceListFactory ?: new PropertyAccessDecorator(new DefaultChoiceListFactory(), $this->propertyAccessor);
     }
 
+    /**
+     * @return array|FormTypeInterface[]
+     */
     protected function loadTypes(): array
     {
-        return array(
+        return [
             new Type\ModelType($this->propertyAccessor, $this->choiceListFactory),
             new Type\TranslationCollectionType(),
             new Type\TranslationType()
-        );
+        ];
     }
 
+    /**
+     * @return FormTypeGuesserInterface|null
+     */
     protected function loadTypeGuesser(): ?FormTypeGuesserInterface
     {
         return new TypeGuesser();

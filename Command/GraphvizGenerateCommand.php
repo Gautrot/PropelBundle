@@ -10,11 +10,10 @@
 
 namespace Propel\Bundle\PropelBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-
 use Propel\Generator\Command\GraphvizGenerateCommand as BaseGraphvizGenerateCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * @author Kévin Gomez <contact@kevingomez.fr>
@@ -31,9 +30,7 @@ class GraphvizGenerateCommand extends WrappedCommand
         $this
             ->setName('propel:graphviz:generate')
             ->setDescription('Generate Graphviz files (.dot)')
-
-            ->addOption('output-dir',  null, InputOption::VALUE_REQUIRED,  'The output directory', BaseGraphvizGenerateCommand::DEFAULT_OUTPUT_DIRECTORY)
-        ;
+            ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'The output directory', BaseGraphvizGenerateCommand::DEFAULT_OUTPUT_DIRECTORY);
     }
 
     /**
@@ -49,8 +46,8 @@ class GraphvizGenerateCommand extends WrappedCommand
      */
     protected function getSubCommandArguments(InputInterface $input): array
     {
-        return array(
+        return [
             '--output-dir' => $input->getOption('output-dir'),
-        );
+        ];
     }
 }

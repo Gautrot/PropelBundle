@@ -21,10 +21,10 @@ class PropelInflector
      * Camelize a word.
      * Inspirated by https://github.com/doctrine/common/blob/master/lib/Doctrine/Common/Util/Inflector.php
      *
-     * @param  string $word The word to camelize.
-     * @return string
+     * @param string|null $word The word to camelize.
+     * @return string|null
      */
-    public static function camelize($word)
+    public static function camelize(?string $word): ?string
     {
         if (empty($word)) {
             return $word;

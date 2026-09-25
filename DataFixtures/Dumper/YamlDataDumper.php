@@ -24,11 +24,6 @@ class YamlDataDumper extends AbstractDataDumper
      */
     protected function transformArrayToData(array $data): string
     {
-        return Yaml::dump(
-            $data,
-            $inline = 3,
-            $indent = 4,
-            Yaml::DUMP_OBJECT
-        );
+        return Yaml::dump($data, 3, 4, Yaml::DUMP_OBJECT);
     }
 }

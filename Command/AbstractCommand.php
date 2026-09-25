@@ -35,10 +35,25 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 abstract class AbstractCommand extends Command
 {
+    /**
+     * @var string|null
+     */
     protected ?string $cacheDir = null;
+    /**
+     * @var BundleInterface|null
+     */
     protected ?BundleInterface $bundle = null;
+    /**
+     * @var InputInterface
+     */
     protected InputInterface $input;
+    /**
+     * @var OutputInterface
+     */
     protected OutputInterface $output;
+    /**
+     * @var ContainerInterface
+     */
     private ContainerInterface $container;
 
     use FormattingHelpers;
@@ -139,7 +154,7 @@ abstract class AbstractCommand extends Command
             }
             $copiedFiles[$file] = $finalSchema->getPathname();
 
-            if (SchemaConverter::FORMAT_YAML === $schemaFormat) {
+            if ($schemaFormat === SchemaConverter::FORMAT_YAML) {
                 $filesystem->dumpFile($file, $schemaConverter->convert((string)$finalSchema, SchemaConverter::FORMAT_XML));
             } else {
                 $filesystem->copy((string)$finalSchema, $file, true);
@@ -216,7 +231,7 @@ abstract class AbstractCommand extends Command
      */
     protected function getFinalSchemas(KernelInterface $kernel, ?BundleInterface $bundle = null): array
     {
-        if (null !== $bundle) {
+        if ($bundle !== null) {
             return $this->getSchemaLocator()->locateFromBundle($bundle);
         }
 

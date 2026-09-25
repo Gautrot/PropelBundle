@@ -10,12 +10,11 @@
 
 namespace Propel\Bundle\PropelBundle\Command;
 
+use Propel\Generator\Command\DatabaseReverseCommand as BaseDatabaseReverseCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
-
-use Propel\Generator\Command\DatabaseReverseCommand as BaseDatabaseReverseCommand;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * @author Kévin Gomez <contact@kevingomez.fr>
@@ -32,12 +31,10 @@ class DatabaseReverseCommand extends WrappedCommand
         $this
             ->setName('propel:database:reverse')
             ->setDescription('Reverse-engineer a XML schema file based on given database')
-
-            ->addArgument('connection',     InputArgument::REQUIRED,           'Connection to use. Example: "default"')
-            ->addOption('output-dir',       null, InputOption::VALUE_REQUIRED, 'The output directory', BaseDatabaseReverseCommand::DEFAULT_OUTPUT_DIRECTORY)
-            ->addOption('database-name',    null, InputOption::VALUE_REQUIRED, 'The database name to reverse', BaseDatabaseReverseCommand::DEFAULT_DATABASE_NAME)
-            ->addOption('schema-name',      null, InputOption::VALUE_REQUIRED, 'The schema name to generate', BaseDatabaseReverseCommand::DEFAULT_SCHEMA_NAME)
-        ;
+            ->addArgument('connection', InputArgument::REQUIRED, 'Connection to use. Example: "default"')
+            ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'The output directory', BaseDatabaseReverseCommand::DEFAULT_OUTPUT_DIRECTORY)
+            ->addOption('database-name', null, InputOption::VALUE_REQUIRED, 'The database name to reverse', BaseDatabaseReverseCommand::DEFAULT_DATABASE_NAME)
+            ->addOption('schema-name', null, InputOption::VALUE_REQUIRED, 'The schema name to generate', BaseDatabaseReverseCommand::DEFAULT_SCHEMA_NAME);
     }
 
     /**
@@ -53,12 +50,12 @@ class DatabaseReverseCommand extends WrappedCommand
      */
     protected function getSubCommandArguments(InputInterface $input): array
     {
-        return array(
-            '--output-dir'      => $input->getOption('output-dir'),
-            '--database-name'   => $input->getOption('database-name'),
-            '--schema-name'     => $input->getOption('schema-name'),
+        return [
+            '--output-dir' => $input->getOption('output-dir'),
+            '--database-name' => $input->getOption('database-name'),
+            '--schema-name' => $input->getOption('schema-name'),
             // this one is an argument, so no leading '--'
-            'connection'        => $this->getDsn($input->getArgument('connection')),
-        );
+            'connection' => $this->getDsn($input->getArgument('connection')),
+        ];
     }
 }

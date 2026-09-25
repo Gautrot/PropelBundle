@@ -33,15 +33,18 @@ class UniqueObject extends Constraint
     public string $messageFieldSeparator = ' and ';
 
     /**
-     * @var array<mixed>|string
+     * @var array|string
      */
-    public $fields = array();
+    public string|array $fields = [];
 
     /**
      * @var string|null Used to set the path where the error will be attached, default is global.
      */
     public ?string $errorPath = null;
 
+    /**
+     * @param $options
+     */
     public function __construct($options = null)
     {
         parent::__construct($options);
@@ -50,20 +53,26 @@ class UniqueObject extends Constraint
             throw new UnexpectedTypeException($this->fields, 'array');
         }
 
-        if (0 === count($this->fields)) {
+        if (empty($this->fields)) {
             throw new ConstraintDefinitionException("At least one field must be specified.");
         }
 
-        if (null !== $this->errorPath && !is_string($this->errorPath)) {
+        if ($this->errorPath !== null && !is_string($this->errorPath)) {
             throw new UnexpectedTypeException($this->errorPath, 'string or null');
         }
     }
 
+    /**
+     * @return string[]
+     */
     public function getRequiredOptions(): array
     {
-        return array('fields');
+        return ['fields'];
     }
 
+    /**
+     * @return array|string|string[]
+     */
     public function getTargets(): array|string
     {
         return self::CLASS_CONSTRAINT;

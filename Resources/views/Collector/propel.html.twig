@@ -41,29 +41,20 @@
     {# the panel content #}
     <style type="text/css">
         .SQLKeyword {
-            color: blue;
+            color: var(--color-link);
             white-space: nowrap;
-        }
-        .theme-dark .SQLKeyword {
-            color: #ADADFF;
         }
 
         .SQLName {
-            color: var(--gray-900);
+            color: var(--color-text);
             white-space: nowrap;
-        }
-        .theme-dark .SQLName {
-            color: var(--gray-300);
         }
 
         .SQLComment {
-            color: var(--gray-500);
+            color: var(--color-muted);
             display: block;
             font-size: 0.9em;
             margin: 3px 0;
-        }
-        .theme-dark .SQLComment {
-            color: var(--gray-100);
         }
 
         .SQLExplain {
@@ -71,9 +62,9 @@
         }
 
         .SQLExplain .error {
-            background-color: #F2DEDE;
-            border-color: #EED3D7;
-            color: #B94A48;
+            background-color: var(--header-error-background);
+            border-color: var(--header-error-border-color);
+            color: var(--color-error);
             padding: 8px 35px 8px 14px;
             font-weight: bold;
         }
@@ -115,7 +106,7 @@
                     <td class="font-normal text-small" nowrap>{{ '%0.2f'|format(query.time * 1000) }}&nbsp;ms</td>
                     <td class="font-normal text-small" nowrap>{{ query.memory|format_memory }}</td>
                     <td>
-                        <a name="propel-query-{{ i }}" ></a>
+                        <a name="propel-query-{{ i }}"></a>
                         <code>{{ query.sql|format_sql|raw }}</code>
                         <div class="metadata font-normal text-muted">
                             <span class="text-small">
@@ -133,7 +124,7 @@
 
                         {% if app.request.query.has('query') and app.request.query.get('query') == i %}
                             <div class="SQLExplain">
-                                {{ render(controller('Propel\\Bundle\\PropelBundle\\Controller\\PanelController::explainAction', {
+                                {{ render(controller('Propel\\Bundle\\PropelBundle\\Controller\\PanelController::explain', {
                                     'token': token,
                                     'panel': 'propel',
                                     'query': app.request.query.get('query'),
@@ -152,5 +143,5 @@
         </table>
     {% endif %}
 
-    {{ render(controller('Propel\\Bundle\\PropelBundle\\Controller\\PanelController::configurationAction')) }}
+    {{ render(controller('Propel\\Bundle\\PropelBundle\\Controller\\PanelController::configuration')) }}
 {% endblock %}
