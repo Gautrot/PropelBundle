@@ -92,7 +92,7 @@ trait FormattingHelpers
 
     /**
      * Comes from the SensioGeneratorBundle.
-     * @see https://github.com/sensio/SensioGeneratorBundle/blob/master/Command/Helper/DialogHelper.php#L52
+     * @see https://github.com/sensiolabs/SensioGeneratorBundle/blob/2.4/Command/Helper/DialogHelper.php#L52
      *
      * @param OutputInterface $output The output.
      * @param string|string[] $text A text message.

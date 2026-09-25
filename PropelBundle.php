@@ -22,14 +22,14 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * PropelBundle
+ * # PropelBundle
  *
  * @author William DURAND <william.durand1@gmail.com>
  */
 class PropelBundle extends Bundle
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     public function boot(): void
     {
@@ -43,6 +43,9 @@ class PropelBundle extends Bundle
         }
     }
 
+    /**
+     * @return void
+     */
     protected function configureConnections(): void
     {
         $config = $this->container->getParameter('propel.configuration');
@@ -53,22 +56,22 @@ class PropelBundle extends Bundle
         $serviceContainer->setDefaultDatasource($defaultConnection);
 
         foreach ($config['database']['connections'] as $name => $connection) {
-            if (!empty($connection['slaves'])) {
+            if (!empty($connection['subs'])) {
                 $manager = new ConnectionManagerPrimaryReplica($name);
 
-                // configure the master (write) connection
+                // configure the main (write) connection
                 $manager->setWriteConfiguration($connection);
 
-                // configure the slave (read) connections
-                $slaveConnections = [];
-                foreach ($connection['slaves'] as $slave) {
-                    $slaveConnections[] = array_merge($connection, [
-                        'dsn' => $slave['dsn'],
-                        'slaves' => null
+                // configure the sub (read) connections
+                $subConnections = [];
+                foreach ($connection['subs'] as $sub) {
+                    $subConnections[] = array_merge($connection, [
+                        'dsn' => $sub['dsn'],
+                        'subs' => null
                     ]);
                 }
 
-                $manager->setReadConfiguration($slaveConnections);
+                $manager->setReadConfiguration($subConnections);
             } else {
                 $manager = new ConnectionManagerSingle($name);
                 $manager->setConfiguration($connection);
@@ -79,11 +82,14 @@ class PropelBundle extends Bundle
 
             // load database maps
             if (file_exists($config['paths']['loaderScriptDir'] . '/loadDatabase.php') && is_readable($config['paths']['loaderScriptDir'] . '/loadDatabase.php')) {
-                require_once($config['paths']['loaderScriptDir'] . '/loadDatabase.php');
+                require_once $config['paths']['loaderScriptDir'] . '/loadDatabase.php';
             }
         }
     }
 
+    /**
+     * @return void
+     */
     protected function configureLogging(): void
     {
         /** @var StandardServiceContainer $serviceContainer */
@@ -102,7 +108,8 @@ class PropelBundle extends Bundle
     }
 
     /**
-     * {@inheritdoc}
+     * @param ContainerBuilder $container
+     * @return void
      */
     public function build(ContainerBuilder $container): void
     {

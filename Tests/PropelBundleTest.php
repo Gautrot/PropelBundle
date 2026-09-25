@@ -62,7 +62,7 @@ class PropelBundleTest extends TestCase
     public function testConfigureConnections(): void
     {
         /**
-         * set single connection without slaves
+         * set single connection without subs
          */
         // reset service container to ensure no connections exists
         Propel::setServiceContainer(new StandardServiceContainer());
@@ -90,7 +90,7 @@ class PropelBundleTest extends TestCase
         $this->assertEquals('test_default_connection', $serviceContainer->getDefaultDatasource());
 
         /**
-         * set single connection with slaves
+         * set single connection with subs
          */
         // reset service container to ensure no connections exists
         Propel::setServiceContainer(new StandardServiceContainer());
@@ -104,7 +104,7 @@ class PropelBundleTest extends TestCase
                     'mysource2' => [
                         'dsn' => 'sqlite::memory:',
                         'adapter' => 'sqlite',
-                        'slaves' => [
+                        'subs' => [
                             ['dsn' => 'sqlite::memory:']
                         ]
                     ]
@@ -121,11 +121,11 @@ class PropelBundleTest extends TestCase
         $this->assertInstanceOf(ConnectionManagerPrimaryReplica::class, $manager);
         $this->assertEquals('sqlite', $serviceContainer->getAdapterClass('mysource2'));
         $this->assertEquals('test_default_connection2', $serviceContainer->getDefaultDatasource());
-        // master slave must be different
+        // main sub must be different
         $this->assertNotSame($manager->getWriteConnection(new SqliteAdapter()), $manager->getReadConnection(new SqliteAdapter()));
 
         /**
-         * multiple connections with slave
+         * multiple connections with sub
          */
         // reset service container to ensure no connections exists
         Propel::setServiceContainer(new StandardServiceContainer());
@@ -139,7 +139,7 @@ class PropelBundleTest extends TestCase
                     'mysource3' => [
                         'dsn' => 'sqlite::memory:',
                         'adapter' => 'sqlite',
-                        'slaves' => [
+                        'subs' => [
                             ['dsn' => 'sqlite::memory:']
                         ]
                     ],
@@ -211,7 +211,7 @@ class PropelBundleTest extends TestCase
                     'mysource1' => [
                         'dsn' => 'sqlite::memory:',
                         'adapter' => 'sqlite',
-                        'slaves' => [
+                        'subs' => [
                             ['dsn' => 'sqlite::memory:']
                         ]
                     ],
