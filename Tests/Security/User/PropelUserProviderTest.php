@@ -96,7 +96,6 @@ class PropelUserProviderTest extends TestCase
      */
     public function testLoadUserByUsername(): void
     {
-        $this->markTestSkipped('testLoadUserByUsername is deprecated since Symfony 5.3. Skipping...');
         $user1 = new User();
         $user1->setUsername('user1');
         $user1->save();
