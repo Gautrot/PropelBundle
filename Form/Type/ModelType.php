@@ -28,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
- * ModelType class.
+ * # ModelType
  *
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
@@ -116,7 +116,9 @@ class ModelType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -127,7 +129,8 @@ class ModelType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * @param OptionsResolver $resolver
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

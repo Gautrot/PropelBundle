@@ -19,6 +19,8 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * # TranslationCollectionType
+ *
  * form type for i18n-columns in propel
  *
  * @author Patrick Kaufmann
@@ -26,7 +28,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TranslationCollectionType extends AbstractType
 {
     /**
-     * {@inheritdoc}
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -42,7 +46,8 @@ class TranslationCollectionType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @param OptionsResolver $resolver
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

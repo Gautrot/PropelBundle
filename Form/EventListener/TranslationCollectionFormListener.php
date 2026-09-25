@@ -18,6 +18,8 @@ use Symfony\Component\Form\FormEvents;
 use Traversable;
 
 /**
+ * # TranslationCollectionFormListener
+ *
  * listener class for propel_translatable_collection
  *
  * @author Patrick Kaufmann
@@ -28,7 +30,9 @@ class TranslationCollectionFormListener implements EventSubscriberInterface
      * @var string
      */
     private string $i18nClass;
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     private array $languages;
 
     /**
@@ -42,7 +46,7 @@ class TranslationCollectionFormListener implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return array[]
      */
     public static function getSubscribedEvents(): array
     {

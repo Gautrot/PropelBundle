@@ -16,13 +16,17 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
+ * # TranslationFormListener
+ *
  * Event Listener class for propel_translation
  *
  * @author Patrick Kaufmann
  */
 class TranslationFormListener implements EventSubscriberInterface
 {
-    /** @var array<string, array<string, mixed>|string|null> */
+    /**
+     * @var array<string, array<string, mixed>|string|null>
+     */
     private array $columns;
     /**
      * @var string

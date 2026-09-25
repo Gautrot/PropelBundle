@@ -13,9 +13,7 @@ namespace Propel\Bundle\PropelBundle\Form;
 
 use Propel\Bundle\PropelBundle\Form\Type\ModelType;
 use Propel\Generator\Model\PropelTypes;
-use Propel\Runtime\Map\ColumnMap;
 use Propel\Runtime\Map\RelationMap;
-use Propel\Runtime\Map\TableMap;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -31,20 +29,23 @@ use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
 
 /**
+ * # TypeGuesser
+ *
  * Propel Type guesser.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
 class TypeGuesser implements FormTypeGuesserInterface
 {
-    /** @var array<string, object> */
+    /**
+     * @var array<string, object>
+     */
     private array $cache = [];
 
     /**
-     * {@inheritDoc}
-     *
      * @param string $class
      * @param string $property
+     * @return TypeGuess|null
      */
     public function guessType(string $class, string $property): ?TypeGuess
     {
@@ -170,8 +171,6 @@ class TypeGuesser implements FormTypeGuesserInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @param string $class
      * @param string $property
      * @return ValueGuess|null
@@ -187,8 +186,6 @@ class TypeGuesser implements FormTypeGuesserInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @param string $class
      * @param string $property
      * @return ValueGuess|null
@@ -210,10 +207,9 @@ class TypeGuesser implements FormTypeGuesserInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @param string $class
      * @param string $property
+     * @return ValueGuess|null
      */
     public function guessPattern(string $class, string $property): ?ValueGuess
     {

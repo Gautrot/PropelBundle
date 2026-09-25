@@ -15,6 +15,8 @@ use Propel\Generator\Model\Table;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
+ * # FormBuilder
+ *
  * @author Moritz Schroeder <moritz.schroeder@molabs.de>
  */
 class FormBuilder

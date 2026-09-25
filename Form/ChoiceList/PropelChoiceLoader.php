@@ -20,6 +20,8 @@ use Symfony\Component\Form\ChoiceList\Factory\ChoiceListFactoryInterface;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
 /**
+ * # PropelChoiceLoader
+ *
  * @author William Durand <william.durand1@gmail.com>
  * @author Toni Uebernickel <tuebernickel@gmail.com>
  * @author Moritz Schroeder <moritz.schroeder@molabs.de>
@@ -48,6 +50,7 @@ class PropelChoiceLoader implements ChoiceLoaderInterface
     protected array $identifier = [];
     /**
      * Whether to use the identifier for index generation.
+     * @var bool
      */
     protected bool $identifierAsIndex = false;
     /**
@@ -57,6 +60,10 @@ class PropelChoiceLoader implements ChoiceLoaderInterface
 
     /**
      * PropelChoiceListLoader constructor.
+     * @param ChoiceListFactoryInterface $factory
+     * @param string $class
+     * @param ModelCriteria $queryObject
+     * @param string|null $useAsIdentifier
      */
     public function __construct(ChoiceListFactoryInterface $factory, string $class, ModelCriteria $queryObject, ?string $useAsIdentifier = null)
     {
@@ -93,9 +100,11 @@ class PropelChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $values
+     * @param callable|null $value
+     * @return array
      */
-    public function loadChoicesForValues(array $values, $value = null): array
+    public function loadChoicesForValues(array $values, ?callable $value = null): array
     {
         // Performance optimization
         if (empty($values)) {
@@ -159,9 +168,10 @@ class PropelChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param callable|null $value
+     * @return ChoiceListInterface
      */
-    public function loadChoiceList($value = null): ChoiceListInterface
+    public function loadChoiceList(?callable $value = null): ChoiceListInterface
     {
         if ($this->choiceList) {
             return $this->choiceList;
@@ -175,7 +185,9 @@ class PropelChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $choices
+     * @param callable|null $value
+     * @return array|string[]
      */
     public function loadValuesForChoices(array $choices, ?callable $value = null): array
     {
