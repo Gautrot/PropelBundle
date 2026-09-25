@@ -17,6 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
+ * # FormattingHelpers
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 trait FormattingHelpers
@@ -52,6 +54,7 @@ trait FormattingHelpers
     /**
      * @param OutputInterface $output The output.
      * @param string $filename The filename.
+     * @return void
      */
     protected function writeNewFile(OutputInterface $output, string $filename): void
     {
@@ -61,6 +64,7 @@ trait FormattingHelpers
     /**
      * @param OutputInterface $output The output.
      * @param string $directory The directory.
+     * @return void
      */
     protected function writeNewDirectory(OutputInterface $output, string $directory): void
     {
@@ -73,6 +77,7 @@ trait FormattingHelpers
      * @param OutputInterface $output The output.
      * @param string $taskName A task name.
      * @param bool $more Whether to add a 'more details' message or not.
+     * @return void
      */
     protected function writeTaskError(OutputInterface $output, string $taskName, bool $more = true): void
     {
@@ -92,6 +97,7 @@ trait FormattingHelpers
      * @param OutputInterface $output The output.
      * @param string|string[] $text A text message.
      * @param string $style A style to apply on the section.
+     * @return void
      */
     protected function writeSection(OutputInterface $output, $text, string $style = 'bg=blue;fg=white'): void
     {

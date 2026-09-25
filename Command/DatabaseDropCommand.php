@@ -18,7 +18,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * DatabaseDropCommand class.
+ * # DatabaseDropCommand
+ *
  * Useful to drop a database.
  *
  * @author William DURAND
@@ -26,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DatabaseDropCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure(): void
     {
@@ -48,7 +49,9 @@ EOT
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

@@ -16,6 +16,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
+ * # UniqueObjectValidator
+ *
  * Unique Object Validator checks if one or a set of fields contain unique values.
  *
  * @author Maxime AILLOUD <maxime.ailloud@gmail.com>
@@ -24,7 +26,9 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 class UniqueObjectValidator extends ConstraintValidator
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $value
+     * @param Constraint $constraint
+     * @return void
      */
     public function validate(mixed $value, Constraint $constraint): void
     {

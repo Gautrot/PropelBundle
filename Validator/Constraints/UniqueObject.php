@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
+ * # UniqueObject
+ *
  * Constraint for the Unique Object validator
  *
  * @author Maxime AILLOUD <maxime.ailloud@gmail.com>
@@ -43,9 +45,9 @@ class UniqueObject extends Constraint
     public ?string $errorPath = null;
 
     /**
-     * @param $options
+     * @param mixed $options
      */
-    public function __construct($options = null)
+    public function __construct(mixed $options = null)
     {
         parent::__construct($options);
 
@@ -64,6 +66,8 @@ class UniqueObject extends Constraint
 
     /**
      * @return string[]
+     * @deprecated since Symfony 7.4
+     * @see __construct()
      */
     public function getRequiredOptions(): array
     {
@@ -71,9 +75,9 @@ class UniqueObject extends Constraint
     }
 
     /**
-     * @return array|string|string[]
+     * @return string|array|string[]
      */
-    public function getTargets(): array|string
+    public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;
     }

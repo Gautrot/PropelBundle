@@ -13,6 +13,8 @@ namespace Propel\Bundle\PropelBundle\DataFixtures\Loader;
 use SimpleXMLElement;
 
 /**
+ * # XmlDataLoader
+ *
  * XML fixtures loader.
  *
  * @author William Durand <william.durand1@gmail.com>
@@ -20,7 +22,8 @@ use SimpleXMLElement;
 class XmlDataLoader extends AbstractDataLoader
 {
     /**
-     * {@inheritdoc}
+     * @param string $file
+     * @return array<string, array<string, array<string, mixed>>>
      */
     protected function transformDataToArray(string $file): array
     {

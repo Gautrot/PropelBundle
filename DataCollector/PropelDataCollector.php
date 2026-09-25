@@ -19,6 +19,8 @@ use Symfony\Component\VarDumper\Cloner\Data;
 use Throwable;
 
 /**
+ * # PropelDataCollector
+ *
  * The PropelDataCollector collector class collects information.
  *
  * @author Kévin Gomez <contact@kevingomez.fr>
@@ -39,7 +41,10 @@ class PropelDataCollector extends DataCollector
     }
 
     /**
-     * {@inheritdoc}
+     * @param Request $request
+     * @param Response $response
+     * @param Throwable|null $exception
+     * @return void
      */
     public function collect(Request $request, Response $response, ?Throwable $exception = null): void
     {
@@ -115,7 +120,7 @@ class PropelDataCollector extends DataCollector
     }
 
     /**
-     * @inheritdoc
+     * @return void
      */
     public function reset(): void
     {

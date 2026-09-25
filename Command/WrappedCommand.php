@@ -18,6 +18,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
+ * # WrappedCommand
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 abstract class WrappedCommand extends AbstractCommand

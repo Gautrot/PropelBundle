@@ -20,6 +20,8 @@ use RuntimeException;
 use ValueError;
 
 /**
+ * # AbstractDataDumper
+ *
  * Abstract class to manage a common logic to dump data.
  *
  * @author William Durand <william.durand1@gmail.com>
@@ -32,7 +34,7 @@ abstract class AbstractDataDumper extends AbstractDataHandler implements DataDum
      * @return void
      * @throws JsonException
      */
-    public function dump(?string $filename, ?string $connectionName = null): void
+    public function dump(?string $filename = null, ?string $connectionName = null): void
     {
         if ($filename === null || $filename === '') {
             throw new RuntimeException('Invalid filename provided.');

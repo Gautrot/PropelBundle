@@ -14,7 +14,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 /**
- * SyntaxExtension class
+ * # SyntaxExtension
  *
  * @package PropelBundle
  * @subpackage Extension
@@ -134,7 +134,7 @@ class SyntaxExtension extends AbstractExtension
             'OFFSET',
         ]);
 
-        $sql = preg_replace([
+        return preg_replace([
             '/\b(' . implode('|', $newlines) . ')\b/',
             '/\b(' . implode('|', $keywords) . ')\b/',
             '/(\/\*.*\*\/)/',
@@ -147,7 +147,5 @@ class SyntaxExtension extends AbstractExtension
             '<span class="SQLName">\\1</span>',
             '<span class="SQLName">\\1</span>',
         ], $sql);
-
-        return $sql;
     }
 }

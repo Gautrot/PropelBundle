@@ -17,12 +17,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
+ * # ModelBuildCommand
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 class ModelBuildCommand extends WrappedCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure(): void
     {
@@ -37,7 +39,7 @@ class ModelBuildCommand extends WrappedCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @return Command
      */
     protected function createSubCommandInstance(): Command
     {
@@ -45,7 +47,8 @@ class ModelBuildCommand extends WrappedCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @return array<string, mixed>
      */
     protected function getSubCommandArguments(InputInterface $input): array
     {

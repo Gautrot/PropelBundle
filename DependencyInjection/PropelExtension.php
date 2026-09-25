@@ -114,6 +114,8 @@ class PropelExtension extends Extension
      * Returns the base path for the XSD files.
      *
      * @return string The XSD base path
+     *
+     * @deprecated since Symfony 7.4, to be removed in Symfony 8.0 together with XML support.
      */
     public function getXsdValidationBasePath(): string
     {

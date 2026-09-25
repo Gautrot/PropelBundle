@@ -20,6 +20,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
+ * # TableDropCommand
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 class TableDropCommand extends AbstractCommand
@@ -27,7 +29,7 @@ class TableDropCommand extends AbstractCommand
     use FormattingHelpers;
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure(): void
     {
@@ -40,7 +42,9 @@ class TableDropCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

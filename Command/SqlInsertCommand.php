@@ -10,18 +10,22 @@
 
 namespace Propel\Bundle\PropelBundle\Command;
 
+use DOMException;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
+ * # SqlInsertCommand
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 class SqlInsertCommand extends WrappedCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure(): void
     {
@@ -34,7 +38,7 @@ class SqlInsertCommand extends WrappedCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @return Command
      */
     protected function createSubCommandInstance(): Command
     {
@@ -42,7 +46,11 @@ class SqlInsertCommand extends WrappedCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @throws DOMException
+     * @throws ExceptionInterface
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -55,7 +63,8 @@ class SqlInsertCommand extends WrappedCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @return array<string, mixed>
      */
     protected function getSubCommandArguments(InputInterface $input): array
     {

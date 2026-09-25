@@ -19,6 +19,8 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
+ * # BundleTrait
+ *
  * @author Moritz Schroeder <moritz.schroeder@molabs.de>
  */
 trait BundleTrait

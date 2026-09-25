@@ -18,12 +18,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
+ * # BuildCommand
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 class BuildCommand extends Command
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure(): void
     {
@@ -39,9 +41,11 @@ class BuildCommand extends Command
     }
 
     /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
      * @throws ExceptionInterface
      * @see Command
-     *
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

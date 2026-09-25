@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 /**
+ * # PanelController
+ *
  * PanelController is designed to display information in the Propel Panel.
  *
  * @author William DURAND <william.durand1@gmail.com>
@@ -27,6 +29,8 @@ class PanelController extends AbstractController
 {
     /**
      * This method renders the global Propel configuration.
+     *
+     * @return Response
      */
     public function configuration(): Response
     {
@@ -70,7 +74,7 @@ class PanelController extends AbstractController
         try {
             $dataFetcher = $con->query('EXPLAIN ' . $queries[$query]['sql']);
             $results = [];
-            while ($results[] = $dataFetcher->fetch(PDO::FETCH_ASSOC));
+            while ($results[] = $dataFetcher->fetch(PDO::FETCH_ASSOC)) ;
         } catch (Exception $e) {
             return new Response('<div class="error">This query cannot be explained.</div>');
         }

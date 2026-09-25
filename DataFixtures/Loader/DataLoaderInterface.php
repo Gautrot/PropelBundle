@@ -11,6 +11,8 @@
 namespace Propel\Bundle\PropelBundle\DataFixtures\Loader;
 
 /**
+ * # DataLoaderInterface
+ *
  * Interface that exposes how Propel data loaders should work.
  *
  * @author William Durand <william.durand1@gmail.com>

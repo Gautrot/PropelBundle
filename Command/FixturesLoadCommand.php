@@ -24,7 +24,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
- * FixturesLoadCommand
+ * # FixturesLoadCommand
  *
  * @author William DURAND <william.durand1@gmail.com>
  */
@@ -32,20 +32,24 @@ class FixturesLoadCommand extends AbstractCommand
 {
     /**
      * Default fixtures directory.
+     * @var string
      */
     private string $defaultFixturesDir = 'propel/fixtures';
 
     /**
      * Absolute path for fixtures directory
+     * @var string
      */
     private string $absoluteFixturesPath = '';
 
     /**
      * Filesystem for manipulating files
+     * @var Filesystem|null
      */
     private ?Filesystem $filesystem = null;
 
     /**
+     * @return void
      * @see Command
      */
     protected function configure(): void
@@ -109,8 +113,6 @@ EOT
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int

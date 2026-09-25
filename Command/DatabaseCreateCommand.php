@@ -19,7 +19,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * DatabaseCreateCommand class.
+ * # DatabaseCreateCommand
+ *
  * Useful to create a database.
  *
  * @author William DURAND

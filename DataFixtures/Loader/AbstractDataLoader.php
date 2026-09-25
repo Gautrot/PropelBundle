@@ -24,6 +24,8 @@ use ReflectionException;
 use RuntimeException;
 
 /**
+ * # AbstractDataLoader
+ *
  * Abstract class to manage a common logic to load datas.
  *
  * @author William Durand <william.durand1@gmail.com>
@@ -37,7 +39,6 @@ abstract class AbstractDataLoader extends AbstractDataHandler implements DataLoa
     protected array $object_references = [];
 
     /**
-     * {@inheritdoc}
      * @param array $files
      * @param string $connectionName
      * @return int

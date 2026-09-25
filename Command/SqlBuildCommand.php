@@ -15,12 +15,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
+ * # SqlBuildCommand
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 class SqlBuildCommand extends WrappedCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure(): void
     {
@@ -35,7 +37,7 @@ class SqlBuildCommand extends WrappedCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @return Command
      */
     protected function createSubCommandInstance(): Command
     {
@@ -43,7 +45,8 @@ class SqlBuildCommand extends WrappedCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @return array<string, mixed>
      */
     protected function getSubCommandArguments(InputInterface $input): array
     {

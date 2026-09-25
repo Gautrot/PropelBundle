@@ -16,6 +16,8 @@ use Propel\Runtime\Propel;
 use Symfony\Component\Finder\Finder;
 
 /**
+ * # AbstractDataHandler
+ *
  * @author William Durand <william.durand1@gmail.com>
  */
 abstract class AbstractDataHandler

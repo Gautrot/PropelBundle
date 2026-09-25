@@ -26,6 +26,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
+ * # FormGenerateCommand
+ *
  * @author William DURAND <william.durand1@gmail.com>
  */
 class FormGenerateCommand extends AbstractCommand
@@ -38,7 +40,7 @@ class FormGenerateCommand extends AbstractCommand
     use BundleTrait;
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure(): void
     {
@@ -60,8 +62,6 @@ EOT
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int
@@ -144,6 +144,7 @@ EOT
      * @param string[] $models The models to build.
      * @param OutputInterface $output An OutputInterface instance
      * @param bool $force Override files if present.
+     * @return void
      */
     protected function createFormTypeFromDatabase(BundleInterface $bundle, Database $database, array $models, OutputInterface $output, bool $force = false): void
     {
@@ -198,6 +199,7 @@ EOT
      * @param SplFileInfo $file File representing the FormType.
      * @param bool $force Is the write forced?
      * @param OutputInterface $output An OutputInterface instance.
+     * @return void
      */
     protected function writeFormType(BundleInterface $bundle, Table $table, SplFileInfo $file, bool $force, OutputInterface $output): void
     {

@@ -15,6 +15,8 @@ use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
 /**
+ * # YamlDataLoader
+ *
  * YAML fixtures loader.
  *
  * @author William Durand <william.durand1@gmail.com>
@@ -27,7 +29,9 @@ class YamlDataLoader extends AbstractDataLoader
     private ?Generator $faker;
 
     /**
-     * {@inheritdoc}
+     * @param $rootDir
+     * @param array $datasources
+     * @param Generator|null $faker
      */
     public function __construct($rootDir, array $datasources, ?Generator $faker = null)
     {
@@ -37,7 +41,8 @@ class YamlDataLoader extends AbstractDataLoader
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $file
+     * @return array<string, array<string, array<string, mixed>>>
      */
     protected function transformDataToArray(string $file): array
     {

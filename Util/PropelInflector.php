@@ -11,7 +11,9 @@
 namespace Propel\Bundle\PropelBundle\Util;
 
 /**
- * The Propel inflector class provides methods for inflecting text.
+ * # PropelInflector
+ *
+ * The Propel Inflector class provides methods for inflecting text.
  *
  * @author William Durand <william.durand1@gmail.com>
  */
@@ -19,7 +21,7 @@ class PropelInflector
 {
     /**
      * Camelize a word.
-     * Inspirated by https://github.com/doctrine/common/blob/master/lib/Doctrine/Common/Util/Inflector.php
+     * Inspired by https://github.com/doctrine/common/blob/2.3/lib/Doctrine/Common/Util/Inflector.php
      *
      * @param string|null $word The word to camelize.
      * @return string|null

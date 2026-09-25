@@ -12,10 +12,13 @@ namespace Propel\Bundle\PropelBundle\Logger;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
+use Stringable;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\VarDumper\Caster\TraceStub;
 
 /**
+ * # PropelLogger
+ *
  * @author Kévin Gomez <contact@kevingomez.fr>
  */
 class PropelLogger implements LoggerInterface
@@ -54,10 +57,10 @@ class PropelLogger implements LoggerInterface
      * Logs with an arbitrary level.
      *
      * @param mixed $level
-     * @param string $message
+     * @param string|Stringable $message
      * @param array $context
      */
-    public function log($level, $message, array $context = []): void
+    public function log(mixed $level, string|Stringable $message, array $context = []): void
     {
         if ($this->logger === null) {
             return;

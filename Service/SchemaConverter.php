@@ -101,7 +101,7 @@ class SchemaConverter
 
         $schema = $this->databaseToYaml($document->documentElement, $source);
 
-        return Yaml::dump($schema, 99, 2, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
+        return Yaml::dump($schema, 99, 4, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
     }
 
     /**

@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * PropelParamConverter
+ * # PropelParamConverter
  *
  * This convert action parameter to a Propel Object
  * there is two option for this converter:
@@ -238,12 +238,11 @@ class PropelParamConverter implements ValueResolverInterface
             'LEFT' => Criteria::LEFT_JOIN,
             'RIGHT' => Criteria::RIGHT_JOIN,
             'INNER' => Criteria::INNER_JOIN,
-            default => Criteria::JOIN,
+            default => throw new Exception(sprintf(
+                'ParamConverter : "with" parameter "%s" is invalid, only "left", "right" or "inner" are allowed for join option',
+                var_export($with, true)
+            ))
         };
-
-        throw new Exception(sprintf('ParamConverter : "with" parameter "%s" is invalid,
-                only "left", "right" or "inner" are allowed for join option',
-            var_export($with, true)));
     }
 
     /**

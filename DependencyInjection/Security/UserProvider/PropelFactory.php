@@ -17,6 +17,8 @@ use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
+ * # PropelFactory
+ *
  * PropelFactory creates services for Propel user provider.
  *
  * @author William Durand <william.durand1@gmail.com>
@@ -47,7 +49,7 @@ class PropelFactory implements UserProviderFactoryInterface
      * @param string $id
      * @param array<string, mixed> $config
      */
-    public function create(ContainerBuilder $container, $id, $config): void
+    public function create(ContainerBuilder $container, string $id, array $config): void
     {
         $container
             ->setDefinition($id, new ChildDefinition($this->providerId))
